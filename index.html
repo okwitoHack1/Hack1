@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Reader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-top: 40px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .description {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h2 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card h2 i {
+            font-size: 1.5rem;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .result {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 100px;
+            display: none;
+        }
+        
+        .result h3 {
+            margin-bottom: 10px;
+        }
+        
+        .sms-content {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        
+        .instructions {
+            margin-top: 30px;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .compatibility {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        .icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        
+        .status {
+            text-align: center;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><span class="icon">📱</span> SMS Reader</h1>
+        
+        <p class="description">
+            This website can read SMS messages from your phone when you click the button below. 
+            It uses the WebOTP API to securely access one-time password messages.
+        </p>
+        
+        <div class="card">
+            <h2><span class="icon">🔒</span> Privacy & Security</h2>
+            <p>Your SMS data is processed locally on your device and is not sent to any server. 
+            The website only has access to SMS messages that contain OTP codes and only after you grant permission.</p>
+        </div>
+        
+        <div class="card">
+            <h2><span class="icon">📨</span> Read SMS</h2>
+            <p>Click the button below to start reading SMS messages from your device.</p>
+            
+            <div class="status" id="status">Ready to read SMS</div>
+            
+            <button class="btn" id="readSmsBtn">Read SMS Messages</button>
+            
+            <div class="result" id="result">
+                <h3>Retrieved SMS:</h3>
+                <div class="sms-content" id="smsContent">No SMS content yet.</div>
+            </div>
+        </div>
+        
+        <div class="card instructions">
+            <h2><span class="icon">📋</span> Instructions</h2>
+            <ol>
+                <li>Make sure you're using a compatible browser (Chrome for Android 84+ or Edge for Android 84+)</li>
+                <li>Ensure your phone has SMS messages with OTP codes</li>
+                <li>Click the "Read SMS Messages" button</li>
+                <li>Grant permission when prompted by your browser</li>
+                <li>The most recent OTP message will be displayed</li>
+            </ol>
+        </div>
+        
+        <div class="compatibility">
+            <p>Note: This feature requires a browser that supports the WebOTP API and may not work on all devices.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const readSmsBtn = document.getElementById('readSmsBtn');
+            const resultDiv = document.getElementById('result');
+            const smsContent = document.getElementById('smsContent');
+            const statusDiv = document.getElementById('status');
+            
+            // Check if WebOTP API is supported
+            if ('OTPCredential' in window) {
+                statusDiv.textContent = "WebOTP API is supported on your browser";
+                statusDiv.style.color = "#4caf50";
+            } else {
+                statusDiv.textContent = "WebOTP API is not supported on your browser";
+                statusDiv.style.color = "#ff6b6b";
+                readSmsBtn.disabled = true;
+            }
+            
+            readSmsBtn.addEventListener('click', async function() {
+                statusDiv.textContent = "Requesting SMS access...";
+                statusDiv.style.color = "#ff9800";
+                
+                try {
+                    // Request permission to read SMS
+                    if (navigator.permissions) {
+                        const permission = await navigator.permissions.query({ name: 'otp-credentials' });
+                        if (permission.state === 'denied') {
+                            statusDiv.textContent = "Permission denied. Please enable SMS access in your browser settings.";
+                            statusDiv.style.color = "#ff6b6b";
+                            return;
+                        }
+                    }
+                    
+                    // Use the WebOTP API to read the SMS
+                    const content = await navigator.credentials.get({
+                        otp: { transport: ['sms'] }
+                    });
+                    
+                    // Display the SMS content
+                    if (content && content.code) {
+                        smsContent.textContent = `OTP Code: ${content.code}\n\nFrom: ${content.type || 'Unknown sender'}`;
+                        resultDiv.style.display = 'block';
+                        statusDiv.textContent = "SMS read successfully!";
+                        statusDiv.style.color = "#4caf50";
+                    } else {
+                        smsContent.textContent = "No OTP code found in the SMS message.";
+                        resultDiv.style.display = 'block';
+                        statusDiv.textContent = "No OTP code detected";
+                        statusDiv.style.color = "#ff9800";
+                    }
+                } catch (error) {
+                    console.error('Error reading SMS:', error);
+                    
+                    // Handle different error cases
+                    if (error.name === 'AbortError') {
+                        statusDiv.textContent = "SMS reading was cancelled";
+                        statusDiv.style.color = "#ff9800";
+                    } else if (error.name === 'NotAllowedError') {
+                        statusDiv.textContent = "Permission denied by user";
+                        statusDiv.style.color = "#ff6b6b";
+                    } else if (error.name === 'NotSupportedError') {
+                        statusDiv.textContent = "WebOTP API not supported";
+                        statusDiv.style.color = "#ff6b6b";
+                    } else {
+                        statusDiv.textContent = "Error reading SMS: " + error.message;
+                        statusDiv.style.color = "#ff6b6b";
+                    }
+                    
+                    // Show a demo message if the API fails
+                    smsContent.textContent = "Demo SMS Content:\n\nYour verification code is: 123456\n\nFrom: ExampleApp";
+                    resultDiv.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
