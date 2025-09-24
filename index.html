@@ -62,10 +62,6 @@
             gap: 10px;
         }
         
-        .card h2 i {
-            font-size: 1.5rem;
-        }
-        
         .btn {
             display: block;
             width: 100%;
@@ -105,7 +101,6 @@
             padding: 20px;
             margin-top: 20px;
             min-height: 100px;
-            display: none;
         }
         
         .result h3 {
@@ -119,6 +114,14 @@
             font-family: monospace;
             white-space: pre-wrap;
             word-break: break-word;
+        }
+        
+        .debug-info {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.9rem;
         }
         
         .instructions {
@@ -151,6 +154,13 @@
             text-align: center;
             margin: 15px 0;
             font-weight: bold;
+        }
+        
+        .warning {
+            background: rgba(255, 152, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
         }
         
         @media (max-width: 600px) {
@@ -187,29 +197,35 @@
             <h2><span class="icon">📨</span> Read SMS</h2>
             <p>Click the button below to start reading SMS messages from your device.</p>
             
-            <div class="status" id="status">Ready to read SMS</div>
+            <div class="status" id="status">Checking browser compatibility...</div>
+            
+            <div class="warning" id="warning" style="display: none;">
+                <strong>Important:</strong> WebOTP API requires specific conditions to work. See instructions below.
+            </div>
             
             <button class="btn" id="readSmsBtn">Read SMS Messages</button>
             
             <div class="result" id="result">
                 <h3>Retrieved SMS:</h3>
                 <div class="sms-content" id="smsContent">No SMS content yet.</div>
+                <div class="debug-info" id="debugInfo"></div>
             </div>
         </div>
         
         <div class="card instructions">
-            <h2><span class="icon">📋</span> Instructions</h2>
+            <h2><span class="icon">📋</span> Instructions & Requirements</h2>
             <ol>
-                <li>Make sure you're using a compatible browser (Chrome for Android 84+ or Edge for Android 84+)</li>
-                <li>Ensure your phone has SMS messages with OTP codes</li>
-                <li>Click the "Read SMS Messages" button</li>
-                <li>Grant permission when prompted by your browser</li>
-                <li>The most recent OTP message will be displayed</li>
+                <li><strong>Browser:</strong> Chrome for Android 84+ or Edge for Android 84+</li>
+                <li><strong>Device:</strong> Android phone (doesn't work on iOS or desktop)</li>
+                <li><strong>Connection:</strong> Must be using HTTPS (GitHub Pages provides this)</li>
+                <li><strong>SMS Format:</strong> Message must contain an OTP code with specific formatting</li>
+                <li><strong>Timing:</strong> SMS should arrive while the page is open</li>
+                <li><strong>Permission:</strong> Grant permission when browser prompts</li>
             </ol>
         </div>
         
         <div class="compatibility">
-            <p>Note: This feature requires a browser that supports the WebOTP API and may not work on all devices.</p>
+            <p>Note: This feature requires very specific conditions and may not work on all devices.</p>
         </div>
     </div>
 
@@ -219,76 +235,118 @@
             const resultDiv = document.getElementById('result');
             const smsContent = document.getElementById('smsContent');
             const statusDiv = document.getElementById('status');
+            const debugInfo = document.getElementById('debugInfo');
+            const warningDiv = document.getElementById('warning');
+            
+            // Debug information
+            let debugData = {
+                userAgent: navigator.userAgent,
+                isHTTPS: window.location.protocol === 'https:',
+                webOTPSupported: false,
+                platform: navigator.platform,
+                isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+            };
             
             // Check if WebOTP API is supported
             if ('OTPCredential' in window) {
-                statusDiv.textContent = "WebOTP API is supported on your browser";
+                debugData.webOTPSupported = true;
+                statusDiv.textContent = "✅ WebOTP API is supported on your browser";
                 statusDiv.style.color = "#4caf50";
+                readSmsBtn.disabled = false;
                 
-                // Additional check for SMS receiver support
-                if (navigator.userAgent.includes('Chrome/') && !navigator.userAgent.includes('Edg/')) {
-                    statusDiv.textContent += " (Chrome detected)";
-                } else if (navigator.userAgent.includes('Edg/')) {
-                    statusDiv.textContent += " (Edge detected)";
-                }
+                // Show warning about requirements
+                warningDiv.style.display = 'block';
+                
             } else {
-                statusDiv.textContent = "WebOTP API is not supported on your browser";
+                statusDiv.textContent = "❌ WebOTP API is not supported on your browser";
                 statusDiv.style.color = "#ff6b6b";
                 readSmsBtn.disabled = true;
+                debugData.webOTPSupported = false;
             }
             
+            // Update debug info
+            updateDebugInfo();
+            
             readSmsBtn.addEventListener('click', async function() {
-                statusDiv.textContent = "Requesting SMS access...";
+                statusDiv.textContent = "🔄 Requesting SMS access... (Check your phone for permission prompt)";
                 statusDiv.style.color = "#ff9800";
                 readSmsBtn.disabled = true;
                 
                 try {
+                    // Add a timeout for the WebOTP API call
+                    const abortController = new AbortController();
+                    const timeoutId = setTimeout(() => {
+                        abortController.abort();
+                    }, 30000); // 30 second timeout
+                    
                     // Use the WebOTP API to read the SMS
-                    // Note: This will trigger a permission prompt
                     const content = await navigator.credentials.get({
-                        otp: { transport: ['sms'] }
+                        otp: { transport: ['sms'] },
+                        signal: abortController.signal
                     });
+                    
+                    clearTimeout(timeoutId);
                     
                     // Display the SMS content
                     if (content && content.code) {
-                        smsContent.textContent = `OTP Code: ${content.code}\n\nFrom: ${content.type || 'Unknown sender'}`;
-                        resultDiv.style.display = 'block';
-                        statusDiv.textContent = "SMS read successfully!";
+                        smsContent.textContent = `✅ OTP Code Found!\n\nCode: ${content.code}\nType: ${content.type || 'SMS'}`;
+                        statusDiv.textContent = "✅ SMS read successfully!";
                         statusDiv.style.color = "#4caf50";
                     } else {
-                        smsContent.textContent = "No OTP code found in the SMS message.";
-                        resultDiv.style.display = 'block';
-                        statusDiv.textContent = "No OTP code detected";
+                        smsContent.textContent = "ℹ️ No OTP code found in the SMS message.\n\nThis could mean:\n- No recent OTP messages\n- Message format not recognized\n- Permission not granted";
+                        statusDiv.textContent = "ℹ️ No OTP code detected";
                         statusDiv.style.color = "#ff9800";
                     }
                 } catch (error) {
                     console.error('Error reading SMS:', error);
                     
                     // Handle different error cases
+                    let errorMessage = "Unknown error occurred";
+                    let errorColor = "#ff6b6b";
+                    
                     if (error.name === 'AbortError') {
-                        statusDiv.textContent = "SMS reading was cancelled or timed out";
-                        statusDiv.style.color = "#ff9800";
+                        errorMessage = "⏰ SMS reading timed out (30 seconds) - no message received";
+                        errorColor = "#ff9800";
                     } else if (error.name === 'NotAllowedError') {
-                        statusDiv.textContent = "Permission denied by user";
-                        statusDiv.style.color = "#ff6b6b";
+                        errorMessage = "❌ Permission denied by user or browser settings";
                     } else if (error.name === 'NotSupportedError') {
-                        statusDiv.textContent = "WebOTP API not supported";
-                        statusDiv.style.color = "#ff6b6b";
+                        errorMessage = "❌ WebOTP API not supported by your browser";
                     } else if (error.name === 'InvalidStateError') {
-                        statusDiv.textContent = "Another request is already in progress";
-                        statusDiv.style.color = "#ff6b6b";
+                        errorMessage = "⚠️ Another request is already in progress";
                     } else {
-                        statusDiv.textContent = "Error reading SMS: " + error.message;
-                        statusDiv.style.color = "#ff6b6b";
+                        errorMessage = `❌ Error: ${error.message || error.name}`;
                     }
                     
-                    // Show a demo message if the API fails
-                    smsContent.textContent = "Demo SMS Content (for testing):\n\nYour verification code is: 123456\n\nFrom: ExampleApp\n\nNote: This is a demo message. Real SMS reading failed due to the error above.";
-                    resultDiv.style.display = 'block';
+                    statusDiv.textContent = errorMessage;
+                    statusDiv.style.color = errorColor;
+                    
+                    // Show detailed error information
+                    smsContent.textContent = `Failed to read SMS:\n\nError: ${error.name}\nMessage: ${error.message}\n\nWhat to try:\n1. Ensure you're on Android with Chrome/Edge\n2. Make sure you have OTP messages\n3. Grant permission when prompted\n4. Try sending a test OTP while this page is open`;
                 } finally {
                     readSmsBtn.disabled = false;
+                    updateDebugInfo();
                 }
             });
+            
+            function updateDebugInfo() {
+                debugInfo.innerHTML = `
+                    <strong>Debug Information:</strong><br>
+                    User Agent: ${debugData.userAgent.substring(0, 100)}...<br>
+                    HTTPS: ${debugData.isHTTPS ? '✅ Yes' : '❌ No'}<br>
+                    WebOTP Supported: ${debugData.webOTPSupported ? '✅ Yes' : '❌ No'}<br>
+                    Platform: ${debugData.platform}<br>
+                    Mobile Device: ${debugData.isMobile ? '✅ Yes' : '❌ No'}<br>
+                    Current URL: ${window.location.href}
+                `;
+            }
+            
+            // Test function to simulate SMS reception (for demo purposes)
+            window.testSMS = function() {
+                smsContent.textContent = "🧪 Demo SMS Content (for testing):\n\nYour verification code is: 987654\n\nFrom: TestApp\nExpires: 10 minutes\n\nThis is a simulated message for testing purposes.";
+                statusDiv.textContent = "🧪 Demo mode activated";
+                statusDiv.style.color = "#9c27b0";
+                resultDiv.style.display = 'block';
+            };
         });
     </script>
 </body>
