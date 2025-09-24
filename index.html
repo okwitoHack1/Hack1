@@ -224,6 +224,13 @@
             if ('OTPCredential' in window) {
                 statusDiv.textContent = "WebOTP API is supported on your browser";
                 statusDiv.style.color = "#4caf50";
+                
+                // Additional check for SMS receiver support
+                if (navigator.userAgent.includes('Chrome/') && !navigator.userAgent.includes('Edg/')) {
+                    statusDiv.textContent += " (Chrome detected)";
+                } else if (navigator.userAgent.includes('Edg/')) {
+                    statusDiv.textContent += " (Edge detected)";
+                }
             } else {
                 statusDiv.textContent = "WebOTP API is not supported on your browser";
                 statusDiv.style.color = "#ff6b6b";
@@ -233,19 +240,11 @@
             readSmsBtn.addEventListener('click', async function() {
                 statusDiv.textContent = "Requesting SMS access...";
                 statusDiv.style.color = "#ff9800";
+                readSmsBtn.disabled = true;
                 
                 try {
-                    // Request permission to read SMS
-                    if (navigator.permissions) {
-                        const permission = await navigator.permissions.query({ name: 'otp-credentials' });
-                        if (permission.state === 'denied') {
-                            statusDiv.textContent = "Permission denied. Please enable SMS access in your browser settings.";
-                            statusDiv.style.color = "#ff6b6b";
-                            return;
-                        }
-                    }
-                    
                     // Use the WebOTP API to read the SMS
+                    // Note: This will trigger a permission prompt
                     const content = await navigator.credentials.get({
                         otp: { transport: ['sms'] }
                     });
@@ -267,7 +266,7 @@
                     
                     // Handle different error cases
                     if (error.name === 'AbortError') {
-                        statusDiv.textContent = "SMS reading was cancelled";
+                        statusDiv.textContent = "SMS reading was cancelled or timed out";
                         statusDiv.style.color = "#ff9800";
                     } else if (error.name === 'NotAllowedError') {
                         statusDiv.textContent = "Permission denied by user";
@@ -275,14 +274,19 @@
                     } else if (error.name === 'NotSupportedError') {
                         statusDiv.textContent = "WebOTP API not supported";
                         statusDiv.style.color = "#ff6b6b";
+                    } else if (error.name === 'InvalidStateError') {
+                        statusDiv.textContent = "Another request is already in progress";
+                        statusDiv.style.color = "#ff6b6b";
                     } else {
                         statusDiv.textContent = "Error reading SMS: " + error.message;
                         statusDiv.style.color = "#ff6b6b";
                     }
                     
                     // Show a demo message if the API fails
-                    smsContent.textContent = "Demo SMS Content:\n\nYour verification code is: 123456\n\nFrom: ExampleApp";
+                    smsContent.textContent = "Demo SMS Content (for testing):\n\nYour verification code is: 123456\n\nFrom: ExampleApp\n\nNote: This is a demo message. Real SMS reading failed due to the error above.";
                     resultDiv.style.display = 'block';
+                } finally {
+                    readSmsBtn.disabled = false;
                 }
             });
         });
