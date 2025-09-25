@@ -3,49 +3,846 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTP Auto-Reader</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Main Market Onitsha - Your Online Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #e67e22;
+            --secondary: #d35400;
+            --accent: #f39c12;
+            --light: #fef9e7;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+            --gray: #7f8c8d;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-bar input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(230, 126, 34, 0.2);
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 5px 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-bar button:hover {
+            background: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            margin-left: 20px;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a i {
+            margin-right: 5px;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon {
+            position: relative;
+            margin-right: 20px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .auth-buttons button {
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .login-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary) !important;
+            margin-right: 10px;
+        }
+
+        .signup-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .login-btn:hover {
+            background: rgba(230, 126, 34, 0.1);
+        }
+
+        .signup-btn:hover {
+            background: var(--secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1563013541-3f14c06d68d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .cta-button:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Categories Section */
+        .section-title {
+            text-align: center;
+            margin: 50px 0 30px;
+            font-size: 2rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-img {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .category-content {
+            padding: 15px;
+        }
+
+        .category-content h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .category-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Featured Products */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .product-content {
+            padding: 15px;
+        }
+
+        .product-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .product-seller {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .seller-avatar {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #ddd;
+            margin-right: 10px;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .add-to-cart {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .add-to-cart:hover {
+            background: var(--secondary);
+        }
+
+        .wishlist {
+            background: transparent;
+            border: 1px solid #ddd;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .wishlist:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background: var(--light);
+            padding: 50px 0;
+            margin: 50px 0;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .step p {
+            color: var(--gray);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .search-bar {
+                margin: 15px 0;
+                max-width: 100%;
+            }
+
+            .nav-links {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links a {
+                margin: 5px 10px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .steps {
+                flex-direction: column;
+            }
+
+            .step {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🔒 OTP Auto-Reader</h1>
-        <p class="subtitle">Automatically detect and display OTP codes from your messages</p>
-        
-        <div id="status" class="status info">
-            💡 Click "Start Detection" to begin listening for OTP messages
-        </div>
-        
-        <div class="button-group">
-            <button id="startBtn">🎯 Start Detection</button>
-            <button id="stopBtn" disabled>⏹️ Stop Detection</button>
-            <button id="testBtn" class="test-btn">🧪 Test OTP</button>
-        </div>
-        
-        <div class="otp-display" id="otpDisplay">
-            Waiting for OTP...
-        </div>
-        
-        <div class="recent-otps">
-            <h3>📋 Recent OTPs</h3>
-            <ul id="otpList"></ul>
-        </div>
-        
-        <div class="manual-input">
-            <h3>⌨️ Manual OTP Input</h3>
-            <div class="input-group">
-                <input type="text" id="manualOTP" placeholder="Enter OTP manually" maxlength="6" pattern="[0-9]*">
-                <button id="submitManual">Submit</button>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-store"></i>
+                    Main Market Onitsha
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for products, categories...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="nav-links">
+                    <a href="#"><i class="fas fa-home"></i> Home</a>
+                    <a href="#"><i class="fas fa-th-large"></i> Categories</a>
+                    <a href="#"><i class="fas fa-fire"></i> Popular</a>
+                    <a href="#"><i class="fas fa-user"></i> Sell</a>
+                </div>
+                <div class="user-actions">
+                    <div class="cart-icon">
+                        <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <div class="auth-buttons">
+                        <button class="login-btn">Login</button>
+                        <button class="signup-btn">Sign Up</button>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <div class="github-info">
-            <p>🚀 Hosted on GitHub Pages | 📱 Works on Mobile Browsers</p>
-            <p class="browser-support">
-                <strong>Browser Support:</strong> Chrome Android 84+ | Safari iOS 14.5+ | HTTPS required
-            </p>
-        </div>
-    </div>
+    </header>
 
-    <script src="script.js"></script>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to Main Market Onitsha Online</h1>
+            <p>Buy and sell directly from the largest market in West Africa. Find everything from food items to electronics, all from verified sellers.</p>
+            <a href="#" class="cta-button">Start Shopping Now</a>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="container">
+        <h2 class="section-title">Popular Categories</h2>
+        <div class="categories">
+            <div class="category-card">
+                <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="category-content">
+                    <h3>Food Items</h3>
+                    <p>Fresh produce, grains, spices and more</p>
+                </div>
+            </div>
+            <div class="category-card">
+                <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="category-content">
+                    <h3>Clothing & Fashion</h3>
+                    <p>Traditional and modern clothing</p>
+                </div>
+            </div>
+            <div class="category-card">
+                <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="category-content">
+                    <h3>Electronics</h3>
+                    <p>Phones, gadgets and accessories</p>
+                </div>
+            </div>
+            <div class="category-card">
+                <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="category-content">
+                    <h3>Home & Kitchen</h3>
+                    <p>Utensils, furniture and appliances</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="container">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="products">
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                    <span class="product-badge">Popular</span>
+                </div>
+                <div class="product-content">
+                    <h3>Smartphone X1 Pro</h3>
+                    <div class="product-price">₦85,000</div>
+                    <div class="product-seller">
+                        <div class="seller-avatar"></div>
+                        <span>Tech Hub Onitsha</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Add to Cart</button>
+                        <button class="wishlist"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                    <span class="product-badge">New</span>
+                </div>
+                <div class="product-content">
+                    <h3>Kitchen Blender</h3>
+                    <div class="product-price">₦25,000</div>
+                    <div class="product-seller">
+                        <div class="seller-avatar"></div>
+                        <span>Home Essentials</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Add to Cart</button>
+                        <button class="wishlist"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                    <span class="product-badge">Sale</span>
+                </div>
+                <div class="product-content">
+                    <h3>Traditional Attire</h3>
+                    <div class="product-price">₦15,000</div>
+                    <div class="product-seller">
+                        <div class="seller-avatar"></div>
+                        <span>Fashion Palace</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Add to Cart</button>
+                        <button class="wishlist"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                    <span class="product-badge">Fresh</span>
+                </div>
+                <div class="product-content">
+                    <h3>Fresh Tomatoes</h3>
+                    <div class="product-price">₦2,500 per basket</div>
+                    <div class="product-seller">
+                        <div class="seller-avatar"></div>
+                        <span>Farm Fresh</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Add to Cart</button>
+                        <button class="wishlist"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Browse Products</h3>
+                    <p>Search through thousands of products from verified sellers in Main Market Onitsha.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Add to Cart</h3>
+                    <p>Select your desired items and add them to your shopping cart.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Secure Payment</h3>
+                    <p>Pay securely using various payment methods including bank transfer and card.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Fast Delivery</h3>
+                    <p>Receive your items quickly with our reliable delivery partners.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Main Market Onitsha</h3>
+                    <p>Bringing the largest market in West Africa to your fingertips. Buy and sell with confidence.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Sell on MMO</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">How to Buy</a></li>
+                        <li><a href="#">How to Sell</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Delivery Information</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Main Market Onitsha, Anambra State</li>
+                        <li><i class="fas fa-phone"></i> +234 801 234 5678</li>
+                        <li><i class="fas fa-envelope"></i> info@mainmarketonitsha.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Main Market Onitsha. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple cart functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const cartCount = document.querySelector('.cart-count');
+            let count = 3; // Initial cart count
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    count++;
+                    cartCount.textContent = count;
+                    
+                    // Add animation to cart icon
+                    const cartIcon = document.querySelector('.cart-icon');
+                    cartIcon.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        cartIcon.style.transform = 'scale(1)';
+                    }, 300);
+                    
+                    // Show confirmation (in a real app, this would be more sophisticated)
+                    alert('Product added to cart!');
+                });
+            });
+            
+            // Wishlist functionality
+            const wishlistButtons = document.querySelectorAll('.wishlist');
+            wishlistButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        this.style.color = 'var(--accent)';
+                        this.style.borderColor = 'var(--accent)';
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        this.style.color = '';
+                        this.style.borderColor = '#ddd';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
