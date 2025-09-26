@@ -3,29 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Market Onitsha - Advanced Marketplace</title>
+    <title>Main Market Onitsha - Buy & Sell Everything</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://js.paystack.co/v1/inline.js"></script>
     <style>
-        :root {
-            --primary: #8a2be2;
-            --primary-dark: #6a1cb0;
-            --secondary: #00d4ff;
-            --accent: #ff6b6b;
-            --dark-bg: #0f0f23;
-            --dark-card: #1a1a2e;
-            --dark-text: #e2e2e2;
-            --dark-border: #2d2d44;
-            --success: #00cc88;
-            --warning: #ffaa00;
-            --danger: #ff4757;
-            --gray: #8a8a8a;
-            --border-radius: 12px;
-            --shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            --transition: all 0.3s ease;
-            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -33,119 +13,114 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        :root {
+            --primary: #2c5aa0;
+            --secondary: #f7941d;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --danger: #dc3545;
+        }
+
         body {
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
+            background-color: #f5f5f5;
+            color: var(--dark);
             line-height: 1.6;
-            min-height: 100vh;
         }
 
         .container {
-            width: 100%;
+            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
         /* Header Styles */
         header {
-            background-color: var(--dark-card);
-            box-shadow: var(--shadow);
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid var(--dark-border);
         }
 
-        .header-content {
+        .top-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .contact-info span {
+            margin-right: 15px;
         }
 
-        .logo i {
-            margin-right: 10px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .search-bar {
-            flex: 1;
-            max-width: 500px;
-            margin: 0 20px;
-            position: relative;
-        }
-
-        .search-bar input {
-            width: 100%;
-            padding: 12px 20px;
-            background: var(--dark-bg);
-            border: 1px solid var(--dark-border);
-            border-radius: 30px;
-            font-size: 1rem;
-            outline: none;
-            transition: var(--transition);
-            color: var(--dark-text);
-        }
-
-        .search-bar input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
-        }
-
-        .search-bar button {
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            background: var(--gradient);
+        .auth-buttons button {
+            background: transparent;
+            border: 1px solid white;
             color: white;
-            border: none;
-            border-radius: 30px;
-            padding: 7px 20px;
+            padding: 5px 15px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: var(--transition);
+            margin-left: 10px;
+            transition: all 0.3s;
         }
 
-        .search-bar button:hover {
-            opacity: 0.9;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-links a {
-            margin-left: 20px;
-            color: var(--dark-text);
-            text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            transition: var(--transition);
-            padding: 8px 15px;
-            border-radius: var(--border-radius);
-        }
-
-        .nav-links a:hover {
-            background: rgba(138, 43, 226, 0.1);
+        .auth-buttons button:hover {
+            background: white;
             color: var(--primary);
         }
 
-        .nav-links a i {
-            margin-right: 5px;
+        .main-header {
+            padding: 15px 0;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+
+        .search-bar {
+            display: flex;
+            width: 100%;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
         }
 
         .user-actions {
@@ -153,16 +128,25 @@
             align-items: center;
         }
 
-        .cart-icon {
-            position: relative;
-            margin-right: 20px;
+        .action-item {
+            margin-left: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .action-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .action-item span {
+            display: block;
+            font-size: 0.8rem;
+            margin-top: 5px;
         }
 
         .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--accent);
+            background: var(--danger);
             color: white;
             border-radius: 50%;
             width: 20px;
@@ -170,314 +154,180 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
+            position: absolute;
+            top: -5px;
+            right: -5px;
         }
 
-        .auth-buttons button {
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            margin-left: 10px;
-        }
-
-        .login-btn {
-            background: transparent;
-            color: var(--primary);
-            border: 1px solid var(--primary) !important;
-        }
-
-        .signup-btn {
-            background: var(--gradient);
-            color: white;
-        }
-
-        .login-btn:hover {
-            background: rgba(138, 43, 226, 0.1);
-        }
-
-        .signup-btn:hover {
-            opacity: 0.9;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: var(--dark-card);
-            border-radius: var(--border-radius);
-            width: 90%;
-            max-width: 500px;
-            padding: 30px;
-            box-shadow: var(--shadow);
+        .cart-item {
             position: relative;
         }
 
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray);
+        nav {
+            background: var(--secondary);
+            padding: 10px 0;
         }
 
-        .modal h2 {
-            margin-bottom: 20px;
-            text-align: center;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .nav-links {
+            display: flex;
+            list-style: none;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .nav-links li {
+            margin-right: 20px;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            background: var(--dark-bg);
-            border: 1px solid var(--dark-border);
-            border-radius: var(--border-radius);
-            color: var(--dark-text);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background: var(--gradient);
+        .nav-links a {
             color: white;
-            border: none;
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .submit-btn:hover {
-            opacity: 0.9;
-        }
-
-        .form-footer {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .form-footer a {
-            color: var(--primary);
             text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
         }
 
-        /* Hero Section */
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Main Content Styles */
         .hero {
-            background: linear-gradient(rgba(15, 15, 35, 0.9), rgba(15, 15, 35, 0.9)), url('https://images.unsplash.com/photo-1563013541-3f14c06d68d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
-            padding: 100px 0;
+            color: white;
+            padding: 80px 0;
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
             font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto 30px;
-            color: var(--gray);
         }
 
-        .cta-button {
+        .btn {
             display: inline-block;
-            background: var(--gradient);
+            background: var(--secondary);
             color: white;
-            padding: 15px 40px;
-            border-radius: 30px;
+            padding: 12px 25px;
+            border-radius: 4px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
+            transition: all 0.3s;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        .btn:hover {
+            background: #e0851a;
+            transform: translateY(-2px);
         }
 
-        /* Section Titles */
-        .section-title {
-            text-align: center;
-            margin: 50px 0 30px;
-            font-size: 2.2rem;
-            position: relative;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: var(--gradient);
-            margin: 10px auto;
-            border-radius: 2px;
-        }
-
-        /* Categories Section */
         .categories {
+            margin: 40px 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            border-left: 4px solid var(--secondary);
+            padding-left: 10px;
+        }
+
+        .category-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
         }
 
         .category-card {
-            background: var(--dark-card);
-            border-radius: var(--border-radius);
+            background: white;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            cursor: pointer;
-            border: 1px solid var(--dark-border);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+            padding: 20px;
         }
 
         .category-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-            border-color: var(--primary);
+            transform: translateY(-5px);
         }
 
-        .category-img {
-            height: 150px;
-            background-size: cover;
-            background-position: center;
+        .category-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
         }
 
-        .category-content {
-            padding: 20px;
-        }
-
-        .category-content h3 {
-            margin-bottom: 10px;
-            color: var(--dark-text);
-        }
-
-        .category-content p {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-
-        /* Products Section */
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
-        }
-
-        .product-card {
-            background: var(--dark-card);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid var(--dark-border);
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-            border-color: var(--primary);
-        }
-
-        .product-img {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .product-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: var(--gradient);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .product-content {
-            padding: 20px;
-        }
-
-        .product-content h3 {
-            margin-bottom: 10px;
+        .category-card h3 {
             font-size: 1.2rem;
         }
 
+        .products {
+            margin: 40px 0;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 200px;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            height: 50px;
+            overflow: hidden;
+        }
+
         .product-price {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--primary);
             margin-bottom: 10px;
         }
 
         .product-seller {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
             font-size: 0.9rem;
-            color: var(--gray);
-        }
-
-        .seller-avatar {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background: var(--gradient);
-            margin-right: 10px;
+            color: #666;
+            margin-bottom: 15px;
         }
 
         .product-actions {
@@ -486,132 +336,120 @@
         }
 
         .add-to-cart {
-            background: var(--gradient);
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
+            padding: 8px 15px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: var(--transition);
-            font-weight: 500;
             flex: 1;
             margin-right: 10px;
         }
 
-        .add-to-cart:hover {
-            opacity: 0.9;
+        .view-details {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
-        .wishlist {
-            background: transparent;
-            border: 1px solid var(--dark-border);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
+        /* Auth Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--gray);
         }
 
-        .wishlist:hover {
-            border-color: var(--primary);
-            color: var(--primary);
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Dashboard Section */
-        .dashboard {
-            background: var(--dark-card);
-            border-radius: var(--border-radius);
-            padding: 30px;
-            margin: 50px 0;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--dark-border);
-        }
-
-        .dashboard-header {
+        .modal-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
         }
 
-        .dashboard-title {
-            font-size: 1.8rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .modal-header h2 {
+            font-size: 1.5rem;
         }
 
-        .upload-btn {
-            background: var(--gradient);
-            color: white;
+        .close-modal {
+            background: transparent;
             border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
+            color: white;
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: var(--transition);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
             font-weight: 500;
         }
 
-        .upload-btn:hover {
-            opacity: 0.9;
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
         }
 
-        .dashboard-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
         }
 
-        .dashboard-item {
-            background: var(--dark-bg);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            border: 1px solid var(--dark-border);
-        }
-
-        .dashboard-item h3 {
-            margin-bottom: 15px;
+        .form-footer a {
             color: var(--primary);
+            text-decoration: none;
         }
 
-        /* Footer */
+        /* Footer Styles */
         footer {
-            background: var(--dark-card);
+            background: var(--dark);
             color: white;
-            padding: 50px 0 20px;
+            padding: 40px 0 20px;
             margin-top: 50px;
-            border-top: 1px solid var(--dark-border);
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 30px;
             margin-bottom: 30px;
         }
 
         .footer-column h3 {
+            font-size: 1.2rem;
             margin-bottom: 20px;
-            font-size: 1.3rem;
-            position: relative;
-            padding-bottom: 10px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .footer-column h3:after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 40px;
-            height: 3px;
-            background: var(--gradient);
+            color: var(--secondary);
         }
 
         .footer-links {
@@ -623,380 +461,314 @@
         }
 
         .footer-links a {
-            color: var(--gray);
+            color: #ccc;
             text-decoration: none;
-            transition: var(--transition);
+            transition: color 0.3s;
         }
 
         .footer-links a:hover {
-            color: var(--primary);
-            padding-left: 5px;
+            color: white;
         }
 
         .social-links {
             display: flex;
-            margin-top: 20px;
+            gap: 15px;
+            margin-top: 15px;
         }
 
         .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: var(--dark-bg);
-            border-radius: 50%;
-            margin-right: 10px;
-            color: var(--dark-text);
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            background: var(--gradient);
-            transform: translateY(-3px);
+            color: white;
+            font-size: 1.5rem;
         }
 
         .copyright {
             text-align: center;
             padding-top: 20px;
-            border-top: 1px solid var(--dark-border);
+            border-top: 1px solid #444;
             font-size: 0.9rem;
-            color: var(--gray);
+            color: #aaa;
         }
 
-        /* Responsive Design */
+        /* Responsive Styles */
         @media (max-width: 768px) {
-            .header-content {
+            .top-header .container {
                 flex-direction: column;
-                padding: 15px 0;
+                text-align: center;
             }
-
-            .logo {
-                margin-bottom: 15px;
+            
+            .contact-info {
+                margin-bottom: 10px;
             }
-
+            
+            .logo-section {
+                flex-direction: column;
+            }
+            
             .search-bar {
                 margin: 15px 0;
-                max-width: 100%;
             }
-
+            
+            .user-actions {
+                justify-content: center;
+                width: 100%;
+            }
+            
             .nav-links {
-                margin-top: 15px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
-
-            .nav-links a {
-                margin: 5px 10px;
-            }
-
+            
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
-
+            
             .hero p {
                 font-size: 1rem;
-            }
-
-            .dashboard-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .upload-btn {
-                margin-top: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header Section -->
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-store"></i>
-                    Main Market Onitsha
+        <div class="top-header">
+            <div class="container">
+                <div class="contact-info">
+                    <span><i class="fas fa-phone"></i> +234 801 234 5678</span>
+                    <span><i class="fas fa-envelope"></i> info@mainmarketonitsha.com</span>
                 </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search for products, categories...">
-                    <button><i class="fas fa-search"></i></button>
+                <div class="auth-buttons">
+                    <button id="loginBtn">Login</button>
+                    <button id="registerBtn">Register</button>
                 </div>
-                <div class="nav-links">
-                    <a href="#"><i class="fas fa-home"></i> Home</a>
-                    <a href="#"><i class="fas fa-th-large"></i> Categories</a>
-                    <a href="#"><i class="fas fa-fire"></i> Popular</a>
-                    <a href="#" id="sell-link"><i class="fas fa-upload"></i> Sell</a>
-                </div>
-                <div class="user-actions">
-                    <div class="cart-icon">
-                        <a href="#"><i class="fas fa-shopping-cart"></i></a>
-                        <span class="cart-count">3</span>
+            </div>
+        </div>
+        
+        <div class="main-header">
+            <div class="container">
+                <div class="logo-section">
+                    <div class="logo">
+                        <i class="fas fa-shopping-bag"></i>
+                        Main Market Onitsha
                     </div>
-                    <div class="auth-buttons">
-                        <button class="login-btn" id="login-btn">Login</button>
-                        <button class="signup-btn" id="signup-btn">Sign Up</button>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search for products, brands and categories...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="user-actions">
+                        <div class="action-item">
+                            <i class="fas fa-user"></i>
+                            <span>Account</span>
+                        </div>
+                        <div class="action-item cart-item">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Cart</span>
+                            <div class="cart-count">0</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <nav>
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Clothing</a></li>
+                    <li><a href="#">Shoes</a></li>
+                    <li><a href="#">Bags</a></li>
+                    <li><a href="#">Electronics</a></li>
+                    <li><a href="#">Home & Kitchen</a></li>
+                    <li><a href="#">Beauty</a></li>
+                    <li><a href="#">Food</a></li>
+                    <li><a href="#">More</a></li>
+                </ul>
+            </div>
+        </nav>
     </header>
-
-    <!-- Login Modal -->
-    <div class="modal" id="login-modal">
-        <div class="modal-content">
-            <span class="close-modal" id="close-login">&times;</span>
-            <h2>Login to Your Account</h2>
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="login-email">Email</label>
-                    <input type="email" id="login-email" required>
-                </div>
-                <div class="form-group">
-                    <label for="login-password">Password</label>
-                    <input type="password" id="login-password" required>
-                </div>
-                <button type="submit" class="submit-btn">Login</button>
-                <div class="form-footer">
-                    <p>Don't have an account? <a href="#" id="show-signup">Sign Up</a></p>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Signup Modal -->
-    <div class="modal" id="signup-modal">
-        <div class="modal-content">
-            <span class="close-modal" id="close-signup">&times;</span>
-            <h2>Create an Account</h2>
-            <form id="signup-form">
-                <div class="form-group">
-                    <label for="signup-name">Full Name</label>
-                    <input type="text" id="signup-name" required>
-                </div>
-                <div class="form-group">
-                    <label for="signup-email">Email</label>
-                    <input type="email" id="signup-email" required>
-                </div>
-                <div class="form-group">
-                    <label for="signup-password">Password</label>
-                    <input type="password" id="signup-password" required>
-                </div>
-                <div class="form-group">
-                    <label for="signup-role">I want to:</label>
-                    <select id="signup-role" required>
-                        <option value="">Select Role</option>
-                        <option value="buyer">Buy Products</option>
-                        <option value="seller">Sell Products</option>
-                    </select>
-                </div>
-                <button type="submit" class="submit-btn">Create Account</button>
-                <div class="form-footer">
-                    <p>Already have an account? <a href="#" id="show-login">Login</a></p>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Product Upload Modal -->
-    <div class="modal" id="upload-modal">
-        <div class="modal-content">
-            <span class="close-modal" id="close-upload">&times;</span>
-            <h2>Upload a Product</h2>
-            <form id="upload-form">
-                <div class="form-group">
-                    <label for="product-name">Product Name</label>
-                    <input type="text" id="product-name" required>
-                </div>
-                <div class="form-group">
-                    <label for="product-description">Description</label>
-                    <textarea id="product-description" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="product-price">Price (₦)</label>
-                    <input type="number" id="product-price" required>
-                </div>
-                <div class="form-group">
-                    <label for="product-category">Category</label>
-                    <select id="product-category" required>
-                        <option value="">Select Category</option>
-                        <option value="electronics">Electronics</option>
-                        <option value="fashion">Fashion</option>
-                        <option value="home">Home & Kitchen</option>
-                        <option value="food">Food Items</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="product-image">Product Image URL</label>
-                    <input type="url" id="product-image" required>
-                </div>
-                <button type="submit" class="submit-btn">Upload Product</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Payment Modal -->
-    <div class="modal" id="payment-modal">
-        <div class="modal-content">
-            <span class="close-modal" id="close-payment">&times;</span>
-            <h2>Complete Your Purchase</h2>
-            <div id="payment-details">
-                <p>Product: <span id="payment-product">Smartphone X1 Pro</span></p>
-                <p>Price: <span id="payment-price">₦85,000</span></p>
-                <p>Seller: <span id="payment-seller">Tech Hub Onitsha</span></p>
-            </div>
-            <form id="payment-form">
-                <div class="form-group">
-                    <label for="payment-email">Email</label>
-                    <input type="email" id="payment-email" required>
-                </div>
-                <button type="button" class="submit-btn" id="paystack-btn">Pay with Paystack</button>
-            </form>
-        </div>
-    </div>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <h1>Welcome to Main Market Onitsha</h1>
-            <p>Experience the largest market in West Africa from the comfort of your home. Buy and sell with secure payments powered by Paystack.</p>
-            <a href="#" class="cta-button">Start Shopping Now</a>
+            <p>Your one-stop online marketplace for everything sold in Onitsha Main Market. Buy and sell with confidence.</p>
+            <a href="#" class="btn">Start Shopping</a>
         </div>
     </section>
 
-    <!-- Categories Section -->
-    <section class="container">
-        <h2 class="section-title">Popular Categories</h2>
-        <div class="categories">
-            <div class="category-card">
-                <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
-                <div class="category-content">
-                    <h3>Food Items</h3>
-                    <p>Fresh produce, grains, spices and more</p>
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Categories Section -->
+        <section class="categories">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <i class="fas fa-tshirt"></i>
+                    <h3>Clothing</h3>
                 </div>
-            </div>
-            <div class="category-card">
-                <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
-                <div class="category-content">
-                    <h3>Clothing & Fashion</h3>
-                    <p>Traditional and modern clothing</p>
+                <div class="category-card">
+                    <i class="fas fa-shoe-prints"></i>
+                    <h3>Shoes</h3>
                 </div>
-            </div>
-            <div class="category-card">
-                <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
-                <div class="category-content">
+                <div class="category-card">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h3>Bags</h3>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-mobile-alt"></i>
                     <h3>Electronics</h3>
-                    <p>Phones, gadgets and accessories</p>
                 </div>
-            </div>
-            <div class="category-card">
-                <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
-                <div class="category-content">
+                <div class="category-card">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Food</h3>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-home"></i>
                     <h3>Home & Kitchen</h3>
-                    <p>Utensils, furniture and appliances</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Featured Products -->
-    <section class="container">
-        <h2 class="section-title">Featured Products</h2>
-        <div class="products">
-            <div class="product-card">
-                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
-                    <span class="product-badge">Popular</span>
-                </div>
-                <div class="product-content">
-                    <h3>Smartphone X1 Pro</h3>
-                    <div class="product-price">₦85,000</div>
-                    <div class="product-seller">
-                        <div class="seller-avatar"></div>
-                        <span>Tech Hub Onitsha</span>
+        <!-- Featured Products -->
+        <section class="products">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/250x200" alt="Product Image">
                     </div>
-                    <div class="product-actions">
-                        <button class="add-to-cart" data-product="Smartphone X1 Pro" data-price="85000" data-seller="Tech Hub Onitsha">Add to Cart</button>
-                        <button class="wishlist"><i class="far fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
-                    <span class="product-badge">New</span>
-                </div>
-                <div class="product-content">
-                    <h3>Kitchen Blender</h3>
-                    <div class="product-price">₦25,000</div>
-                    <div class="product-seller">
-                        <div class="seller-avatar"></div>
-                        <span>Home Essentials</span>
-                    </div>
-                    <div class="product-actions">
-                        <button class="add-to-cart" data-product="Kitchen Blender" data-price="25000" data-seller="Home Essentials">Add to Cart</button>
-                        <button class="wishlist"><i class="far fa-heart"></i></button>
+                    <div class="product-info">
+                        <h3 class="product-title">Men's Casual Shirt - Premium Quality</h3>
+                        <div class="product-price">₦12,500</div>
+                        <div class="product-seller">By: Chukwuma Stores</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="view-details">Details</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="product-card">
-                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
-                    <span class="product-badge">Sale</span>
-                </div>
-                <div class="product-content">
-                    <h3>Traditional Attire</h3>
-                    <div class="product-price">₦15,000</div>
-                    <div class="product-seller">
-                        <div class="seller-avatar"></div>
-                        <span>Fashion Palace</span>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/250x200" alt="Product Image">
                     </div>
-                    <div class="product-actions">
-                        <button class="add-to-cart" data-product="Traditional Attire" data-price="15000" data-seller="Fashion Palace">Add to Cart</button>
-                        <button class="wishlist"><i class="far fa-heart"></i></button>
+                    <div class="product-info">
+                        <h3 class="product-title">Women's Handbag - Leather Material</h3>
+                        <div class="product-price">₦8,900</div>
+                        <div class="product-seller">By: Ada Bags Collection</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="view-details">Details</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="product-card">
-                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
-                    <span class="product-badge">Fresh</span>
-                </div>
-                <div class="product-content">
-                    <h3>Fresh Tomatoes</h3>
-                    <div class="product-price">₦2,500 per basket</div>
-                    <div class="product-seller">
-                        <div class="seller-avatar"></div>
-                        <span>Farm Fresh</span>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/250x200" alt="Product Image">
                     </div>
-                    <div class="product-actions">
-                        <button class="add-to-cart" data-product="Fresh Tomatoes" data-price="2500" data-seller="Farm Fresh">Add to Cart</button>
-                        <button class="wishlist"><i class="far fa-heart"></i></button>
+                    <div class="product-info">
+                        <h3 class="product-title">Sneakers - Unisex Design</h3>
+                        <div class="product-price">₦15,000</div>
+                        <div class="product-seller">By: Footwear Express</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="view-details">Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/250x200" alt="Product Image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Smartphone - Latest Model</h3>
+                        <div class="product-price">₦65,000</div>
+                        <div class="product-seller">By: Tech Hub Onitsha</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="view-details">Details</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Seller Dashboard -->
-    <section class="container">
-        <div class="dashboard">
-            <div class="dashboard-header">
-                <h2 class="dashboard-title">Seller Dashboard</h2>
-                <button class="upload-btn" id="upload-product-btn">Upload Product</button>
+        <!-- New Arrivals -->
+        <section class="products">
+            <h2 class="section-title">New Arrivals</h2>
+            <div class="product-grid">
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/250x200" alt="Product Image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Traditional Attire - Complete Set</h3>
+                        <div class="product-price">₦25,000</div>
+                        <div class="product-seller">By: Cultural Wear Center</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="view-details">Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/250x200" alt="Product Image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Kitchen Utensils Set - 15 Pieces</h3>
+                        <div class="product-price">₦18,500</div>
+                        <div class="product-seller">By: Home Essentials</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="view-details">Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/250x200" alt="Product Image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Beauty Products - Complete Skincare</h3>
+                        <div class="product-price">₦12,000</div>
+                        <div class="product-seller">By: Beauty World</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="view-details">Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 8 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/250x200" alt="Product Image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Local Food Items - Fresh from Farm</h3>
+                        <div class="product-price">₦7,500</div>
+                        <div class="product-seller">By: Farm Fresh Direct</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="view-details">Details</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="dashboard-content">
-                <div class="dashboard-item">
-                    <h3>My Products</h3>
-                    <p>View and manage your product listings</p>
-                </div>
-                <div class="dashboard-item">
-                    <h3>Sales Analytics</h3>
-                    <p>Track your sales and performance</p>
-                </div>
-                <div class="dashboard-item">
-                    <h3>Payment History</h3>
-                    <p>View your transaction history</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -1004,9 +776,9 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>Main Market Onitsha</h3>
-                    <p>Bringing the largest market in West Africa to your fingertips. Buy and sell with confidence.</p>
+                    <p>Your trusted online marketplace connecting buyers and sellers in Onitsha Main Market.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-whatsapp"></i></a>
@@ -1017,184 +789,177 @@
                     <ul class="footer-links">
                         <li><a href="#">Home</a></li>
                         <li><a href="#">About Us</a></li>
-                        <li><a href="#">Categories</a></li>
-                        <li><a href="#">Sell on MMO</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQs</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Customer Service</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">How to Buy</a></li>
-                        <li><a href="#">How to Sell</a></li>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Track Order</a></li>
                         <li><a href="#">Returns & Refunds</a></li>
-                        <li><a href="#">Delivery Information</a></li>
+                        <li><a href="#">Shipping Info</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Contact Info</h3>
                     <ul class="footer-links">
                         <li><i class="fas fa-map-marker-alt"></i> Main Market Onitsha, Anambra State</li>
-                        <li><i class="fas fa-phone"></i> +234 8064562826</li>
+                        <li><i class="fas fa-phone"></i> +234 801 234 5678</li>
                         <li><i class="fas fa-envelope"></i> info@mainmarketonitsha.com</li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Main Market Onitsha. All rights reserved. | Powered by Paystack</p>
+                <p>&copy; 2023 Main Market Onitsha. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login to Your Account</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Login</button>
+                    <div class="form-footer">
+                        <p>Don't have an account? <a href="#" id="switchToRegister">Register here</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Account</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerName">Full Name</label>
+                        <input type="text" id="registerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email Address</label>
+                        <input type="email" id="registerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPhone">Phone Number</label>
+                        <input type="tel" id="registerPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input type="password" id="registerPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirm Password</label>
+                        <input type="password" id="registerConfirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Register</button>
+                    <div class="form-footer">
+                        <p>Already have an account? <a href="#" id="switchToLogin">Login here</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Modal functionality
-        const loginModal = document.getElementById('login-modal');
-        const signupModal = document.getElementById('signup-modal');
-        const uploadModal = document.getElementById('upload-modal');
-        const paymentModal = document.getElementById('payment-modal');
-        
-        const loginBtn = document.getElementById('login-btn');
-        const signupBtn = document.getElementById('signup-btn');
-        const uploadBtn = document.getElementById('upload-product-btn');
-        const sellLink = document.getElementById('sell-link');
-        
-        const closeLogin = document.getElementById('close-login');
-        const closeSignup = document.getElementById('close-signup');
-        const closeUpload = document.getElementById('close-upload');
-        const closePayment = document.getElementById('close-payment');
-        
-        const showSignup = document.getElementById('show-signup');
-        const showLogin = document.getElementById('show-login');
-        
-        // Open modals
-        loginBtn.addEventListener('click', () => loginModal.style.display = 'flex');
-        signupBtn.addEventListener('click', () => signupModal.style.display = 'flex');
-        uploadBtn.addEventListener('click', () => uploadModal.style.display = 'flex');
-        sellLink.addEventListener('click', () => signupModal.style.display = 'flex');
-        
-        // Close modals
-        closeLogin.addEventListener('click', () => loginModal.style.display = 'none');
-        closeSignup.addEventListener('click', () => signupModal.style.display = 'none');
-        closeUpload.addEventListener('click', () => uploadModal.style.display = 'none');
-        closePayment.addEventListener('click', () => paymentModal.style.display = 'none');
-        
-        // Switch between login and signup
-        showSignup.addEventListener('click', (e) => {
-            e.preventDefault();
-            loginModal.style.display = 'none';
-            signupModal.style.display = 'flex';
-        });
-        
-        showLogin.addEventListener('click', (e) => {
-            e.preventDefault();
-            signupModal.style.display = 'none';
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        const switchToRegister = document.getElementById('switchToRegister');
+        const switchToLogin = document.getElementById('switchToLogin');
+
+        // Open login modal
+        loginBtn.addEventListener('click', () => {
             loginModal.style.display = 'flex';
         });
-        
+
+        // Open register modal
+        registerBtn.addEventListener('click', () => {
+            registerModal.style.display = 'flex';
+        });
+
+        // Close modals
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                registerModal.style.display = 'none';
+            });
+        });
+
+        // Switch between login and register modals
+        switchToRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'flex';
+        });
+
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.style.display = 'none';
+            loginModal.style.display = 'flex';
+        });
+
         // Close modal when clicking outside
         window.addEventListener('click', (e) => {
-            if (e.target === loginModal) loginModal.style.display = 'none';
-            if (e.target === signupModal) signupModal.style.display = 'none';
-            if (e.target === uploadModal) uploadModal.style.display = 'none';
-            if (e.target === paymentModal) paymentModal.style.display = 'none';
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (e.target === registerModal) {
+                registerModal.style.display = 'none';
+            }
         });
-        
-        // Form submissions
-        document.getElementById('login-form').addEventListener('submit', (e) => {
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Login functionality would be implemented here');
+            alert('Login functionality would be implemented here!');
             loginModal.style.display = 'none';
         });
-        
-        document.getElementById('signup-form').addEventListener('submit', (e) => {
+
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Account created successfully!');
-            signupModal.style.display = 'none';
+            alert('Registration functionality would be implemented here!');
+            registerModal.style.display = 'none';
         });
-        
-        document.getElementById('upload-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Product uploaded successfully!');
-            uploadModal.style.display = 'none';
-        });
-        
-        // Cart functionality
+
+        // Add to cart functionality
         const addToCartButtons = document.querySelectorAll('.add-to-cart');
         const cartCount = document.querySelector('.cart-count');
-        let count = 3;
-        
+        let count = 0;
+
         addToCartButtons.forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', () => {
                 count++;
                 cartCount.textContent = count;
-                
-                // Add animation to cart icon
-                const cartIcon = document.querySelector('.cart-icon');
-                cartIcon.style.transform = 'scale(1.2)';
+                // Animation effect
+                cartCount.style.transform = 'scale(1.5)';
                 setTimeout(() => {
-                    cartIcon.style.transform = 'scale(1)';
+                    cartCount.style.transform = 'scale(1)';
                 }, 300);
-                
-                // Show payment modal
-                const product = this.getAttribute('data-product');
-                const price = this.getAttribute('data-price');
-                const seller = this.getAttribute('data-seller');
-                
-                document.getElementById('payment-product').textContent = product;
-                document.getElementById('payment-price').textContent = `₦${parseInt(price).toLocaleString()}`;
-                document.getElementById('payment-seller').textContent = seller;
-                
-                paymentModal.style.display = 'flex';
             });
-        });
-        
-        // Wishlist functionality
-        const wishlistButtons = document.querySelectorAll('.wishlist');
-        wishlistButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const icon = this.querySelector('i');
-                if (icon.classList.contains('far')) {
-                    icon.classList.remove('far');
-                    icon.classList.add('fas');
-                    this.style.color = 'var(--accent)';
-                    this.style.borderColor = 'var(--accent)';
-                } else {
-                    icon.classList.remove('fas');
-                    icon.classList.add('far');
-                    this.style.color = '';
-                    this.style.borderColor = 'var(--dark-border)';
-                }
-            });
-        });
-        
-        // Paystack payment integration
-        document.getElementById('paystack-btn').addEventListener('click', function() {
-            const email = document.getElementById('payment-email').value;
-            const amount = document.querySelector('.add-to-cart').getAttribute('data-price'); // In kobo
-            
-            if (!email) {
-                alert('Please enter your email address');
-                return;
-            }
-            
-            // Paystack integration
-            const handler = PaystackPop.setup({
-                key: 'pk_test_your_paystack_public_key', // Replace with your Paystack public key
-                email: email,
-                amount: amount * 100, // Convert to kobo
-                currency: 'NGN',
-                ref: '' + Math.floor((Math.random() * 1000000000) + 1),
-                callback: function(response) {
-                    alert('Payment complete! Reference: ' + response.reference);
-                    paymentModal.style.display = 'none';
-                    // Here you would typically process the order
-                },
-                onClose: function() {
-                    alert('Payment window closed.');
-                }
-            });
-            handler.openIframe();
         });
     </script>
 </body>
