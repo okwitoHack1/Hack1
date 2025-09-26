@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Market Onitsha - Buy & Sell Everything</title>
+    <title>Main Market Onitsha - Nigeria's Largest Online Marketplace</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -16,15 +16,18 @@
         :root {
             --primary: #2c5aa0;
             --secondary: #f7941d;
+            --accent: #e31837;
             --light: #f8f9fa;
             --dark: #343a40;
             --success: #28a745;
             --danger: #dc3545;
+            --text: #333;
+            --border: #e0e0e0;
         }
 
         body {
-            background-color: #f5f5f5;
-            color: var(--dark);
+            background-color: #f9f9f9;
+            color: var(--text);
             line-height: 1.6;
         }
 
@@ -35,60 +38,24 @@
             padding: 0 15px;
         }
 
-        /* Header Styles */
+        /* Compact Header Styles */
         header {
             background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
-        }
-
-        .top-header {
-            background-color: var(--primary);
-            color: white;
             padding: 10px 0;
-            font-size: 0.9rem;
         }
 
-        .top-header .container {
+        .header-content {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-        }
-
-        .contact-info span {
-            margin-right: 15px;
-        }
-
-        .auth-buttons button {
-            background: transparent;
-            border: 1px solid white;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-left: 10px;
-            transition: all 0.3s;
-        }
-
-        .auth-buttons button:hover {
-            background: white;
-            color: var(--primary);
-        }
-
-        .main-header {
-            padding: 15px 0;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
         }
 
         .logo {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--primary);
             display: flex;
@@ -97,60 +64,71 @@
 
         .logo i {
             color: var(--secondary);
-            margin-right: 10px;
+            margin-right: 8px;
+            font-size: 2rem;
+        }
+
+        .logo span {
+            color: var(--accent);
         }
 
         .search-bar {
             display: flex;
-            width: 100%;
+            width: 50%;
             margin: 0 20px;
         }
 
         .search-bar input {
             flex: 1;
-            padding: 12px 15px;
+            padding: 10px 15px;
             border: 2px solid var(--primary);
             border-radius: 4px 0 0 4px;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .search-bar button {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 0 20px;
+            padding: 0 18px;
             border-radius: 0 4px 4px 0;
             cursor: pointer;
+            transition: background 0.3s;
         }
 
-        .user-actions {
+        .search-bar button:hover {
+            background: #1e4a8a;
+        }
+
+        .header-actions {
             display: flex;
             align-items: center;
         }
 
         .action-item {
-            margin-left: 20px;
+            margin-left: 15px;
             text-align: center;
             cursor: pointer;
+            position: relative;
         }
 
         .action-item i {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary);
         }
 
         .action-item span {
             display: block;
-            font-size: 0.8rem;
-            margin-top: 5px;
+            font-size: 0.75rem;
+            margin-top: 2px;
         }
 
         .cart-count {
-            background: var(--danger);
+            background: var(--accent);
             color: white;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -160,77 +138,127 @@
             right: -5px;
         }
 
-        .cart-item {
-            position: relative;
-        }
-
         nav {
-            background: var(--secondary);
-            padding: 10px 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            padding: 8px 0;
+            margin-top: 10px;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
+            justify-content: space-between;
         }
 
         .nav-links li {
-            margin-right: 20px;
+            flex: 1;
+            text-align: center;
         }
 
         .nav-links a {
             color: white;
             text-decoration: none;
             font-weight: 500;
+            font-size: 0.9rem;
             transition: opacity 0.3s;
+            padding: 5px 0;
+            display: block;
         }
 
         .nav-links a:hover {
-            opacity: 0.8;
+            opacity: 0.9;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
         }
 
-        /* Main Content Styles */
+        /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1592409065737-a253f2900fa8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 80px 0;
+            padding: 60px 0;
             text-align: center;
             margin-bottom: 30px;
+            border-radius: 0 0 10px 10px;
         }
 
         .hero h1 {
             font-size: 2.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             max-width: 700px;
-            margin: 0 auto 30px;
+            margin: 0 auto 25px;
         }
 
         .btn {
             display: inline-block;
             background: var(--secondary);
             color: white;
-            padding: 12px 25px;
+            padding: 12px 30px;
             border-radius: 4px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
         .btn:hover {
             background: #e0851a;
             transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .categories {
-            margin: 40px 0;
+        .btn-primary {
+            background: var(--primary);
         }
 
+        .btn-primary:hover {
+            background: #1e4a8a;
+        }
+
+        /* Loading Animation */
+        .loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        .loader-text {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Categories Section */
         .section-title {
             font-size: 1.8rem;
             margin-bottom: 20px;
@@ -239,9 +267,13 @@
             padding-left: 10px;
         }
 
+        .categories {
+            margin: 40px 0;
+        }
+
         .category-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 20px;
         }
 
@@ -249,26 +281,30 @@
             background: white;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
             text-align: center;
-            padding: 20px;
+            padding: 20px 15px;
+            border: 1px solid var(--border);
         }
 
         .category-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
         }
 
         .category-card i {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: var(--primary);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .category-card h3 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
 
+        /* Products Section */
         .products {
             margin: 40px 0;
         }
@@ -283,12 +319,14 @@
             background: white;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border);
         }
 
         .product-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
         }
 
         .product-image {
@@ -298,12 +336,30 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            position: relative;
         }
 
         .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
         .product-info {
@@ -312,28 +368,48 @@
 
         .product-title {
             font-size: 1.1rem;
-            margin-bottom: 10px;
-            height: 50px;
+            margin-bottom: 8px;
+            height: 45px;
             overflow: hidden;
+            font-weight: 600;
         }
 
         .product-price {
             font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .product-seller {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #666;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
         }
 
         .product-seller i {
             margin-right: 5px;
+            font-size: 0.9rem;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .product-rating i {
+            color: #ffc107;
+            margin-right: 2px;
+            font-size: 0.9rem;
+        }
+
+        .product-rating span {
+            font-size: 0.85rem;
+            color: #666;
+            margin-left: 5px;
         }
 
         .product-actions {
@@ -349,7 +425,13 @@
             border-radius: 4px;
             cursor: pointer;
             flex: 1;
-            margin-right: 10px;
+            margin-right: 8px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #1e4a8a;
         }
 
         .view-details {
@@ -359,307 +441,94 @@
             padding: 8px 15px;
             border-radius: 4px;
             cursor: pointer;
-        }
-
-        /* Auth Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: white;
-            width: 90%;
-            max-width: 500px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .modal-header {
-            background: var(--primary);
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-header h2 {
-            font-size: 1.5rem;
-        }
-
-        .close-modal {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .user-type {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .user-type-option {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 4px;
-            cursor: pointer;
+            font-weight: 600;
             transition: all 0.3s;
         }
 
-        .user-type-option.selected {
-            border-color: var(--primary);
-            background-color: rgba(44, 90, 160, 0.1);
-        }
-
-        .user-type-option i {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-
-        .form-footer {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .form-footer a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        /* Dashboard Styles */
-        .dashboard {
-            display: none;
-            margin: 30px 0;
-        }
-
-        .dashboard-header {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .dashboard-tabs {
-            display: flex;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 20px;
-        }
-
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-        }
-
-        .tab.active {
-            border-bottom-color: var(--primary);
-            font-weight: 600;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .add-product-form {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Cart Page Styles */
-        .cart-page {
-            display: none;
-            margin: 30px 0;
-        }
-
-        .cart-items {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .cart-item {
-            display: flex;
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .cart-item:last-child {
-            border-bottom: none;
-        }
-
-        .cart-item-image {
-            width: 100px;
-            height: 100px;
-            margin-right: 15px;
-        }
-
-        .cart-item-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-
-        .cart-item-details {
-            flex: 1;
-        }
-
-        .cart-item-title {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .cart-item-seller {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        .cart-item-price {
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .cart-item-actions {
-            display: flex;
-            align-items: center;
-        }
-
-        .quantity-control {
-            display: flex;
-            align-items: center;
-            margin-right: 15px;
-        }
-
-        .quantity-btn {
-            width: 30px;
-            height: 30px;
-            background: #f0f0f0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .quantity-input {
-            width: 40px;
-            text-align: center;
-            margin: 0 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 5px;
-        }
-
-        .remove-item {
-            color: var(--danger);
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .cart-summary {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .summary-total {
-            font-weight: 600;
-            font-size: 1.2rem;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
-            margin-top: 10px;
-        }
-
-        .checkout-btn {
-            width: 100%;
-            padding: 12px;
+        .view-details:hover {
             background: var(--primary);
             color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin-top: 15px;
         }
 
         /* Ads Section */
         .ads {
-            margin: 30px 0;
+            margin: 40px 0;
         }
 
         .ad-banner {
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 8px;
             text-align: center;
             margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .ad-banner h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 10px;
         }
 
-        /* Footer Styles */
+        .ad-banner p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .ad-code {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Traditional Market Section */
+        .market-gallery {
+            margin: 50px 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 200px;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
         footer {
             background: var(--dark);
             color: white;
-            padding: 40px 0 20px;
-            margin-top: 50px;
+            padding: 50px 0 20px;
+            margin-top: 60px;
         }
 
         .footer-content {
@@ -687,10 +556,23 @@
             color: #ccc;
             text-decoration: none;
             transition: color 0.3s;
+            font-size: 0.9rem;
         }
 
         .footer-links a:hover {
             color: white;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--secondary);
+            margin-top: 3px;
         }
 
         .social-links {
@@ -701,7 +583,12 @@
 
         .social-links a {
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
         }
 
         .copyright {
@@ -712,35 +599,170 @@
             color: #aaa;
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .user-type {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .user-type-option {
+            flex: 1;
+            text-align: center;
+            padding: 15px 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .user-type-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(44, 90, 160, 0.1);
+        }
+
+        .user-type-option i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .user-type-option div {
+            font-weight: 600;
+        }
+
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
         /* Responsive Styles */
-        @media (max-width: 768px) {
-            .top-header .container {
-                flex-direction: column;
-                text-align: center;
+        @media (max-width: 992px) {
+            .header-content {
+                flex-wrap: wrap;
             }
             
-            .contact-info {
+            .logo {
                 margin-bottom: 10px;
             }
             
-            .logo-section {
-                flex-direction: column;
-            }
-            
             .search-bar {
-                margin: 15px 0;
+                width: 100%;
+                order: 3;
+                margin: 10px 0 0;
             }
             
-            .user-actions {
-                justify-content: center;
-                width: 100%;
+            .header-actions {
+                margin-left: auto;
             }
             
             .nav-links {
                 flex-wrap: wrap;
-                justify-content: center;
             }
             
+            .nav-links li {
+                flex: 0 0 33.333%;
+                margin-bottom: 5px;
+            }
+        }
+
+        @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
             }
@@ -749,56 +771,68 @@
                 font-size: 1rem;
             }
             
-            .cart-item {
-                flex-direction: column;
+            .category-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             }
             
-            .cart-item-image {
-                width: 100%;
-                height: 200px;
-                margin-right: 0;
-                margin-bottom: 15px;
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links li {
+                flex: 0 0 50%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .action-item span {
+                display: none;
+            }
+            
+            .nav-links li {
+                flex: 0 0 100%;
+            }
+            
+            .user-type {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header Section -->
+    <!-- Loading Animation -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Processing...</div>
+    </div>
+
+    <!-- Compact Header -->
     <header>
-        <div class="top-header">
-            <div class="container">
-                <div class="contact-info">
-                    <span><i class="fas fa-phone"></i> Customer Care: 0806 456 2826</span>
-                    <span><i class="fas fa-envelope"></i> info@mainmarketonitsha.com</span>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    Main Market <span>Onitsha</span>
                 </div>
-                <div class="auth-buttons">
-                    <button id="loginBtn">Login</button>
-                    <button id="registerBtn">Register</button>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for products, brands and categories...">
+                    <button><i class="fas fa-search"></i></button>
                 </div>
-            </div>
-        </div>
-        
-        <div class="main-header">
-            <div class="container">
-                <div class="logo-section">
-                    <div class="logo">
-                        <i class="fas fa-shopping-bag"></i>
-                        Main Market Onitsha
+                
+                <div class="header-actions">
+                    <div class="action-item" id="userAccount">
+                        <i class="fas fa-user"></i>
+                        <span>Account</span>
                     </div>
-                    <div class="search-bar">
-                        <input type="text" placeholder="Search for products, brands and categories...">
-                        <button><i class="fas fa-search"></i></button>
-                    </div>
-                    <div class="user-actions">
-                        <div class="action-item" id="userAccount">
-                            <i class="fas fa-user"></i>
-                            <span>Account</span>
-                        </div>
-                        <div class="action-item cart-item" id="viewCart">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span>Cart</span>
-                            <div class="cart-count">0</div>
-                        </div>
+                    <div class="action-item cart-item" id="viewCart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Cart</span>
+                        <div class="cart-count">0</div>
                     </div>
                 </div>
             </div>
@@ -823,145 +857,87 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Welcome to Main Market Onitsha</h1>
-            <p>Your one-stop online marketplace for everything sold in Onitsha Main Market. Buy and sell with confidence.</p>
+            <h1>Nigeria's Largest Online Marketplace</h1>
+            <p>Connect with thousands of sellers in Onitsha Main Market. Buy authentic products at the best prices.</p>
             <a href="#" class="btn">Start Shopping</a>
+            <a href="#" class="btn btn-primary" style="margin-left: 10px;">Become a Seller</a>
         </div>
     </section>
 
     <!-- Ads Section -->
     <section class="ads container">
         <div class="ad-banner">
-            <h3>Special Offer!</h3>
-            <p>Get 15% off on all clothing items this week. Use code: ONITSHA15</p>
+            <h3>Grand Opening Sale!</h3>
+            <p>Enjoy up to 30% off on all products. Limited time offer.</p>
+            <div class="ad-code">Use code: <strong>MARKET30</strong></div>
         </div>
     </section>
 
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Categories Section -->
-        <section class="categories">
-            <h2 class="section-title">Shop by Category</h2>
-            <div class="category-grid">
-                <div class="category-card" data-category="clothing">
-                    <i class="fas fa-tshirt"></i>
-                    <h3>Clothing</h3>
-                </div>
-                <div class="category-card" data-category="shoes">
-                    <i class="fas fa-shoe-prints"></i>
-                    <h3>Shoes</h3>
-                </div>
-                <div class="category-card" data-category="bags">
-                    <i class="fas fa-shopping-bag"></i>
-                    <h3>Bags</h3>
-                </div>
-                <div class="category-card" data-category="electronics">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3>Electronics</h3>
-                </div>
-                <div class="category-card" data-category="food">
-                    <i class="fas fa-utensils"></i>
-                    <h3>Food</h3>
-                </div>
-                <div class="category-card" data-category="home">
-                    <i class="fas fa-home"></i>
-                    <h3>Home & Kitchen</h3>
-                </div>
+    <!-- Categories Section -->
+    <section class="categories container">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="category-grid">
+            <div class="category-card" data-category="clothing">
+                <i class="fas fa-tshirt"></i>
+                <h3>Clothing</h3>
             </div>
-        </section>
+            <div class="category-card" data-category="shoes">
+                <i class="fas fa-shoe-prints"></i>
+                <h3>Shoes</h3>
+            </div>
+            <div class="category-card" data-category="bags">
+                <i class="fas fa-shopping-bag"></i>
+                <h3>Bags</h3>
+            </div>
+            <div class="category-card" data-category="electronics">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Electronics</h3>
+            </div>
+            <div class="category-card" data-category="food">
+                <i class="fas fa-utensils"></i>
+                <h3>Food</h3>
+            </div>
+            <div class="category-card" data-category="home">
+                <i class="fas fa-home"></i>
+                <h3>Home & Kitchen</h3>
+            </div>
+            <div class="category-card" data-category="beauty">
+                <i class="fas fa-spa"></i>
+                <h3>Beauty</h3>
+            </div>
+            <div class="category-card" data-category="accessories">
+                <i class="fas fa-gem"></i>
+                <h3>Accessories</h3>
+            </div>
+        </div>
+    </section>
 
-        <!-- Products Section -->
-        <section class="products">
-            <h2 class="section-title">Featured Products</h2>
-            <div class="product-grid" id="productGrid">
-                <!-- Products will be dynamically added here -->
-            </div>
-        </section>
+    <!-- Products Section -->
+    <section class="products container">
+        <h2 class="section-title">Trending Products</h2>
+        <div class="product-grid" id="productGrid">
+            <!-- Products will be dynamically added here -->
+        </div>
+    </section>
 
-        <!-- Seller Dashboard -->
-        <section class="dashboard" id="sellerDashboard">
-            <div class="dashboard-header">
-                <h2>Seller Dashboard</h2>
-                <p>Manage your products and sales</p>
+    <!-- Traditional Market Gallery -->
+    <section class="market-gallery container">
+        <h2 class="section-title">Experience Onitsha Main Market</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1592409065737-a253f2900fa8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Onitsha Market Scene">
+                <div class="gallery-caption">Vibrant market scene at Onitsha</div>
             </div>
-            
-            <div class="dashboard-tabs">
-                <div class="tab active" data-tab="add-product">Add Product</div>
-                <div class="tab" data-tab="my-products">My Products</div>
-                <div class="tab" data-tab="sales">Sales</div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Traditional fabrics">
+                <div class="gallery-caption">Colorful African textiles</div>
             </div>
-            
-            <div class="tab-content active" id="add-product">
-                <div class="add-product-form">
-                    <h3>Add New Product</h3>
-                    <form id="productForm">
-                        <div class="form-group">
-                            <label for="productName">Product Name</label>
-                            <input type="text" id="productName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="productCategory">Category</label>
-                            <select id="productCategory" required>
-                                <option value="">Select Category</option>
-                                <option value="clothing">Clothing</option>
-                                <option value="shoes">Shoes</option>
-                                <option value="bags">Bags</option>
-                                <option value="electronics">Electronics</option>
-                                <option value="home">Home & Kitchen</option>
-                                <option value="beauty">Beauty</option>
-                                <option value="food">Food</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="productPrice">Price (₦)</label>
-                            <input type="number" id="productPrice" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="productDescription">Description</label>
-                            <textarea id="productDescription" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="productImage">Product Image URL</label>
-                            <input type="text" id="productImage" placeholder="Paste image URL here">
-                        </div>
-                        <button type="submit" class="btn">Add Product</button>
-                    </form>
-                </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1598301257982-0cf01499abb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Market spices">
+                <div class="gallery-caption">Fresh spices and ingredients</div>
             </div>
-            
-            <div class="tab-content" id="my-products">
-                <h3>My Products</h3>
-                <div class="product-grid" id="myProductsGrid">
-                    <!-- Seller's products will be displayed here -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Cart Page -->
-        <section class="cart-page" id="cartPage">
-            <h2 class="section-title">Shopping Cart</h2>
-            
-            <div class="cart-items" id="cartItems">
-                <!-- Cart items will be displayed here -->
-            </div>
-            
-            <div class="cart-summary">
-                <div class="summary-row">
-                    <span>Subtotal:</span>
-                    <span id="cartSubtotal">₦0.00</span>
-                </div>
-                <div class="summary-row">
-                    <span>Shipping:</span>
-                    <span id="cartShipping">₦1,500.00</span>
-                </div>
-                <div class="summary-row summary-total">
-                    <span>Total:</span>
-                    <span id="cartTotal">₦1,500.00</span>
-                </div>
-                <button class="checkout-btn">Proceed to Checkout</button>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -969,7 +945,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>Main Market Onitsha</h3>
-                    <p>Your trusted online marketplace connecting buyers and sellers in Onitsha Main Market.</p>
+                    <p>Bringing the authentic Onitsha market experience to your doorstep. Shop with confidence from verified sellers.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -982,8 +958,8 @@
                     <ul class="footer-links">
                         <li><a href="#">Home</a></li>
                         <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Sell on Main Market</a></li>
+                        <li><a href="#">Become an Affiliate</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -993,19 +969,21 @@
                         <li><a href="#">Track Order</a></li>
                         <li><a href="#">Returns & Refunds</a></li>
                         <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">FAQs</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Contact Info</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> Main Market Onitsha, Anambra State</li>
-                        <li><i class="fas fa-phone"></i> Customer Care: 0806 456 2826</li>
-                        <li><i class="fas fa-envelope"></i> info@mainmarketonitsha.com</li>
+                    <ul class="footer-links contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Main Market Onitsha, Anambra State, Nigeria</li>
+                        <li><i class="fas fa-phone"></i> Customer Care: +234 707 075 2053</li>
+                        <li><i class="fas fa-envelope"></i> support@mainmarketonitsha.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 8:00AM - 6:00PM</li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Main Market Onitsha. All rights reserved.</p>
+                <p>&copy; 2023 Main Market Onitsha. All rights reserved. | Designed for GitHub Hosting</p>
             </div>
         </div>
     </footer>
@@ -1061,13 +1039,15 @@
                     <div class="form-group">
                         <label>Account Type</label>
                         <div class="user-type">
-                            <div class="user-type-option" data-type="buyer">
+                            <div class="user-type-option selected" data-type="buyer">
                                 <i class="fas fa-shopping-cart"></i>
                                 <div>Buyer</div>
+                                <small>Shop for products</small>
                             </div>
                             <div class="user-type-option" data-type="seller">
                                 <i class="fas fa-store"></i>
                                 <div>Seller</div>
+                                <small>Sell your products</small>
                             </div>
                         </div>
                         <input type="hidden" id="userType" value="buyer" required>
@@ -1081,7 +1061,7 @@
                         <label for="registerConfirmPassword">Confirm Password</label>
                         <input type="password" id="registerConfirmPassword" required>
                     </div>
-                    <button type="submit" class="btn" style="width: 100%;">Register</button>
+                    <button type="submit" class="btn" style="width: 100%;">Create Account</button>
                     <div class="form-footer">
                         <p>Already have an account? <a href="#" id="switchToLogin">Login here</a></p>
                     </div>
@@ -1091,90 +1071,106 @@
     </div>
 
     <script>
-        // Sample product data with realistic images
+        // Sample product data with realistic images and Nigerian sellers
         const sampleProducts = [
             {
                 id: 1,
-                name: "Men's Ankara Shirt",
+                name: "Men's Ankara Shirt - Premium Quality",
                 price: 12500,
                 category: "clothing",
                 seller: "Ngozi Fashion",
                 image: "https://images.unsplash.com/photo-1594938371073-8b96043d18d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                description: "High-quality Ankara fabric shirt for men, perfect for special occasions."
+                rating: 4.5,
+                reviews: 24,
+                badge: "Bestseller"
             },
             {
                 id: 2,
-                name: "Women's Handbag",
+                name: "Women's Handbag - Genuine Leather",
                 price: 8900,
                 category: "bags",
                 seller: "Ada Bags Collection",
                 image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                description: "Elegant leather handbag for women, available in multiple colors."
+                rating: 4.2,
+                reviews: 18,
+                badge: "Popular"
             },
             {
                 id: 3,
-                name: "Designer Sneakers",
+                name: "Designer Sneakers - Unisex",
                 price: 15000,
                 category: "shoes",
                 seller: "Footwear Express",
                 image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                description: "Comfortable and stylish sneakers for everyday wear."
+                rating: 4.7,
+                reviews: 31,
+                badge: "New"
             },
             {
                 id: 4,
-                name: "Smartphone",
+                name: "Smartphone - Latest Model",
                 price: 65000,
                 category: "electronics",
                 seller: "Tech Hub Onitsha",
                 image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                description: "Latest smartphone model with advanced features and long battery life."
+                rating: 4.3,
+                reviews: 42,
+                badge: "Sale"
             },
             {
                 id: 5,
-                name: "Traditional Attire Set",
+                name: "Traditional Attire - Complete Set",
                 price: 25000,
                 category: "clothing",
                 seller: "Cultural Wear Center",
                 image: "https://images.unsplash.com/photo-1585487000113-4e0d6b4f4c5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                description: "Complete traditional attire set for men and women."
+                rating: 4.8,
+                reviews: 15,
+                badge: "Premium"
             },
             {
                 id: 6,
-                name: "Kitchen Utensils Set",
+                name: "Kitchen Utensils Set - 15 Pieces",
                 price: 18500,
                 category: "home",
                 seller: "Home Essentials",
                 image: "https://images.unsplash.com/photo-1583778176475-6a92a2361c4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                description: "15-piece kitchen utensils set for all your cooking needs."
+                rating: 4.4,
+                reviews: 27,
+                badge: "Bestseller"
             },
             {
                 id: 7,
-                name: "Skincare Products Set",
+                name: "Skincare Products - Complete Set",
                 price: 12000,
                 category: "beauty",
                 seller: "Beauty World",
                 image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                description: "Complete skincare set for healthy and glowing skin."
+                rating: 4.1,
+                reviews: 33,
+                badge: "Popular"
             },
             {
                 id: 8,
-                name: "Local Food Basket",
+                name: "Local Food Basket - Fresh Items",
                 price: 7500,
                 category: "food",
                 seller: "Farm Fresh Direct",
                 image: "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                description: "Fresh local food items directly from the farm."
+                rating: 4.6,
+                reviews: 29,
+                badge: "Fresh"
             }
         ];
 
         // Application state
         let currentUser = null;
         let cart = [];
-        let userProducts = [];
 
         // DOM Elements
-        const loginBtn = document.getElementById('loginBtn');
-        const registerBtn = document.getElementById('registerBtn');
+        const loader = document.getElementById('loader');
+        const loginBtn = document.querySelector('.auth-buttons button:nth-child(1)');
+        const registerBtn = document.querySelector('.auth-buttons button:nth-child(2)');
         const loginModal = document.getElementById('loginModal');
         const registerModal = document.getElementById('registerModal');
         const closeModalButtons = document.querySelectorAll('.close-modal');
@@ -1183,19 +1179,26 @@
         const userAccount = document.getElementById('userAccount');
         const viewCart = document.getElementById('viewCart');
         const productGrid = document.getElementById('productGrid');
-        const sellerDashboard = document.getElementById('sellerDashboard');
-        const cartPage = document.getElementById('cartPage');
-        const cartItems = document.getElementById('cartItems');
         const cartCount = document.querySelector('.cart-count');
         const userTypeOptions = document.querySelectorAll('.user-type-option');
         const userTypeInput = document.getElementById('userType');
-        const productForm = document.getElementById('productForm');
-        const myProductsGrid = document.getElementById('myProductsGrid');
         const navLinks = document.querySelectorAll('.nav-link');
         const categoryCards = document.querySelectorAll('.category-card');
 
         // Initialize the application
         function init() {
+            // Create auth buttons if they don't exist
+            if (!document.querySelector('.auth-buttons')) {
+                const topHeader = document.querySelector('.top-header .container');
+                const authDiv = document.createElement('div');
+                authDiv.className = 'auth-buttons';
+                authDiv.innerHTML = `
+                    <button id="loginBtn">Login</button>
+                    <button id="registerBtn">Register</button>
+                `;
+                topHeader.appendChild(authDiv);
+            }
+            
             displayProducts(sampleProducts);
             setupEventListeners();
             checkLoginStatus();
@@ -1204,11 +1207,11 @@
         // Set up event listeners
         function setupEventListeners() {
             // Modal functionality
-            loginBtn.addEventListener('click', () => {
+            document.getElementById('loginBtn').addEventListener('click', () => {
                 loginModal.style.display = 'flex';
             });
 
-            registerBtn.addEventListener('click', () => {
+            document.getElementById('registerBtn').addEventListener('click', () => {
                 registerModal.style.display = 'flex';
             });
 
@@ -1252,7 +1255,6 @@
             // Form submissions
             document.getElementById('loginForm').addEventListener('submit', handleLogin);
             document.getElementById('registerForm').addEventListener('submit', handleRegister);
-            productForm.addEventListener('submit', handleAddProduct);
 
             // Navigation
             userAccount.addEventListener('click', handleUserAccount);
@@ -1281,23 +1283,6 @@
                     document.querySelector(`.nav-link[data-category="${category}"]`).classList.add('active');
                 });
             });
-
-            // Dashboard tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const tabId = tab.dataset.tab;
-                    
-                    // Update active tab
-                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    
-                    // Show corresponding content
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    document.getElementById(tabId).classList.add('active');
-                });
-            });
         }
 
         // Display products in the grid
@@ -1310,11 +1295,16 @@
                 productCard.innerHTML = `
                     <div class="product-image">
                         <img src="${product.image}" alt="${product.name}">
+                        ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
                     </div>
                     <div class="product-info">
                         <h3 class="product-title">${product.name}</h3>
                         <div class="product-price">₦${product.price.toLocaleString()}</div>
                         <div class="product-seller"><i class="fas fa-store"></i> ${product.seller}</div>
+                        <div class="product-rating">
+                            ${generateStarRating(product.rating)}
+                            <span>${product.rating} (${product.reviews})</span>
+                        </div>
                         <div class="product-actions">
                             <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
                             <button class="view-details">Details</button>
@@ -1334,6 +1324,28 @@
             });
         }
 
+        // Generate star rating HTML
+        function generateStarRating(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            
+            return stars;
+        }
+
         // Filter products by category
         function filterProducts(category) {
             if (category === 'all') {
@@ -1344,6 +1356,16 @@
             }
         }
 
+        // Show loading animation
+        function showLoader() {
+            loader.style.display = 'flex';
+        }
+
+        // Hide loading animation
+        function hideLoader() {
+            loader.style.display = 'none';
+        }
+
         // Handle user login
         function handleLogin(e) {
             e.preventDefault();
@@ -1352,17 +1374,23 @@
             
             // Simple validation (in a real app, this would be done on the server)
             if (email && password) {
-                currentUser = {
-                    email: email,
-                    name: email.split('@')[0],
-                    type: localStorage.getItem('userType') || 'buyer'
-                };
+                showLoader();
                 
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                checkLoginStatus();
-                loginModal.style.display = 'none';
-                
-                alert('Login successful!');
+                // Simulate API call delay
+                setTimeout(() => {
+                    currentUser = {
+                        email: email,
+                        name: email.split('@')[0],
+                        type: localStorage.getItem('userType') || 'buyer'
+                    };
+                    
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    checkLoginStatus();
+                    loginModal.style.display = 'none';
+                    hideLoader();
+                    
+                    alert('Login successful! Welcome back, ' + currentUser.name);
+                }, 1500);
             } else {
                 alert('Please enter both email and password.');
             }
@@ -1385,19 +1413,25 @@
             }
             
             if (name && email && phone && password) {
-                currentUser = {
-                    name: name,
-                    email: email,
-                    phone: phone,
-                    type: userType
-                };
+                showLoader();
                 
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                localStorage.setItem('userType', userType);
-                checkLoginStatus();
-                registerModal.style.display = 'none';
-                
-                alert('Registration successful! You can now ' + (userType === 'seller' ? 'add products to sell.' : 'shop on our platform.'));
+                // Simulate API call delay
+                setTimeout(() => {
+                    currentUser = {
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        type: userType
+                    };
+                    
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    localStorage.setItem('userType', userType);
+                    checkLoginStatus();
+                    registerModal.style.display = 'none';
+                    hideLoader();
+                    
+                    alert('Registration successful! You can now ' + (userType === 'seller' ? 'add products to sell.' : 'shop on our platform.'));
+                }, 2000);
             } else {
                 alert('Please fill in all fields.');
             }
@@ -1411,30 +1445,19 @@
                 currentUser = JSON.parse(savedUser);
                 
                 // Update auth buttons
-                loginBtn.style.display = 'none';
-                registerBtn.style.display = 'none';
+                document.getElementById('loginBtn').style.display = 'none';
+                document.getElementById('registerBtn').style.display = 'none';
                 userAccount.querySelector('span').textContent = currentUser.name;
-                
-                // Show seller dashboard if user is a seller
-                if (currentUser.type === 'seller') {
-                    sellerDashboard.style.display = 'block';
-                    displayUserProducts();
-                }
             } else {
-                loginBtn.style.display = 'inline-block';
-                registerBtn.style.display = 'inline-block';
-                sellerDashboard.style.display = 'none';
+                document.getElementById('loginBtn').style.display = 'inline-block';
+                document.getElementById('registerBtn').style.display = 'inline-block';
             }
         }
 
         // Handle user account click
         function handleUserAccount() {
             if (currentUser) {
-                if (currentUser.type === 'seller') {
-                    sellerDashboard.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    alert(`Welcome ${currentUser.name}! You are logged in as a buyer.`);
-                }
+                alert(`Welcome ${currentUser.name}! You are logged in as a ${currentUser.type}.`);
             } else {
                 loginModal.style.display = 'flex';
             }
@@ -1461,17 +1484,20 @@
             }
             
             updateCartUI();
+            
+            // Show success message with animation
+            const cartIcon = document.querySelector('.cart-item i');
+            cartIcon.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                cartIcon.style.transform = 'scale(1)';
+            }, 300);
+            
             alert(`${product.name} added to cart!`);
         }
 
         // Update cart UI
         function updateCartUI() {
             cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-            
-            // Update cart page if it's visible
-            if (cartPage.style.display === 'block') {
-                showCartPage();
-            }
         }
 
         // Show cart page
@@ -1482,212 +1508,9 @@
                 return;
             }
             
-            // Hide other sections
-            document.querySelector('.categories').style.display = 'none';
-            document.querySelector('.products').style.display = 'none';
-            sellerDashboard.style.display = 'none';
-            
-            // Show cart page
-            cartPage.style.display = 'block';
-            
-            // Display cart items
-            cartItems.innerHTML = '';
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p style="padding: 20px; text-align: center;">Your cart is empty.</p>';
-            } else {
-                cart.forEach(item => {
-                    const cartItemElement = document.createElement('div');
-                    cartItemElement.className = 'cart-item';
-                    cartItemElement.innerHTML = `
-                        <div class="cart-item-image">
-                            <img src="${item.image}" alt="${item.name}">
-                        </div>
-                        <div class="cart-item-details">
-                            <div class="cart-item-title">${item.name}</div>
-                            <div class="cart-item-seller">Sold by: ${item.seller}</div>
-                            <div class="cart-item-price">₦${item.price.toLocaleString()}</div>
-                        </div>
-                        <div class="cart-item-actions">
-                            <div class="quantity-control">
-                                <button class="quantity-btn minus" data-id="${item.id}">-</button>
-                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-id="${item.id}">
-                                <button class="quantity-btn plus" data-id="${item.id}">+</button>
-                            </div>
-                            <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash"></i></button>
-                        </div>
-                    `;
-                    cartItems.appendChild(cartItemElement);
-                });
-                
-                // Add event listeners to quantity controls
-                document.querySelectorAll('.quantity-btn.minus').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const productId = parseInt(e.target.dataset.id);
-                        updateCartItemQuantity(productId, -1);
-                    });
-                });
-                
-                document.querySelectorAll('.quantity-btn.plus').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const productId = parseInt(e.target.dataset.id);
-                        updateCartItemQuantity(productId, 1);
-                    });
-                });
-                
-                document.querySelectorAll('.quantity-input').forEach(input => {
-                    input.addEventListener('change', (e) => {
-                        const productId = parseInt(e.target.dataset.id);
-                        const newQuantity = parseInt(e.target.value);
-                        setCartItemQuantity(productId, newQuantity);
-                    });
-                });
-                
-                document.querySelectorAll('.remove-item').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const productId = parseInt(e.target.closest('button').dataset.id);
-                        removeFromCart(productId);
-                    });
-                });
-            }
-            
-            // Update cart summary
-            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-            const shipping = 1500;
-            const total = subtotal + shipping;
-            
-            document.getElementById('cartSubtotal').textContent = `₦${subtotal.toLocaleString()}`;
-            document.getElementById('cartTotal').textContent = `₦${total.toLocaleString()}`;
-        }
-
-        // Update cart item quantity
-        function updateCartItemQuantity(productId, change) {
-            const item = cart.find(item => item.id === productId);
-            if (item) {
-                item.quantity += change;
-                
-                if (item.quantity < 1) {
-                    removeFromCart(productId);
-                } else {
-                    updateCartUI();
-                }
-            }
-        }
-
-        // Set cart item quantity
-        function setCartItemQuantity(productId, quantity) {
-            const item = cart.find(item => item.id === productId);
-            if (item) {
-                if (quantity < 1) {
-                    removeFromCart(productId);
-                } else {
-                    item.quantity = quantity;
-                    updateCartUI();
-                }
-            }
-        }
-
-        // Remove item from cart
-        function removeFromCart(productId) {
-            cart = cart.filter(item => item.id !== productId);
-            updateCartUI();
-        }
-
-        // Handle adding a new product (for sellers)
-        function handleAddProduct(e) {
-            e.preventDefault();
-            
-            if (!currentUser || currentUser.type !== 'seller') {
-                alert('You need to be logged in as a seller to add products.');
-                return;
-            }
-            
-            const name = document.getElementById('productName').value;
-            const category = document.getElementById('productCategory').value;
-            const price = parseInt(document.getElementById('productPrice').value);
-            const description = document.getElementById('productDescription').value;
-            const image = document.getElementById('productImage').value || 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80';
-            
-            if (name && category && price) {
-                const newProduct = {
-                    id: Date.now(), // Simple ID generation
-                    name,
-                    price,
-                    category,
-                    seller: currentUser.name,
-                    image,
-                    description
-                };
-                
-                userProducts.push(newProduct);
-                productForm.reset();
-                
-                alert('Product added successfully!');
-                
-                // Refresh the products display
-                displayUserProducts();
-            } else {
-                alert('Please fill in all required fields.');
-            }
-        }
-
-        // Display user's products (for sellers)
-        function displayUserProducts() {
-            myProductsGrid.innerHTML = '';
-            
-            if (userProducts.length === 0) {
-                myProductsGrid.innerHTML = '<p>You haven\'t added any products yet.</p>';
-                return;
-            }
-            
-            userProducts.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.innerHTML = `
-                    <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">${product.name}</h3>
-                        <div class="product-price">₦${product.price.toLocaleString()}</div>
-                        <div class="product-seller"><i class="fas fa-store"></i> ${product.seller}</div>
-                        <div class="product-actions">
-                            <button class="edit-product" data-id="${product.id}">Edit</button>
-                            <button class="delete-product" data-id="${product.id}">Delete</button>
-                        </div>
-                    </div>
-                `;
-                
-                myProductsGrid.appendChild(productCard);
-            });
-            
-            // Add event listeners to edit and delete buttons
-            document.querySelectorAll('.edit-product').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const productId = parseInt(e.target.dataset.id);
-                    editProduct(productId);
-                });
-            });
-            
-            document.querySelectorAll('.delete-product').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const productId = parseInt(e.target.dataset.id);
-                    deleteProduct(productId);
-                });
-            });
-        }
-
-        // Edit product (placeholder function)
-        function editProduct(productId) {
-            alert('Edit product functionality would be implemented here!');
-        }
-
-        // Delete product
-        function deleteProduct(productId) {
-            if (confirm('Are you sure you want to delete this product?')) {
-                userProducts = userProducts.filter(product => product.id !== productId);
-                displayUserProducts();
-            }
+            // In a full implementation, this would show a detailed cart page
+            alert('Cart page would open with ' + cart.length + ' items. Total: ₦' + 
+                  cart.reduce((total, item) => total + (item.price * item.quantity), 0).toLocaleString());
         }
 
         // Initialize the application when the DOM is loaded
