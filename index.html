@@ -343,7 +343,7 @@
             color: var(--gray);
         }
 
-        /* Rest of the CSS remains the same as before */
+        /* Rest of the CSS */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
@@ -561,7 +561,7 @@
             color: white;
         }
 
-        /* Modal, Dashboard, Cart styles remain the same */
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -1319,7 +1319,7 @@
                             <textarea id="productDescription" rows="3"></textarea>
                         </div>
                         
-                        <!-- File Upload Section - Replaced URL input with file upload -->
+                        <!-- File Upload Section -->
                         <div class="file-upload-container">
                             <label class="file-upload-label">Product Image</label>
                             <div class="file-upload-wrapper">
@@ -1538,6 +1538,24 @@
                 seller: "Ada Bags Collection",
                 image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
                 description: "Elegant leather handbag for women, available in multiple colors."
+            },
+            {
+                id: 3,
+                name: "Designer Sneakers",
+                price: 15000,
+                category: "shoes",
+                seller: "Footwear Express",
+                image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                description: "Comfortable and stylish sneakers for everyday wear."
+            },
+            {
+                id: 4,
+                name: "Smartphone",
+                price: 65000,
+                category: "electronics",
+                seller: "Tech Hub Onitsha",
+                image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                description: "Latest smartphone model with advanced features and long battery life."
             }
         ];
 
@@ -1545,7 +1563,7 @@
         let currentUser = null;
         let cart = [];
         let userProducts = [];
-        let allProducts = [...sampleProducts]; // Combined sample and user products
+        let allProducts = [...sampleProducts];
 
         // DOM Elements
         const loginBtn = document.getElementById('loginBtn');
@@ -1671,7 +1689,6 @@
                     const category = e.target.dataset.category;
                     filterProducts(category);
                     
-                    // Update active nav link
                     navLinks.forEach(l => l.classList.remove('active'));
                     e.target.classList.add('active');
                 });
@@ -1682,7 +1699,6 @@
                     const category = card.dataset.category;
                     filterProducts(category);
                     
-                    // Update active nav link
                     navLinks.forEach(l => l.classList.remove('active'));
                     const correspondingNavLink = document.querySelector(`.nav-link[data-category="${category}"]`);
                     if (correspondingNavLink) {
@@ -1696,11 +1712,9 @@
                 tab.addEventListener('click', () => {
                     const tabId = tab.dataset.tab;
                     
-                    // Update active tab
                     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
                     
-                    // Show corresponding content
                     document.querySelectorAll('.tab-content').forEach(content => {
                         content.classList.remove('active');
                     });
@@ -1754,7 +1768,7 @@
                 productGrid.appendChild(productCard);
             });
             
-            // Add event listeners to Add to Cart buttons
+            // Add event listeners to buttons
             document.querySelectorAll('.add-to-cart').forEach(button => {
                 button.addEventListener('click', (e) => {
                     const productId = parseInt(e.target.dataset.id);
@@ -1762,13 +1776,132 @@
                 });
             });
 
-            // Add event listeners to View Details buttons
             document.querySelectorAll('.view-details').forEach(button => {
                 button.addEventListener('click', (e) => {
                     const productId = parseInt(e.target.dataset.id);
                     viewProductDetails(productId);
                 });
             });
+        }
+
+        // Filter products by category
+        function filterProducts(category) {
+            if (category === 'all') {
+                displayProducts(allProducts);
+            } else {
+                const filteredProducts = allProducts.filter(product => product.category === category);
+                displayProducts(filteredProducts);
+            }
+        }
+
+        // Perform search
+        function performSearch(searchTerm) {
+            if (!searchTerm.trim()) {
+                displayProducts(allProducts);
+                return;
+            }
+            
+            const filteredProducts = allProducts.filter(product => 
+                product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                product.seller.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                product.category.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            
+            displayProducts(filteredProducts);
+            showToast(`Found ${filteredProducts.length} products matching "${searchTerm}"`, 'success');
+        }
+
+        // View product details
+        function viewProductDetails(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (product) {
+                alert(`Product: ${product.name}\nPrice: ₦${product.price.toLocaleString()}\nSeller: ${product.seller}\nDescription: ${product.description}`);
+            }
+        }
+
+        // Handle user login
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Show loading state
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="spinner"></span> Logging in...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                if (email && password) {
+                    currentUser = {
+                        email: email,
+                        name: email.split('@')[0],
+                        type: localStorage.getItem('userType') || 'buyer'
+                    };
+                    
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    checkLoginStatus();
+                    loginModal.style.display = 'none';
+                    
+                    showToast('Login successful!', 'success');
+                } else {
+                    showToast('Please enter both email and password.', 'error');
+                }
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1000);
+        }
+
+        // Handle user registration
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const phone = document.getElementById('registerPhone').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            const userType = userTypeInput.value;
+            
+            // Show loading state
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="spinner"></span> Registering...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                if (password !== confirmPassword) {
+                    showToast('Passwords do not match.', 'error');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    return;
+                }
+                
+                if (name && email && phone && password) {
+                    currentUser = {
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        type: userType
+                    };
+                    
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    localStorage.setItem('userType', userType);
+                    checkLoginStatus();
+                    registerModal.style.display = 'none';
+                    
+                    showToast(`Registration successful! You can now ${userType === 'seller' ? 'add products to sell.' : 'shop on our platform.'}`, 'success');
+                } else {
+                    showToast('Please fill in all fields.', 'error');
+                }
+                
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1000);
         }
 
         // Handle user logout
@@ -1780,13 +1913,252 @@
                 updateCartUI();
                 checkLoginStatus();
                 showToast('You have been logged out successfully.', 'success');
-                
-                // Return to main page view
                 goBackToShopping();
             }
         }
 
-        // Handle adding a new product (for sellers)
+        // Check login status
+        function checkLoginStatus() {
+            const savedUser = localStorage.getItem('currentUser');
+            
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                loginBtn.style.display = 'none';
+                registerBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-block';
+                userAccount.querySelector('span').textContent = currentUser.name;
+                
+                if (currentUser.type === 'seller') {
+                    sellerDashboard.style.display = 'block';
+                    displayUserProducts();
+                } else {
+                    sellerDashboard.style.display = 'none';
+                }
+            } else {
+                loginBtn.style.display = 'inline-block';
+                registerBtn.style.display = 'inline-block';
+                logoutBtn.style.display = 'none';
+                sellerDashboard.style.display = 'none';
+            }
+        }
+
+        // Handle user account click
+        function handleUserAccount() {
+            if (currentUser) {
+                if (currentUser.type === 'seller') {
+                    sellerDashboard.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    showToast(`Welcome ${currentUser.name}!`, 'info');
+                }
+            } else {
+                loginModal.style.display = 'flex';
+            }
+        }
+
+        // Add product to cart
+        function addToCart(productId) {
+            if (!currentUser) {
+                showToast('Please login to add items to your cart.', 'warning');
+                loginModal.style.display = 'flex';
+                return;
+            }
+            
+            const product = allProducts.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+            
+            updateCartUI();
+            saveCartToStorage();
+            showToast(`${product.name} added to cart!`, 'success');
+        }
+
+        // Update cart UI
+        function updateCartUI() {
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            if (cartPage.style.display === 'block') {
+                showCartPage();
+            }
+        }
+
+        // Show cart page
+        function showCartPage() {
+            if (!currentUser) {
+                showToast('Please login to view your cart.', 'warning');
+                loginModal.style.display = 'flex';
+                return;
+            }
+            
+            document.querySelector('.categories').style.display = 'none';
+            document.querySelector('.products').style.display = 'none';
+            sellerDashboard.style.display = 'none';
+            cartPage.style.display = 'block';
+            
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div style="padding: 40px; text-align: center;"><i class="fas fa-shopping-cart" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i><p>Your cart is empty.</p><a href="#" class="btn" style="margin-top: 15px;" onclick="goBackToShopping()">Continue Shopping</a></div>';
+            } else {
+                cart.forEach(item => {
+                    const cartItemElement = document.createElement('div');
+                    cartItemElement.className = 'cart-item';
+                    cartItemElement.innerHTML = `
+                        <div class="cart-item-image">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-seller">Sold by: ${item.seller}</div>
+                            <div class="cart-item-price">₦${item.price.toLocaleString()}</div>
+                        </div>
+                        <div class="cart-item-actions">
+                            <div class="quantity-control">
+                                <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-id="${item.id}">
+                                <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                            </div>
+                            <button class="remove-item" data-id="${item.id}" title="Remove item"><i class="fas fa-trash"></i></button>
+                        </div>
+                    `;
+                    cartItems.appendChild(cartItemElement);
+                });
+                
+                document.querySelectorAll('.quantity-btn.minus').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = parseInt(e.target.dataset.id);
+                        updateCartItemQuantity(productId, -1);
+                    });
+                });
+                
+                document.querySelectorAll('.quantity-btn.plus').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = parseInt(e.target.dataset.id);
+                        updateCartItemQuantity(productId, 1);
+                    });
+                });
+                
+                document.querySelectorAll('.quantity-input').forEach(input => {
+                    input.addEventListener('change', (e) => {
+                        const productId = parseInt(e.target.dataset.id);
+                        const newQuantity = parseInt(e.target.value);
+                        setCartItemQuantity(productId, newQuantity);
+                    });
+                });
+                
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = parseInt(e.target.closest('button').dataset.id);
+                        removeFromCart(productId);
+                    });
+                });
+            }
+            
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const shipping = 1500;
+            const tax = subtotal * 0.05;
+            const total = subtotal + shipping + tax;
+            
+            document.getElementById('cartSubtotal').textContent = `₦${subtotal.toLocaleString()}`;
+            document.getElementById('cartShipping').textContent = `₦${shipping.toLocaleString()}`;
+            document.getElementById('cartTax').textContent = `₦${tax.toLocaleString()}`;
+            document.getElementById('cartTotal').textContent = `₦${total.toLocaleString()}`;
+        }
+
+        // Go back to shopping
+        function goBackToShopping() {
+            cartPage.style.display = 'none';
+            document.querySelector('.categories').style.display = 'block';
+            document.querySelector('.products').style.display = 'block';
+            if (currentUser && currentUser.type === 'seller') {
+                sellerDashboard.style.display = 'block';
+            }
+        }
+
+        // Update cart item quantity
+        function updateCartItemQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity < 1) {
+                    removeFromCart(productId);
+                } else {
+                    updateCartUI();
+                    saveCartToStorage();
+                }
+            }
+        }
+
+        // Set cart item quantity
+        function setCartItemQuantity(productId, quantity) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                if (quantity < 1) {
+                    removeFromCart(productId);
+                } else {
+                    item.quantity = quantity;
+                    updateCartUI();
+                    saveCartToStorage();
+                }
+            }
+        }
+
+        // Remove item from cart
+        function removeFromCart(productId) {
+            const item = cart.find(item => item.id === productId);
+            if (item && confirm(`Remove ${item.name} from cart?`)) {
+                cart = cart.filter(item => item.id !== productId);
+                updateCartUI();
+                saveCartToStorage();
+                showToast('Item removed from cart.', 'info');
+            }
+        }
+
+        // Handle checkout
+        function handleCheckout() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty.', 'warning');
+                return;
+            }
+            
+            showToast('Proceeding to checkout...', 'info');
+            setTimeout(() => {
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) + 1500;
+                showToast(`Order placed! Total: ₦${total.toLocaleString()}`, 'success');
+                cart = [];
+                updateCartUI();
+                saveCartToStorage();
+                setTimeout(() => {
+                    goBackToShopping();
+                }, 2000);
+            }, 2000);
+        }
+
+        // Save cart to storage
+        function saveCartToStorage() {
+            if (currentUser) {
+                localStorage.setItem(`cart_${currentUser.email}`, JSON.stringify(cart));
+            }
+        }
+
+        // Load cart from storage
+        function loadCartFromStorage() {
+            if (currentUser) {
+                const savedCart = localStorage.getItem(`cart_${currentUser.email}`);
+                if (savedCart) {
+                    cart = JSON.parse(savedCart);
+                    updateCartUI();
+                }
+            }
+        }
+
+        // Handle adding a new product
         function handleAddProduct(e) {
             e.preventDefault();
             
@@ -1802,9 +2174,8 @@
             const imageFile = productImageFile.files[0];
             
             if (name && category && price) {
-                let imageSrc = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'; // Default image
+                let imageSrc = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80';
                 
-                // If user uploaded an image, use it
                 if (imageFile) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
@@ -1820,41 +2191,119 @@
             }
         }
 
-        // Add product to the system
+        // Add product to system
         function addProductToSystem(name, category, price, description, imageSrc) {
             const newProduct = {
-                id: Date.now(), // Simple ID generation
+                id: Date.now(),
                 name,
                 price,
                 category,
                 seller: currentUser.name,
                 image: imageSrc,
                 description,
-                isUserProduct: true // Mark as user-uploaded product
+                isUserProduct: true
             };
             
             userProducts.push(newProduct);
-            allProducts.push(newProduct); // Add to main product list
-            
-            // Reset form
+            allProducts.push(newProduct);
             productForm.reset();
             imagePreview.style.display = 'none';
             productImageFile.value = '';
             
             showToast('Product added successfully!', 'success');
-            
-            // Refresh the products display
             displayProducts(allProducts);
             displayUserProducts();
-            
-            // Show the product in the main grid
             filterProducts('all');
         }
 
-        // The rest of the JavaScript functions remain the same as before
-        // (filterProducts, performSearch, handleLogin, handleRegister, etc.)
+        // Display user's products
+        function displayUserProducts() {
+            myProductsGrid.innerHTML = '';
+            
+            if (userProducts.length === 0) {
+                myProductsGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 40px;">You haven\'t added any products yet.</p>';
+                return;
+            }
+            
+            userProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">₦${product.price.toLocaleString()}</div>
+                        <div class="product-seller"><i class="fas fa-store"></i> ${product.seller}</div>
+                        <div class="product-actions">
+                            <button class="edit-product" data-id="${product.id}">Edit</button>
+                            <button class="delete-product" data-id="${product.id}">Delete</button>
+                        </div>
+                    </div>
+                `;
+                myProductsGrid.appendChild(productCard);
+            });
+            
+            document.querySelectorAll('.edit-product').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productId = parseInt(e.target.dataset.id);
+                    editProduct(productId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-product').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productId = parseInt(e.target.dataset.id);
+                    deleteProduct(productId);
+                });
+            });
+        }
 
-        // Initialize the application when the DOM is loaded
+        // Edit product
+        function editProduct(productId) {
+            const product = userProducts.find(p => p.id === productId);
+            if (product) {
+                document.getElementById('productName').value = product.name;
+                document.getElementById('productCategory').value = product.category;
+                document.getElementById('productPrice').value = product.price;
+                document.getElementById('productDescription').value = product.description;
+                showToast(`Editing ${product.name}`, 'info');
+            }
+        }
+
+        // Delete product
+        function deleteProduct(productId) {
+            const product = userProducts.find(p => p.id === productId);
+            if (product && confirm(`Delete "${product.name}"?`)) {
+                userProducts = userProducts.filter(p => p.id !== productId);
+                allProducts = allProducts.filter(p => p.id !== productId);
+                displayUserProducts();
+                displayProducts(allProducts);
+                showToast('Product deleted.', 'success');
+            }
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'info') {
+            toastMessage.textContent = message;
+            toast.className = 'toast';
+            toast.classList.add(type);
+            
+            const icon = toast.querySelector('i');
+            icon.className = 
+                type === 'success' ? 'fas fa-check-circle' :
+                type === 'error' ? 'fas fa-exclamation-circle' :
+                type === 'warning' ? 'fas fa-exclamation-triangle' :
+                'fas fa-info-circle';
+            
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize the application
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
