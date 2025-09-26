@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Market Onitsha - Nigeria's Largest Online Marketplace</title>
+    <title>Main Market Onitsha - Nigeria's Premier Online Marketplace</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,21 +14,29 @@
         }
 
         :root {
-            --primary: #2c5aa0;
-            --secondary: #f7941d;
-            --accent: #e31837;
+            --primary: #1a3a8f;
+            --primary-light: #2c5aa0;
+            --secondary: #e67e22;
+            --secondary-light: #f7941d;
             --light: #f8f9fa;
-            --dark: #343a40;
-            --success: #28a745;
-            --danger: #dc3545;
-            --text: #333;
-            --border: #e0e0e0;
+            --dark: #2c3e50;
+            --darker: #1a252f;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --gray: #95a5a6;
+            --light-gray: #ecf0f1;
+            --border: #ddd;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
 
         body {
             background-color: #f9f9f9;
-            color: var(--text);
+            color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
@@ -38,20 +46,64 @@
             padding: 0 15px;
         }
 
-        /* Compact Header Styles */
+        /* Header Styles */
         header {
             background-color: white;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 1000;
-            padding: 10px 0;
         }
 
-        .header-content {
+        .top-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 0;
+            font-size: 0.85rem;
+        }
+
+        .top-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-info span {
+            margin-right: 15px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+        }
+
+        .auth-buttons button {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+
+        .auth-buttons button:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .main-header {
+            padding: 12px 0;
+        }
+
+        .logo-section {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-bottom: 12px;
         }
 
         .logo {
@@ -65,16 +117,12 @@
         .logo i {
             color: var(--secondary);
             margin-right: 8px;
-            font-size: 2rem;
-        }
-
-        .logo span {
-            color: var(--accent);
         }
 
         .search-bar {
             display: flex;
-            width: 50%;
+            width: 100%;
+            max-width: 600px;
             margin: 0 20px;
         }
 
@@ -83,7 +131,13 @@
             padding: 10px 15px;
             border: 2px solid var(--primary);
             border-radius: 4px 0 0 4px;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-bar input:focus {
+            border-color: var(--secondary);
         }
 
         .search-bar button {
@@ -93,38 +147,43 @@
             padding: 0 18px;
             border-radius: 0 4px 4px 0;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: var(--transition);
         }
 
         .search-bar button:hover {
-            background: #1e4a8a;
+            background: var(--primary-light);
         }
 
-        .header-actions {
+        .user-actions {
             display: flex;
             align-items: center;
         }
 
         .action-item {
-            margin-left: 15px;
+            margin-left: 20px;
             text-align: center;
             cursor: pointer;
             position: relative;
+            transition: var(--transition);
+        }
+
+        .action-item:hover {
+            transform: translateY(-2px);
         }
 
         .action-item i {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: var(--primary);
         }
 
         .action-item span {
             display: block;
-            font-size: 0.75rem;
-            margin-top: 2px;
+            font-size: 0.8rem;
+            margin-top: 3px;
         }
 
         .cart-count {
-            background: var(--accent);
+            background: var(--danger);
             color: white;
             border-radius: 50%;
             width: 18px;
@@ -136,63 +195,82 @@
             position: absolute;
             top: -5px;
             right: -5px;
+            font-weight: bold;
         }
 
         nav {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: var(--primary);
             padding: 8px 0;
-            margin-top: 10px;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            justify-content: space-between;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 5px;
+        }
+
+        .nav-links::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .nav-links::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
         }
 
         .nav-links li {
-            flex: 1;
-            text-align: center;
+            margin-right: 20px;
         }
 
         .nav-links a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
-            transition: opacity 0.3s;
+            transition: var(--transition);
             padding: 5px 0;
             display: block;
+            position: relative;
         }
 
-        .nav-links a:hover {
-            opacity: 0.9;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--secondary-light);
         }
 
-        /* Hero Section */
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--secondary-light);
+        }
+
+        /* Main Content Styles */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1592409065737-a253f2900fa8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 60px 0;
+            padding: 100px 0;
             text-align: center;
             margin-bottom: 30px;
             border-radius: 0 0 10px 10px;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             max-width: 700px;
-            margin: 0 auto 25px;
+            margin: 0 auto 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         .btn {
@@ -203,15 +281,27 @@
             border-radius: 4px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: var(--transition);
             border: none;
             cursor: pointer;
+            font-size: 1rem;
         }
 
         .btn:hover {
-            background: #e0851a;
+            background: var(--secondary-light);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
         }
 
         .btn-primary {
@@ -219,56 +309,30 @@
         }
 
         .btn-primary:hover {
-            background: #1e4a8a;
-        }
-
-        /* Loading Animation */
-        .loader {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .loader-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
-        }
-
-        .loader-text {
-            font-size: 1.2rem;
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Categories Section */
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-            border-left: 4px solid var(--secondary);
-            padding-left: 10px;
+            background: var(--primary-light);
         }
 
         .categories {
             margin: 40px 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-gray);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: var(--secondary);
         }
 
         .category-grid {
@@ -281,22 +345,24 @@
             background: white;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
             text-align: center;
-            padding: 20px 15px;
+            padding: 20px;
+            cursor: pointer;
             border: 1px solid var(--border);
         }
 
         .category-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
         }
 
         .category-card i {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: var(--primary);
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .category-card h3 {
@@ -304,7 +370,6 @@
             font-weight: 600;
         }
 
-        /* Products Section */
         .products {
             margin: 40px 0;
         }
@@ -319,19 +384,19 @@
             background: white;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
             border: 1px solid var(--border);
         }
 
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-lg);
         }
 
         .product-image {
             height: 200px;
-            background-color: #f8f9fa;
+            background-color: var(--light-gray);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -343,23 +408,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: var(--transition);
         }
 
         .product-card:hover .product-image img {
             transform: scale(1.05);
-        }
-
-        .product-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: var(--accent);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 3px;
-            font-size: 0.8rem;
-            font-weight: 600;
         }
 
         .product-info {
@@ -368,8 +421,8 @@
 
         .product-title {
             font-size: 1.1rem;
-            margin-bottom: 8px;
-            height: 45px;
+            margin-bottom: 10px;
+            height: 50px;
             overflow: hidden;
             font-weight: 600;
         }
@@ -378,43 +431,25 @@
             font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .product-seller {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 12px;
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
         }
 
         .product-seller i {
             margin-right: 5px;
-            font-size: 0.9rem;
-        }
-
-        .product-rating {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .product-rating i {
-            color: #ffc107;
-            margin-right: 2px;
-            font-size: 0.9rem;
-        }
-
-        .product-rating span {
-            font-size: 0.85rem;
-            color: #666;
-            margin-left: 5px;
         }
 
         .product-actions {
             display: flex;
             justify-content: space-between;
+            gap: 10px;
         }
 
         .add-to-cart {
@@ -425,13 +460,12 @@
             border-radius: 4px;
             cursor: pointer;
             flex: 1;
-            margin-right: 8px;
-            font-weight: 600;
-            transition: background 0.3s;
+            transition: var(--transition);
+            font-weight: 500;
         }
 
         .add-to-cart:hover {
-            background: #1e4a8a;
+            background: var(--primary-light);
         }
 
         .view-details {
@@ -441,8 +475,7 @@
             padding: 8px 15px;
             border-radius: 4px;
             cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
+            transition: var(--transition);
         }
 
         .view-details:hover {
@@ -450,156 +483,7 @@
             color: white;
         }
 
-        /* Ads Section */
-        .ads {
-            margin: 40px 0;
-        }
-
-        .ad-banner {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            padding: 25px;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .ad-banner h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-
-        .ad-banner p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-
-        .ad-code {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-weight: 600;
-            display: inline-block;
-        }
-
-        /* Traditional Market Section */
-        .market-gallery {
-            margin: 50px 0;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .gallery-item {
-            border-radius: 8px;
-            overflow: hidden;
-            height: 200px;
-            position: relative;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            font-size: 0.9rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 50px 0 20px;
-            margin-top: 60px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .contact-info li {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .contact-info i {
-            margin-right: 10px;
-            color: var(--secondary);
-            margin-top: 3px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 1.3rem;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: var(--secondary);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #444;
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-
-        /* Modal Styles */
+        /* Auth Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -607,7 +491,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 2000;
             align-items: center;
             justify-content: center;
@@ -625,12 +509,12 @@
             max-width: 500px;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.4s;
+            box-shadow: var(--shadow-lg);
+            animation: slideIn 0.3s;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
@@ -653,56 +537,60 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: var(--transition);
         }
 
         .close-modal:hover {
-            transform: scale(1.2);
+            transform: scale(1.1);
         }
 
         .modal-body {
-            padding: 25px;
+            padding: 20px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-weight: 500;
-            color: #555;
         }
 
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 12px 15px;
+            padding: 10px;
             border: 1px solid var(--border);
             border-radius: 4px;
             font-size: 1rem;
-            transition: border 0.3s;
+            transition: var(--transition);
         }
 
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             border-color: var(--primary);
             outline: none;
+            box-shadow: 0 0 0 2px rgba(44, 90, 160, 0.2);
         }
 
         .user-type {
             display: flex;
             gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .user-type-option {
             flex: 1;
             text-align: center;
             padding: 15px 10px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
+        }
+
+        .user-type-option:hover {
+            border-color: var(--primary);
         }
 
         .user-type-option.selected {
@@ -716,53 +604,415 @@
             color: var(--primary);
         }
 
-        .user-type-option div {
-            font-weight: 600;
-        }
-
         .form-footer {
             margin-top: 20px;
             text-align: center;
-            font-size: 0.9rem;
         }
 
         .form-footer a {
             color: var(--primary);
             text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Dashboard Styles */
+        .dashboard {
+            display: none;
+            margin: 30px 0;
+        }
+
+        .dashboard-header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            background: var(--light-gray);
+        }
+
+        .tab.active {
+            border-bottom-color: var(--primary);
             font-weight: 600;
+            color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .add-product-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Cart Page Styles */
+        .cart-page {
+            display: none;
+            margin: 30px 0;
+        }
+
+        .cart-items {
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .cart-item {
+            display: flex;
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            align-items: center;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .cart-item-seller {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        .cart-item-price {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background: var(--light-gray);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .quantity-btn:hover {
+            background: var(--border);
+        }
+
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            margin: 0 5px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 5px;
+        }
+
+        .remove-item {
+            color: var(--danger);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .remove-item:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-summary {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .summary-total {
+            font-weight: 600;
+            font-size: 1.2rem;
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .checkout-btn:hover {
+            background: var(--primary-light);
+        }
+
+        /* Ads Section */
+        .ads {
+            margin: 30px 0;
+        }
+
+        .ad-banner {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .ad-banner h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: var(--darker);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-links a i {
+            margin-right: 8px;
+            width: 16px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 4px;
+            box-shadow: var(--shadow-lg);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            max-width: 350px;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .toast.success i {
+            color: var(--success);
+        }
+
+        .toast.error i {
+            color: var(--danger);
+        }
+
+        .toast.warning i {
+            color: var(--warning);
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         /* Responsive Styles */
         @media (max-width: 992px) {
-            .header-content {
-                flex-wrap: wrap;
-            }
-            
-            .logo {
-                margin-bottom: 10px;
+            .logo-section {
+                flex-direction: column;
             }
             
             .search-bar {
+                margin: 15px 0;
+                max-width: 100%;
+            }
+            
+            .user-actions {
                 width: 100%;
-                order: 3;
-                margin: 10px 0 0;
-            }
-            
-            .header-actions {
-                margin-left: auto;
-            }
-            
-            .nav-links {
-                flex-wrap: wrap;
-            }
-            
-            .nav-links li {
-                flex: 0 0 33.333%;
-                margin-bottom: 5px;
+                justify-content: center;
+                margin-top: 10px;
             }
         }
 
         @media (max-width: 768px) {
+            .top-header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-info {
+                margin-bottom: 10px;
+            }
+            
             .hero h1 {
                 font-size: 2rem;
             }
@@ -776,63 +1026,87 @@
             }
             
             .product-grid {
-                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
             
-            .gallery-grid {
-                grid-template-columns: 1fr;
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
             }
             
-            .nav-links li {
-                flex: 0 0 50%;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .action-item span {
-                display: none;
+            .cart-item-image {
+                width: 100%;
+                height: 200px;
+                margin-right: 0;
+                margin-bottom: 15px;
             }
             
-            .nav-links li {
-                flex: 0 0 100%;
+            .cart-item-actions {
+                justify-content: center;
+                margin-top: 15px;
             }
             
             .user-type {
                 flex-direction: column;
             }
         }
+
+        @media (max-width: 576px) {
+            .nav-links {
+                font-size: 0.9rem;
+            }
+            
+            .nav-links li {
+                margin-right: 10px;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Loading Animation -->
-    <div class="loader" id="loader">
-        <div class="loader-spinner"></div>
-        <div class="loader-text">Processing...</div>
-    </div>
-
-    <!-- Compact Header -->
+    <!-- Header Section -->
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-shopping-bag"></i>
-                    Main Market <span>Onitsha</span>
+        <div class="top-header">
+            <div class="container">
+                <div class="contact-info">
+                    <span><i class="fas fa-phone"></i> Customer Care: 0806 456 2826</span>
+                    <span><i class="fas fa-envelope"></i> info@mainmarketonitsha.com</span>
                 </div>
-                
-                <div class="search-bar">
-                    <input type="text" placeholder="Search for products, brands and categories...">
-                    <button><i class="fas fa-search"></i></button>
+                <div class="auth-buttons">
+                    <button id="loginBtn">Login</button>
+                    <button id="registerBtn">Register</button>
                 </div>
-                
-                <div class="header-actions">
-                    <div class="action-item" id="userAccount">
-                        <i class="fas fa-user"></i>
-                        <span>Account</span>
+            </div>
+        </div>
+        
+        <div class="main-header">
+            <div class="container">
+                <div class="logo-section">
+                    <div class="logo">
+                        <i class="fas fa-shopping-bag"></i>
+                        Main Market Onitsha
                     </div>
-                    <div class="action-item cart-item" id="viewCart">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>Cart</span>
-                        <div class="cart-count">0</div>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search for products, brands and categories...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="user-actions">
+                        <div class="action-item" id="userAccount">
+                            <i class="fas fa-user"></i>
+                            <span>Account</span>
+                        </div>
+                        <div class="action-item cart-item" id="viewCart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Cart</span>
+                            <div class="cart-count">0</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -857,87 +1131,156 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Nigeria's Largest Online Marketplace</h1>
-            <p>Connect with thousands of sellers in Onitsha Main Market. Buy authentic products at the best prices.</p>
+            <h1>Nigeria's Premier Online Marketplace</h1>
+            <p>Your one-stop online marketplace for everything sold in Onitsha Main Market. Buy and sell with confidence.</p>
             <a href="#" class="btn">Start Shopping</a>
-            <a href="#" class="btn btn-primary" style="margin-left: 10px;">Become a Seller</a>
         </div>
     </section>
 
     <!-- Ads Section -->
     <section class="ads container">
         <div class="ad-banner">
-            <h3>Grand Opening Sale!</h3>
-            <p>Enjoy up to 30% off on all products. Limited time offer.</p>
-            <div class="ad-code">Use code: <strong>MARKET30</strong></div>
+            <h3>Special Offer!</h3>
+            <p>Get 15% off on all clothing items this week. Use code: ONITSHA15</p>
         </div>
     </section>
 
-    <!-- Categories Section -->
-    <section class="categories container">
-        <h2 class="section-title">Shop by Category</h2>
-        <div class="category-grid">
-            <div class="category-card" data-category="clothing">
-                <i class="fas fa-tshirt"></i>
-                <h3>Clothing</h3>
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Categories Section -->
+        <section class="categories">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="category-grid">
+                <div class="category-card" data-category="clothing">
+                    <i class="fas fa-tshirt"></i>
+                    <h3>Clothing</h3>
+                </div>
+                <div class="category-card" data-category="shoes">
+                    <i class="fas fa-shoe-prints"></i>
+                    <h3>Shoes</h3>
+                </div>
+                <div class="category-card" data-category="bags">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h3>Bags</h3>
+                </div>
+                <div class="category-card" data-category="electronics">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Electronics</h3>
+                </div>
+                <div class="category-card" data-category="food">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Food</h3>
+                </div>
+                <div class="category-card" data-category="home">
+                    <i class="fas fa-home"></i>
+                    <h3>Home & Kitchen</h3>
+                </div>
             </div>
-            <div class="category-card" data-category="shoes">
-                <i class="fas fa-shoe-prints"></i>
-                <h3>Shoes</h3>
-            </div>
-            <div class="category-card" data-category="bags">
-                <i class="fas fa-shopping-bag"></i>
-                <h3>Bags</h3>
-            </div>
-            <div class="category-card" data-category="electronics">
-                <i class="fas fa-mobile-alt"></i>
-                <h3>Electronics</h3>
-            </div>
-            <div class="category-card" data-category="food">
-                <i class="fas fa-utensils"></i>
-                <h3>Food</h3>
-            </div>
-            <div class="category-card" data-category="home">
-                <i class="fas fa-home"></i>
-                <h3>Home & Kitchen</h3>
-            </div>
-            <div class="category-card" data-category="beauty">
-                <i class="fas fa-spa"></i>
-                <h3>Beauty</h3>
-            </div>
-            <div class="category-card" data-category="accessories">
-                <i class="fas fa-gem"></i>
-                <h3>Accessories</h3>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Products Section -->
-    <section class="products container">
-        <h2 class="section-title">Trending Products</h2>
-        <div class="product-grid" id="productGrid">
-            <!-- Products will be dynamically added here -->
-        </div>
-    </section>
+        <!-- Products Section -->
+        <section class="products">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="product-grid" id="productGrid">
+                <!-- Products will be dynamically added here -->
+            </div>
+        </section>
 
-    <!-- Traditional Market Gallery -->
-    <section class="market-gallery container">
-        <h2 class="section-title">Experience Onitsha Main Market</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1592409065737-a253f2900fa8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Onitsha Market Scene">
-                <div class="gallery-caption">Vibrant market scene at Onitsha</div>
+        <!-- Seller Dashboard -->
+        <section class="dashboard" id="sellerDashboard">
+            <div class="dashboard-header">
+                <h2>Seller Dashboard</h2>
+                <p>Manage your products and sales</p>
             </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Traditional fabrics">
-                <div class="gallery-caption">Colorful African textiles</div>
+            
+            <div class="dashboard-tabs">
+                <div class="tab active" data-tab="add-product">Add Product</div>
+                <div class="tab" data-tab="my-products">My Products</div>
+                <div class="tab" data-tab="sales">Sales</div>
             </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1598301257982-0cf01499abb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Market spices">
-                <div class="gallery-caption">Fresh spices and ingredients</div>
+            
+            <div class="tab-content active" id="add-product">
+                <div class="add-product-form">
+                    <h3>Add New Product</h3>
+                    <form id="productForm">
+                        <div class="form-group">
+                            <label for="productName">Product Name</label>
+                            <input type="text" id="productName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productCategory">Category</label>
+                            <select id="productCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="shoes">Shoes</option>
+                                <option value="bags">Bags</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="home">Home & Kitchen</option>
+                                <option value="beauty">Beauty</option>
+                                <option value="food">Food</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice">Price (₦)</label>
+                            <input type="number" id="productPrice" required min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="productDescription">Description</label>
+                            <textarea id="productDescription" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="productImage">Product Image URL</label>
+                            <input type="text" id="productImage" placeholder="Paste image URL here">
+                        </div>
+                        <button type="submit" class="btn">Add Product</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
+            
+            <div class="tab-content" id="my-products">
+                <h3>My Products</h3>
+                <div class="product-grid" id="myProductsGrid">
+                    <!-- Seller's products will be displayed here -->
+                </div>
+            </div>
+
+            <div class="tab-content" id="sales">
+                <h3>Sales History</h3>
+                <div class="sales-list">
+                    <p>Sales history will appear here once you make sales.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart Page -->
+        <section class="cart-page" id="cartPage">
+            <h2 class="section-title">Shopping Cart</h2>
+            
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be displayed here -->
+            </div>
+            
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">₦0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping:</span>
+                    <span id="cartShipping">₦1,500.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Tax (5%):</span>
+                    <span id="cartTax">₦0.00</span>
+                </div>
+                <div class="summary-row summary-total">
+                    <span>Total:</span>
+                    <span id="cartTotal">₦1,500.00</span>
+                </div>
+                <button class="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -945,7 +1288,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>Main Market Onitsha</h3>
-                    <p>Bringing the authentic Onitsha market experience to your doorstep. Shop with confidence from verified sellers.</p>
+                    <p>Your trusted online marketplace connecting buyers and sellers in Onitsha Main Market.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -956,34 +1299,32 @@
                 <div class="footer-column">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Sell on Main Market</a></li>
-                        <li><a href="#">Become an Affiliate</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQs</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Customer Service</h3>
                     <ul class="footer-links">
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Track Order</a></li>
-                        <li><a href="#">Returns & Refunds</a></li>
-                        <li><a href="#">Shipping Info</a></li>
-                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> My Account</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Track Order</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Returns & Refunds</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Shipping Info</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Contact Info</h3>
-                    <ul class="footer-links contact-info">
-                        <li><i class="fas fa-map-marker-alt"></i> Main Market Onitsha, Anambra State, Nigeria</li>
-                        <li><i class="fas fa-phone"></i> Customer Care: +234 707 075 2053</li>
-                        <li><i class="fas fa-envelope"></i> support@mainmarketonitsha.com</li>
-                        <li><i class="fas fa-clock"></i> Mon-Sat: 8:00AM - 6:00PM</li>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Main Market Onitsha, Anambra State</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> Customer Care: 0806 456 2826</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@mainmarketonitsha.com</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Main Market Onitsha. All rights reserved. | Designed for GitHub Hosting</p>
+                <p>&copy; 2023 Main Market Onitsha. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -1039,15 +1380,13 @@
                     <div class="form-group">
                         <label>Account Type</label>
                         <div class="user-type">
-                            <div class="user-type-option selected" data-type="buyer">
+                            <div class="user-type-option" data-type="buyer">
                                 <i class="fas fa-shopping-cart"></i>
                                 <div>Buyer</div>
-                                <small>Shop for products</small>
                             </div>
                             <div class="user-type-option" data-type="seller">
                                 <i class="fas fa-store"></i>
                                 <div>Seller</div>
-                                <small>Sell your products</small>
                             </div>
                         </div>
                         <input type="hidden" id="userType" value="buyer" required>
@@ -1061,7 +1400,7 @@
                         <label for="registerConfirmPassword">Confirm Password</label>
                         <input type="password" id="registerConfirmPassword" required>
                     </div>
-                    <button type="submit" class="btn" style="width: 100%;">Create Account</button>
+                    <button type="submit" class="btn" style="width: 100%;">Register</button>
                     <div class="form-footer">
                         <p>Already have an account? <a href="#" id="switchToLogin">Login here</a></p>
                     </div>
@@ -1070,107 +1409,97 @@
         </div>
     </div>
 
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Operation completed successfully</span>
+    </div>
+
     <script>
-        // Sample product data with realistic images and Nigerian sellers
+        // Sample product data with realistic images
         const sampleProducts = [
             {
                 id: 1,
-                name: "Men's Ankara Shirt - Premium Quality",
+                name: "Men's Ankara Shirt",
                 price: 12500,
                 category: "clothing",
                 seller: "Ngozi Fashion",
                 image: "https://images.unsplash.com/photo-1594938371073-8b96043d18d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.5,
-                reviews: 24,
-                badge: "Bestseller"
+                description: "High-quality Ankara fabric shirt for men, perfect for special occasions."
             },
             {
                 id: 2,
-                name: "Women's Handbag - Genuine Leather",
+                name: "Women's Handbag",
                 price: 8900,
                 category: "bags",
                 seller: "Ada Bags Collection",
                 image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.2,
-                reviews: 18,
-                badge: "Popular"
+                description: "Elegant leather handbag for women, available in multiple colors."
             },
             {
                 id: 3,
-                name: "Designer Sneakers - Unisex",
+                name: "Designer Sneakers",
                 price: 15000,
                 category: "shoes",
                 seller: "Footwear Express",
                 image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.7,
-                reviews: 31,
-                badge: "New"
+                description: "Comfortable and stylish sneakers for everyday wear."
             },
             {
                 id: 4,
-                name: "Smartphone - Latest Model",
+                name: "Smartphone",
                 price: 65000,
                 category: "electronics",
                 seller: "Tech Hub Onitsha",
                 image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.3,
-                reviews: 42,
-                badge: "Sale"
+                description: "Latest smartphone model with advanced features and long battery life."
             },
             {
                 id: 5,
-                name: "Traditional Attire - Complete Set",
+                name: "Traditional Attire Set",
                 price: 25000,
                 category: "clothing",
                 seller: "Cultural Wear Center",
                 image: "https://images.unsplash.com/photo-1585487000113-4e0d6b4f4c5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.8,
-                reviews: 15,
-                badge: "Premium"
+                description: "Complete traditional attire set for men and women."
             },
             {
                 id: 6,
-                name: "Kitchen Utensils Set - 15 Pieces",
+                name: "Kitchen Utensils Set",
                 price: 18500,
                 category: "home",
                 seller: "Home Essentials",
                 image: "https://images.unsplash.com/photo-1583778176475-6a92a2361c4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.4,
-                reviews: 27,
-                badge: "Bestseller"
+                description: "15-piece kitchen utensils set for all your cooking needs."
             },
             {
                 id: 7,
-                name: "Skincare Products - Complete Set",
+                name: "Skincare Products Set",
                 price: 12000,
                 category: "beauty",
                 seller: "Beauty World",
                 image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.1,
-                reviews: 33,
-                badge: "Popular"
+                description: "Complete skincare set for healthy and glowing skin."
             },
             {
                 id: 8,
-                name: "Local Food Basket - Fresh Items",
+                name: "Local Food Basket",
                 price: 7500,
                 category: "food",
                 seller: "Farm Fresh Direct",
                 image: "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.6,
-                reviews: 29,
-                badge: "Fresh"
+                description: "Fresh local food items directly from the farm."
             }
         ];
 
         // Application state
         let currentUser = null;
         let cart = [];
+        let userProducts = [];
 
         // DOM Elements
-        const loader = document.getElementById('loader');
-        const loginBtn = document.querySelector('.auth-buttons button:nth-child(1)');
-        const registerBtn = document.querySelector('.auth-buttons button:nth-child(2)');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
         const loginModal = document.getElementById('loginModal');
         const registerModal = document.getElementById('registerModal');
         const closeModalButtons = document.querySelectorAll('.close-modal');
@@ -1179,39 +1508,35 @@
         const userAccount = document.getElementById('userAccount');
         const viewCart = document.getElementById('viewCart');
         const productGrid = document.getElementById('productGrid');
+        const sellerDashboard = document.getElementById('sellerDashboard');
+        const cartPage = document.getElementById('cartPage');
+        const cartItems = document.getElementById('cartItems');
         const cartCount = document.querySelector('.cart-count');
         const userTypeOptions = document.querySelectorAll('.user-type-option');
         const userTypeInput = document.getElementById('userType');
+        const productForm = document.getElementById('productForm');
+        const myProductsGrid = document.getElementById('myProductsGrid');
         const navLinks = document.querySelectorAll('.nav-link');
         const categoryCards = document.querySelectorAll('.category-card');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
 
         // Initialize the application
         function init() {
-            // Create auth buttons if they don't exist
-            if (!document.querySelector('.auth-buttons')) {
-                const topHeader = document.querySelector('.top-header .container');
-                const authDiv = document.createElement('div');
-                authDiv.className = 'auth-buttons';
-                authDiv.innerHTML = `
-                    <button id="loginBtn">Login</button>
-                    <button id="registerBtn">Register</button>
-                `;
-                topHeader.appendChild(authDiv);
-            }
-            
             displayProducts(sampleProducts);
             setupEventListeners();
             checkLoginStatus();
+            loadCartFromStorage();
         }
 
         // Set up event listeners
         function setupEventListeners() {
             // Modal functionality
-            document.getElementById('loginBtn').addEventListener('click', () => {
+            loginBtn.addEventListener('click', () => {
                 loginModal.style.display = 'flex';
             });
 
-            document.getElementById('registerBtn').addEventListener('click', () => {
+            registerBtn.addEventListener('click', () => {
                 registerModal.style.display = 'flex';
             });
 
@@ -1255,6 +1580,7 @@
             // Form submissions
             document.getElementById('loginForm').addEventListener('submit', handleLogin);
             document.getElementById('registerForm').addEventListener('submit', handleRegister);
+            productForm.addEventListener('submit', handleAddProduct);
 
             // Navigation
             userAccount.addEventListener('click', handleUserAccount);
@@ -1280,34 +1606,69 @@
                     
                     // Update active nav link
                     navLinks.forEach(l => l.classList.remove('active'));
-                    document.querySelector(`.nav-link[data-category="${category}"]`).classList.add('active');
+                    const correspondingNavLink = document.querySelector(`.nav-link[data-category="${category}"]`);
+                    if (correspondingNavLink) {
+                        correspondingNavLink.classList.add('active');
+                    }
                 });
             });
+
+            // Dashboard tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.dataset.tab;
+                    
+                    // Update active tab
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show corresponding content
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Search functionality
+            document.querySelector('.search-bar input').addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    performSearch(e.target.value);
+                }
+            });
+
+            document.querySelector('.search-bar button').addEventListener('click', () => {
+                const searchTerm = document.querySelector('.search-bar input').value;
+                performSearch(searchTerm);
+            });
+
+            // Checkout button
+            document.querySelector('.checkout-btn').addEventListener('click', handleCheckout);
         }
 
         // Display products in the grid
         function displayProducts(products) {
             productGrid.innerHTML = '';
             
+            if (products.length === 0) {
+                productGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 40px;">No products found matching your criteria.</p>';
+                return;
+            }
+            
             products.forEach(product => {
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 productCard.innerHTML = `
                     <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}">
-                        ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
                     </div>
                     <div class="product-info">
                         <h3 class="product-title">${product.name}</h3>
                         <div class="product-price">₦${product.price.toLocaleString()}</div>
                         <div class="product-seller"><i class="fas fa-store"></i> ${product.seller}</div>
-                        <div class="product-rating">
-                            ${generateStarRating(product.rating)}
-                            <span>${product.rating} (${product.reviews})</span>
-                        </div>
                         <div class="product-actions">
                             <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
-                            <button class="view-details">Details</button>
+                            <button class="view-details" data-id="${product.id}">Details</button>
                         </div>
                     </div>
                 `;
@@ -1322,28 +1683,14 @@
                     addToCart(productId);
                 });
             });
-        }
 
-        // Generate star rating HTML
-        function generateStarRating(rating) {
-            let stars = '';
-            const fullStars = Math.floor(rating);
-            const hasHalfStar = rating % 1 >= 0.5;
-            
-            for (let i = 0; i < fullStars; i++) {
-                stars += '<i class="fas fa-star"></i>';
-            }
-            
-            if (hasHalfStar) {
-                stars += '<i class="fas fa-star-half-alt"></i>';
-            }
-            
-            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-            for (let i = 0; i < emptyStars; i++) {
-                stars += '<i class="far fa-star"></i>';
-            }
-            
-            return stars;
+            // Add event listeners to View Details buttons
+            document.querySelectorAll('.view-details').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productId = parseInt(e.target.dataset.id);
+                    viewProductDetails(productId);
+                });
+            });
         }
 
         // Filter products by category
@@ -1356,14 +1703,33 @@
             }
         }
 
-        // Show loading animation
-        function showLoader() {
-            loader.style.display = 'flex';
+        // Perform search
+        function performSearch(searchTerm) {
+            if (!searchTerm.trim()) {
+                displayProducts(sampleProducts);
+                return;
+            }
+            
+            const filteredProducts = sampleProducts.filter(product => 
+                product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                product.seller.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                product.category.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            
+            displayProducts(filteredProducts);
+            showToast(`Found ${filteredProducts.length} products matching "${searchTerm}"`, 'success');
         }
 
-        // Hide loading animation
-        function hideLoader() {
-            loader.style.display = 'none';
+        // View product details
+        function viewProductDetails(productId) {
+            const product = sampleProducts.find(p => p.id === productId);
+            if (product) {
+                // In a real application, this would open a detailed product page/modal
+                showToast(`Viewing details for ${product.name}`, 'info');
+                // For now, just show an alert with product details
+                alert(`Product: ${product.name}\nPrice: ₦${product.price.toLocaleString()}\nSeller: ${product.seller}\nDescription: ${product.description}`);
+            }
         }
 
         // Handle user login
@@ -1372,12 +1738,16 @@
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            // Simple validation (in a real app, this would be done on the server)
-            if (email && password) {
-                showLoader();
-                
-                // Simulate API call delay
-                setTimeout(() => {
+            // Show loading state
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="spinner"></span> Logging in...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Simple validation (in a real app, this would be done on the server)
+                if (email && password) {
                     currentUser = {
                         email: email,
                         name: email.split('@')[0],
@@ -1387,13 +1757,16 @@
                     localStorage.setItem('currentUser', JSON.stringify(currentUser));
                     checkLoginStatus();
                     loginModal.style.display = 'none';
-                    hideLoader();
                     
-                    alert('Login successful! Welcome back, ' + currentUser.name);
-                }, 1500);
-            } else {
-                alert('Please enter both email and password.');
-            }
+                    showToast('Login successful!', 'success');
+                } else {
+                    showToast('Please enter both email and password.', 'error');
+                }
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1000);
         }
 
         // Handle user registration
@@ -1406,17 +1779,23 @@
             const confirmPassword = document.getElementById('registerConfirmPassword').value;
             const userType = userTypeInput.value;
             
-            // Simple validation
-            if (password !== confirmPassword) {
-                alert('Passwords do not match.');
-                return;
-            }
+            // Show loading state
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="spinner"></span> Registering...';
+            submitBtn.disabled = true;
             
-            if (name && email && phone && password) {
-                showLoader();
+            // Simulate API call
+            setTimeout(() => {
+                // Simple validation
+                if (password !== confirmPassword) {
+                    showToast('Passwords do not match.', 'error');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    return;
+                }
                 
-                // Simulate API call delay
-                setTimeout(() => {
+                if (name && email && phone && password) {
                     currentUser = {
                         name: name,
                         email: email,
@@ -1428,13 +1807,16 @@
                     localStorage.setItem('userType', userType);
                     checkLoginStatus();
                     registerModal.style.display = 'none';
-                    hideLoader();
                     
-                    alert('Registration successful! You can now ' + (userType === 'seller' ? 'add products to sell.' : 'shop on our platform.'));
-                }, 2000);
-            } else {
-                alert('Please fill in all fields.');
-            }
+                    showToast(`Registration successful! You can now ${userType === 'seller' ? 'add products to sell.' : 'shop on our platform.'}`, 'success');
+                } else {
+                    showToast('Please fill in all fields.', 'error');
+                }
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1000);
         }
 
         // Check login status and update UI accordingly
@@ -1445,19 +1827,32 @@
                 currentUser = JSON.parse(savedUser);
                 
                 // Update auth buttons
-                document.getElementById('loginBtn').style.display = 'none';
-                document.getElementById('registerBtn').style.display = 'none';
+                loginBtn.style.display = 'none';
+                registerBtn.style.display = 'none';
                 userAccount.querySelector('span').textContent = currentUser.name;
+                
+                // Show seller dashboard if user is a seller
+                if (currentUser.type === 'seller') {
+                    sellerDashboard.style.display = 'block';
+                    displayUserProducts();
+                } else {
+                    sellerDashboard.style.display = 'none';
+                }
             } else {
-                document.getElementById('loginBtn').style.display = 'inline-block';
-                document.getElementById('registerBtn').style.display = 'inline-block';
+                loginBtn.style.display = 'inline-block';
+                registerBtn.style.display = 'inline-block';
+                sellerDashboard.style.display = 'none';
             }
         }
 
         // Handle user account click
         function handleUserAccount() {
             if (currentUser) {
-                alert(`Welcome ${currentUser.name}! You are logged in as a ${currentUser.type}.`);
+                if (currentUser.type === 'seller') {
+                    sellerDashboard.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    showToast(`Welcome ${currentUser.name}! You are logged in as a buyer.`, 'info');
+                }
             } else {
                 loginModal.style.display = 'flex';
             }
@@ -1466,7 +1861,7 @@
         // Add product to cart
         function addToCart(productId) {
             if (!currentUser) {
-                alert('Please login to add items to your cart.');
+                showToast('Please login to add items to your cart.', 'warning');
                 loginModal.style.display = 'flex';
                 return;
             }
@@ -1484,33 +1879,348 @@
             }
             
             updateCartUI();
-            
-            // Show success message with animation
-            const cartIcon = document.querySelector('.cart-item i');
-            cartIcon.style.transform = 'scale(1.3)';
-            setTimeout(() => {
-                cartIcon.style.transform = 'scale(1)';
-            }, 300);
-            
-            alert(`${product.name} added to cart!`);
+            saveCartToStorage();
+            showToast(`${product.name} added to cart!`, 'success');
         }
 
         // Update cart UI
         function updateCartUI() {
             cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            // Update cart page if it's visible
+            if (cartPage.style.display === 'block') {
+                showCartPage();
+            }
         }
 
         // Show cart page
         function showCartPage() {
             if (!currentUser) {
-                alert('Please login to view your cart.');
+                showToast('Please login to view your cart.', 'warning');
                 loginModal.style.display = 'flex';
                 return;
             }
             
-            // In a full implementation, this would show a detailed cart page
-            alert('Cart page would open with ' + cart.length + ' items. Total: ₦' + 
-                  cart.reduce((total, item) => total + (item.price * item.quantity), 0).toLocaleString());
+            // Hide other sections
+            document.querySelector('.categories').style.display = 'none';
+            document.querySelector('.products').style.display = 'none';
+            sellerDashboard.style.display = 'none';
+            
+            // Show cart page
+            cartPage.style.display = 'block';
+            
+            // Display cart items
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div style="padding: 40px; text-align: center;"><i class="fas fa-shopping-cart" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i><p>Your cart is empty.</p><a href="#" class="btn" style="margin-top: 15px;" onclick="goBackToShopping()">Continue Shopping</a></div>';
+            } else {
+                cart.forEach(item => {
+                    const cartItemElement = document.createElement('div');
+                    cartItemElement.className = 'cart-item';
+                    cartItemElement.innerHTML = `
+                        <div class="cart-item-image">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-seller">Sold by: ${item.seller}</div>
+                            <div class="cart-item-price">₦${item.price.toLocaleString()}</div>
+                        </div>
+                        <div class="cart-item-actions">
+                            <div class="quantity-control">
+                                <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-id="${item.id}">
+                                <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                            </div>
+                            <button class="remove-item" data-id="${item.id}" title="Remove item"><i class="fas fa-trash"></i></button>
+                        </div>
+                    `;
+                    cartItems.appendChild(cartItemElement);
+                });
+                
+                // Add event listeners to quantity controls
+                document.querySelectorAll('.quantity-btn.minus').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = parseInt(e.target.dataset.id);
+                        updateCartItemQuantity(productId, -1);
+                    });
+                });
+                
+                document.querySelectorAll('.quantity-btn.plus').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = parseInt(e.target.dataset.id);
+                        updateCartItemQuantity(productId, 1);
+                    });
+                });
+                
+                document.querySelectorAll('.quantity-input').forEach(input => {
+                    input.addEventListener('change', (e) => {
+                        const productId = parseInt(e.target.dataset.id);
+                        const newQuantity = parseInt(e.target.value);
+                        setCartItemQuantity(productId, newQuantity);
+                    });
+                });
+                
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = parseInt(e.target.closest('button').dataset.id);
+                        removeFromCart(productId);
+                    });
+                });
+            }
+            
+            // Update cart summary
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const shipping = 1500;
+            const tax = subtotal * 0.05; // 5% tax
+            const total = subtotal + shipping + tax;
+            
+            document.getElementById('cartSubtotal').textContent = `₦${subtotal.toLocaleString()}`;
+            document.getElementById('cartShipping').textContent = `₦${shipping.toLocaleString()}`;
+            document.getElementById('cartTax').textContent = `₦${tax.toLocaleString()}`;
+            document.getElementById('cartTotal').textContent = `₦${total.toLocaleString()}`;
+        }
+
+        // Go back to shopping from empty cart
+        function goBackToShopping() {
+            cartPage.style.display = 'none';
+            document.querySelector('.categories').style.display = 'block';
+            document.querySelector('.products').style.display = 'block';
+            if (currentUser && currentUser.type === 'seller') {
+                sellerDashboard.style.display = 'block';
+            }
+        }
+
+        // Update cart item quantity
+        function updateCartItemQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                
+                if (item.quantity < 1) {
+                    removeFromCart(productId);
+                } else {
+                    updateCartUI();
+                    saveCartToStorage();
+                }
+            }
+        }
+
+        // Set cart item quantity
+        function setCartItemQuantity(productId, quantity) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                if (quantity < 1) {
+                    removeFromCart(productId);
+                } else {
+                    item.quantity = quantity;
+                    updateCartUI();
+                    saveCartToStorage();
+                }
+            }
+        }
+
+        // Remove item from cart
+        function removeFromCart(productId) {
+            const item = cart.find(item => item.id === productId);
+            if (item && confirm(`Are you sure you want to remove ${item.name} from your cart?`)) {
+                cart = cart.filter(item => item.id !== productId);
+                updateCartUI();
+                saveCartToStorage();
+                showToast('Item removed from cart.', 'info');
+            }
+        }
+
+        // Handle checkout
+        function handleCheckout() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty. Add some items before checking out.', 'warning');
+                return;
+            }
+            
+            // In a real application, this would redirect to a checkout page
+            // For this demo, we'll simulate a checkout process
+            showToast('Proceeding to checkout...', 'info');
+            
+            // Simulate payment processing
+            setTimeout(() => {
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) + 1500;
+                showToast(`Order placed successfully! Total: ₦${total.toLocaleString()}`, 'success');
+                
+                // Clear cart after successful checkout
+                cart = [];
+                updateCartUI();
+                saveCartToStorage();
+                
+                // Return to shopping
+                setTimeout(() => {
+                    goBackToShopping();
+                }, 2000);
+            }, 2000);
+        }
+
+        // Save cart to localStorage
+        function saveCartToStorage() {
+            if (currentUser) {
+                localStorage.setItem(`cart_${currentUser.email}`, JSON.stringify(cart));
+            }
+        }
+
+        // Load cart from localStorage
+        function loadCartFromStorage() {
+            if (currentUser) {
+                const savedCart = localStorage.getItem(`cart_${currentUser.email}`);
+                if (savedCart) {
+                    cart = JSON.parse(savedCart);
+                    updateCartUI();
+                }
+            }
+        }
+
+        // Handle adding a new product (for sellers)
+        function handleAddProduct(e) {
+            e.preventDefault();
+            
+            if (!currentUser || currentUser.type !== 'seller') {
+                showToast('You need to be logged in as a seller to add products.', 'error');
+                return;
+            }
+            
+            const name = document.getElementById('productName').value;
+            const category = document.getElementById('productCategory').value;
+            const price = parseInt(document.getElementById('productPrice').value);
+            const description = document.getElementById('productDescription').value;
+            const image = document.getElementById('productImage').value || 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80';
+            
+            if (name && category && price) {
+                const newProduct = {
+                    id: Date.now(), // Simple ID generation
+                    name,
+                    price,
+                    category,
+                    seller: currentUser.name,
+                    image,
+                    description
+                };
+                
+                userProducts.push(newProduct);
+                productForm.reset();
+                
+                showToast('Product added successfully!', 'success');
+                
+                // Refresh the products display
+                displayUserProducts();
+            } else {
+                showToast('Please fill in all required fields.', 'error');
+            }
+        }
+
+        // Display user's products (for sellers)
+        function displayUserProducts() {
+            myProductsGrid.innerHTML = '';
+            
+            if (userProducts.length === 0) {
+                myProductsGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 40px;">You haven\'t added any products yet.</p>';
+                return;
+            }
+            
+            userProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">₦${product.price.toLocaleString()}</div>
+                        <div class="product-seller"><i class="fas fa-store"></i> ${product.seller}</div>
+                        <div class="product-actions">
+                            <button class="edit-product" data-id="${product.id}">Edit</button>
+                            <button class="delete-product" data-id="${product.id}">Delete</button>
+                        </div>
+                    </div>
+                `;
+                
+                myProductsGrid.appendChild(productCard);
+            });
+            
+            // Add event listeners to edit and delete buttons
+            document.querySelectorAll('.edit-product').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productId = parseInt(e.target.dataset.id);
+                    editProduct(productId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-product').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productId = parseInt(e.target.dataset.id);
+                    deleteProduct(productId);
+                });
+            });
+        }
+
+        // Edit product
+        function editProduct(productId) {
+            const product = userProducts.find(p => p.id === productId);
+            if (product) {
+                // Pre-fill the form with product data
+                document.getElementById('productName').value = product.name;
+                document.getElementById('productCategory').value = product.category;
+                document.getElementById('productPrice').value = product.price;
+                document.getElementById('productDescription').value = product.description;
+                document.getElementById('productImage').value = product.image;
+                
+                // Switch to add product tab
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelector('.tab[data-tab="add-product"]').classList.add('active');
+                
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById('add-product').classList.add('active');
+                
+                // Update form button text
+                const submitBtn = productForm.querySelector('button[type="submit"]');
+                submitBtn.textContent = 'Update Product';
+                submitBtn.dataset.editingId = productId;
+                
+                showToast(`Editing ${product.name}`, 'info');
+            }
+        }
+
+        // Delete product
+        function deleteProduct(productId) {
+            const product = userProducts.find(p => p.id === productId);
+            if (product && confirm(`Are you sure you want to delete "${product.name}"?`)) {
+                userProducts = userProducts.filter(p => p.id !== productId);
+                displayUserProducts();
+                showToast('Product deleted successfully.', 'success');
+            }
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'info') {
+            toastMessage.textContent = message;
+            toast.className = 'toast';
+            toast.classList.add(type);
+            
+            // Set appropriate icon
+            const icon = toast.querySelector('i');
+            icon.className = 
+                type === 'success' ? 'fas fa-check-circle' :
+                type === 'error' ? 'fas fa-exclamation-circle' :
+                type === 'warning' ? 'fas fa-exclamation-triangle' :
+                'fas fa-info-circle';
+            
+            toast.classList.add('show');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
         }
 
         // Initialize the application when the DOM is loaded
