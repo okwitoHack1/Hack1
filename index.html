@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Market Onitsha - Your Online Marketplace</title>
+    <title>Main Market Onitsha - Advanced Marketplace</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://js.paystack.co/v1/inline.js"></script>
     <style>
+        :root {
+            --primary: #8a2be2;
+            --primary-dark: #6a1cb0;
+            --secondary: #00d4ff;
+            --accent: #ff6b6b;
+            --dark-bg: #0f0f23;
+            --dark-card: #1a1a2e;
+            --dark-text: #e2e2e2;
+            --dark-border: #2d2d44;
+            --success: #00cc88;
+            --warning: #ffaa00;
+            --danger: #ff4757;
+            --gray: #8a8a8a;
+            --border-radius: 12px;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,41 +33,28 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        :root {
-            --primary: #e67e22;
-            --secondary: #d35400;
-            --accent: #f39c12;
-            --light: #fef9e7;
-            --dark: #2c3e50;
-            --success: #27ae60;
-            --warning: #f1c40f;
-            --danger: #e74c3c;
-            --gray: #7f8c8d;
-            --border-radius: 8px;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-
         body {
-            background-color: #f9f9f9;
-            color: var(--dark);
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 20px;
         }
 
         /* Header Styles */
         header {
-            background-color: white;
+            background-color: var(--dark-card);
             box-shadow: var(--shadow);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            border-bottom: 1px solid var(--dark-border);
         }
 
         .header-content {
@@ -62,12 +69,16 @@
             align-items: center;
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--primary);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .logo i {
             margin-right: 10px;
-            color: var(--secondary);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .search-bar {
@@ -79,34 +90,36 @@
 
         .search-bar input {
             width: 100%;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
+            padding: 12px 20px;
+            background: var(--dark-bg);
+            border: 1px solid var(--dark-border);
             border-radius: 30px;
             font-size: 1rem;
             outline: none;
             transition: var(--transition);
+            color: var(--dark-text);
         }
 
         .search-bar input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(230, 126, 34, 0.2);
+            box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
         }
 
         .search-bar button {
             position: absolute;
             right: 5px;
             top: 5px;
-            background: var(--primary);
+            background: var(--gradient);
             color: white;
             border: none;
             border-radius: 30px;
-            padding: 5px 15px;
+            padding: 7px 20px;
             cursor: pointer;
             transition: var(--transition);
         }
 
         .search-bar button:hover {
-            background: var(--secondary);
+            opacity: 0.9;
         }
 
         .nav-links {
@@ -116,15 +129,18 @@
 
         .nav-links a {
             margin-left: 20px;
-            color: var(--dark);
+            color: var(--dark-text);
             text-decoration: none;
             font-weight: 500;
             display: flex;
             align-items: center;
             transition: var(--transition);
+            padding: 8px 15px;
+            border-radius: var(--border-radius);
         }
 
         .nav-links a:hover {
+            background: rgba(138, 43, 226, 0.1);
             color: var(--primary);
         }
 
@@ -158,111 +174,214 @@
         }
 
         .auth-buttons button {
-            padding: 8px 15px;
+            padding: 10px 20px;
             border-radius: 30px;
             font-weight: 500;
             cursor: pointer;
             transition: var(--transition);
             border: none;
+            margin-left: 10px;
         }
 
         .login-btn {
             background: transparent;
             color: var(--primary);
             border: 1px solid var(--primary) !important;
-            margin-right: 10px;
         }
 
         .signup-btn {
-            background: var(--primary);
+            background: var(--gradient);
             color: white;
         }
 
         .login-btn:hover {
-            background: rgba(230, 126, 34, 0.1);
+            background: rgba(138, 43, 226, 0.1);
         }
 
         .signup-btn:hover {
-            background: var(--secondary);
+            opacity: 0.9;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--dark-card);
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--dark-bg);
+            border: 1px solid var(--dark-border);
+            border-radius: var(--border-radius);
+            color: var(--dark-text);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1563013541-3f14c06d68d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(15, 15, 35, 0.9), rgba(15, 15, 35, 0.9)), url('https://images.unsplash.com/photo-1563013541-3f14c06d68d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
-            color: white;
-            padding: 80px 0;
+            padding: 100px 0;
             text-align: center;
+            margin-bottom: 50px;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
             font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto 30px;
+            color: var(--gray);
         }
 
         .cta-button {
             display: inline-block;
-            background: var(--primary);
+            background: var(--gradient);
             color: white;
-            padding: 12px 30px;
+            padding: 15px 40px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
             transition: var(--transition);
+            box-shadow: var(--shadow);
         }
 
         .cta-button:hover {
-            background: var(--secondary);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
 
-        /* Categories Section */
+        /* Section Titles */
         .section-title {
             text-align: center;
             margin: 50px 0 30px;
-            font-size: 2rem;
-            color: var(--dark);
+            font-size: 2.2rem;
             position: relative;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .section-title:after {
             content: '';
             display: block;
-            width: 80px;
+            width: 100px;
             height: 4px;
-            background: var(--primary);
+            background: var(--gradient);
             margin: 10px auto;
             border-radius: 2px;
         }
 
+        /* Categories Section */
         .categories {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 25px;
             margin-bottom: 50px;
         }
 
         .category-card {
-            background: white;
+            background: var(--dark-card);
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
             cursor: pointer;
+            border: 1px solid var(--dark-border);
         }
 
         .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary);
         }
 
         .category-img {
@@ -272,12 +391,12 @@
         }
 
         .category-content {
-            padding: 15px;
+            padding: 20px;
         }
 
         .category-content h3 {
             margin-bottom: 10px;
-            color: var(--dark);
+            color: var(--dark-text);
         }
 
         .category-content p {
@@ -285,7 +404,7 @@
             font-size: 0.9rem;
         }
 
-        /* Featured Products */
+        /* Products Section */
         .products {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -294,16 +413,18 @@
         }
 
         .product-card {
-            background: white;
+            background: var(--dark-card);
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            border: 1px solid var(--dark-border);
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary);
         }
 
         .product-img {
@@ -317,16 +438,16 @@
             position: absolute;
             top: 10px;
             left: 10px;
-            background: var(--primary);
+            background: var(--gradient);
             color: white;
-            padding: 5px 10px;
+            padding: 5px 15px;
             border-radius: 30px;
             font-size: 0.8rem;
             font-weight: 600;
         }
 
         .product-content {
-            padding: 15px;
+            padding: 20px;
         }
 
         .product-content h3 {
@@ -335,9 +456,11 @@
         }
 
         .product-price {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: var(--primary);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
         }
 
@@ -353,7 +476,7 @@
             width: 25px;
             height: 25px;
             border-radius: 50%;
-            background: #ddd;
+            background: var(--gradient);
             margin-right: 10px;
         }
 
@@ -363,31 +486,34 @@
         }
 
         .add-to-cart {
-            background: var(--primary);
+            background: var(--gradient);
             color: white;
             border: none;
-            padding: 8px 15px;
+            padding: 10px 20px;
             border-radius: 30px;
             cursor: pointer;
             transition: var(--transition);
             font-weight: 500;
+            flex: 1;
+            margin-right: 10px;
         }
 
         .add-to-cart:hover {
-            background: var(--secondary);
+            opacity: 0.9;
         }
 
         .wishlist {
             background: transparent;
-            border: 1px solid #ddd;
-            width: 40px;
-            height: 40px;
+            border: 1px solid var(--dark-border);
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: var(--transition);
+            color: var(--gray);
         }
 
         .wishlist:hover {
@@ -395,53 +521,70 @@
             color: var(--primary);
         }
 
-        /* How It Works Section */
-        .how-it-works {
-            background: var(--light);
-            padding: 50px 0;
+        /* Dashboard Section */
+        .dashboard {
+            background: var(--dark-card);
+            border-radius: var(--border-radius);
+            padding: 30px;
             margin: 50px 0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
         }
 
-        .steps {
+        .dashboard-header {
             display: flex;
             justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .step {
-            flex: 1;
-            min-width: 250px;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .step-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex;
             align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-title {
+            font-size: 1.8rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .upload-btn {
+            background: var(--gradient);
             color: white;
-            font-size: 2rem;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
         }
 
-        .step h3 {
-            margin-bottom: 10px;
-            color: var(--dark);
+        .upload-btn:hover {
+            opacity: 0.9;
         }
 
-        .step p {
-            color: var(--gray);
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .dashboard-item {
+            background: var(--dark-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            border: 1px solid var(--dark-border);
+        }
+
+        .dashboard-item h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
         }
 
         /* Footer */
         footer {
-            background: var(--dark);
+            background: var(--dark-card);
             color: white;
             padding: 50px 0 20px;
+            margin-top: 50px;
+            border-top: 1px solid var(--dark-border);
         }
 
         .footer-content {
@@ -456,6 +599,9 @@
             font-size: 1.3rem;
             position: relative;
             padding-bottom: 10px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .footer-column h3:after {
@@ -465,7 +611,7 @@
             bottom: 0;
             width: 40px;
             height: 3px;
-            background: var(--primary);
+            background: var(--gradient);
         }
 
         .footer-links {
@@ -477,7 +623,7 @@
         }
 
         .footer-links a {
-            color: #bdc3c7;
+            color: var(--gray);
             text-decoration: none;
             transition: var(--transition);
         }
@@ -498,24 +644,24 @@
             justify-content: center;
             width: 40px;
             height: 40px;
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--dark-bg);
             border-radius: 50%;
             margin-right: 10px;
-            color: white;
+            color: var(--dark-text);
             transition: var(--transition);
         }
 
         .social-links a:hover {
-            background: var(--primary);
+            background: var(--gradient);
             transform: translateY(-3px);
         }
 
         .copyright {
             text-align: center;
             padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--dark-border);
             font-size: 0.9rem;
-            color: #bdc3c7;
+            color: var(--gray);
         }
 
         /* Responsive Design */
@@ -545,19 +691,20 @@
             }
 
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
 
             .hero p {
                 font-size: 1rem;
             }
 
-            .steps {
+            .dashboard-header {
                 flex-direction: column;
+                align-items: flex-start;
             }
 
-            .step {
-                margin-bottom: 30px;
+            .upload-btn {
+                margin-top: 15px;
             }
         }
     </style>
@@ -579,7 +726,7 @@
                     <a href="#"><i class="fas fa-home"></i> Home</a>
                     <a href="#"><i class="fas fa-th-large"></i> Categories</a>
                     <a href="#"><i class="fas fa-fire"></i> Popular</a>
-                    <a href="#"><i class="fas fa-user"></i> Sell</a>
+                    <a href="#" id="sell-link"><i class="fas fa-upload"></i> Sell</a>
                 </div>
                 <div class="user-actions">
                     <div class="cart-icon">
@@ -587,19 +734,132 @@
                         <span class="cart-count">3</span>
                     </div>
                     <div class="auth-buttons">
-                        <button class="login-btn">Login</button>
-                        <button class="signup-btn">Sign Up</button>
+                        <button class="login-btn" id="login-btn">Login</button>
+                        <button class="signup-btn" id="signup-btn">Sign Up</button>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-login">&times;</span>
+            <h2>Login to Your Account</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="#" id="show-signup">Sign Up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-signup">&times;</span>
+            <h2>Create an Account</h2>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-role">I want to:</label>
+                    <select id="signup-role" required>
+                        <option value="">Select Role</option>
+                        <option value="buyer">Buy Products</option>
+                        <option value="seller">Sell Products</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Create Account</button>
+                <div class="form-footer">
+                    <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Upload Modal -->
+    <div class="modal" id="upload-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-upload">&times;</span>
+            <h2>Upload a Product</h2>
+            <form id="upload-form">
+                <div class="form-group">
+                    <label for="product-name">Product Name</label>
+                    <input type="text" id="product-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-description">Description</label>
+                    <textarea id="product-description" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="product-price">Price (₦)</label>
+                    <input type="number" id="product-price" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-category">Category</label>
+                    <select id="product-category" required>
+                        <option value="">Select Category</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="home">Home & Kitchen</option>
+                        <option value="food">Food Items</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="product-image">Product Image URL</label>
+                    <input type="url" id="product-image" required>
+                </div>
+                <button type="submit" class="submit-btn">Upload Product</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="payment-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-payment">&times;</span>
+            <h2>Complete Your Purchase</h2>
+            <div id="payment-details">
+                <p>Product: <span id="payment-product">Smartphone X1 Pro</span></p>
+                <p>Price: <span id="payment-price">₦85,000</span></p>
+                <p>Seller: <span id="payment-seller">Tech Hub Onitsha</span></p>
+            </div>
+            <form id="payment-form">
+                <div class="form-group">
+                    <label for="payment-email">Email</label>
+                    <input type="email" id="payment-email" required>
+                </div>
+                <button type="button" class="submit-btn" id="paystack-btn">Pay with Paystack</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Welcome to Main Market Onitsha Online</h1>
-            <p>Buy and sell directly from the largest market in West Africa. Find everything from food items to electronics, all from verified sellers.</p>
+            <h1>Welcome to Main Market Onitsha</h1>
+            <p>Experience the largest market in West Africa from the comfort of your home. Buy and sell with secure payments powered by Paystack.</p>
             <a href="#" class="cta-button">Start Shopping Now</a>
         </div>
     </section>
@@ -655,7 +915,7 @@
                         <span>Tech Hub Onitsha</span>
                     </div>
                     <div class="product-actions">
-                        <button class="add-to-cart">Add to Cart</button>
+                        <button class="add-to-cart" data-product="Smartphone X1 Pro" data-price="85000" data-seller="Tech Hub Onitsha">Add to Cart</button>
                         <button class="wishlist"><i class="far fa-heart"></i></button>
                     </div>
                 </div>
@@ -672,7 +932,7 @@
                         <span>Home Essentials</span>
                     </div>
                     <div class="product-actions">
-                        <button class="add-to-cart">Add to Cart</button>
+                        <button class="add-to-cart" data-product="Kitchen Blender" data-price="25000" data-seller="Home Essentials">Add to Cart</button>
                         <button class="wishlist"><i class="far fa-heart"></i></button>
                     </div>
                 </div>
@@ -689,7 +949,7 @@
                         <span>Fashion Palace</span>
                     </div>
                     <div class="product-actions">
-                        <button class="add-to-cart">Add to Cart</button>
+                        <button class="add-to-cart" data-product="Traditional Attire" data-price="15000" data-seller="Fashion Palace">Add to Cart</button>
                         <button class="wishlist"><i class="far fa-heart"></i></button>
                     </div>
                 </div>
@@ -706,7 +966,7 @@
                         <span>Farm Fresh</span>
                     </div>
                     <div class="product-actions">
-                        <button class="add-to-cart">Add to Cart</button>
+                        <button class="add-to-cart" data-product="Fresh Tomatoes" data-price="2500" data-seller="Farm Fresh">Add to Cart</button>
                         <button class="wishlist"><i class="far fa-heart"></i></button>
                     </div>
                 </div>
@@ -714,38 +974,25 @@
         </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section class="how-it-works">
-        <div class="container">
-            <h2 class="section-title">How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3>Browse Products</h3>
-                    <p>Search through thousands of products from verified sellers in Main Market Onitsha.</p>
+    <!-- Seller Dashboard -->
+    <section class="container">
+        <div class="dashboard">
+            <div class="dashboard-header">
+                <h2 class="dashboard-title">Seller Dashboard</h2>
+                <button class="upload-btn" id="upload-product-btn">Upload Product</button>
+            </div>
+            <div class="dashboard-content">
+                <div class="dashboard-item">
+                    <h3>My Products</h3>
+                    <p>View and manage your product listings</p>
                 </div>
-                <div class="step">
-                    <div class="step-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <h3>Add to Cart</h3>
-                    <p>Select your desired items and add them to your shopping cart.</p>
+                <div class="dashboard-item">
+                    <h3>Sales Analytics</h3>
+                    <p>Track your sales and performance</p>
                 </div>
-                <div class="step">
-                    <div class="step-icon">
-                        <i class="fas fa-credit-card"></i>
-                    </div>
-                    <h3>Secure Payment</h3>
-                    <p>Pay securely using various payment methods including bank transfer and card.</p>
-                </div>
-                <div class="step">
-                    <div class="step-icon">
-                        <i class="fas fa-truck"></i>
-                    </div>
-                    <h3>Fast Delivery</h3>
-                    <p>Receive your items quickly with our reliable delivery partners.</p>
+                <div class="dashboard-item">
+                    <h3>Payment History</h3>
+                    <p>View your transaction history</p>
                 </div>
             </div>
         </div>
@@ -795,53 +1042,159 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Main Market Onitsha. All rights reserved.</p>
+                <p>&copy; 2023 Main Market Onitsha. All rights reserved. | Powered by Paystack</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Simple cart functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const addToCartButtons = document.querySelectorAll('.add-to-cart');
-            const cartCount = document.querySelector('.cart-count');
-            let count = 3; // Initial cart count
-            
-            addToCartButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    count++;
-                    cartCount.textContent = count;
-                    
-                    // Add animation to cart icon
-                    const cartIcon = document.querySelector('.cart-icon');
-                    cartIcon.style.transform = 'scale(1.2)';
-                    setTimeout(() => {
-                        cartIcon.style.transform = 'scale(1)';
-                    }, 300);
-                    
-                    // Show confirmation (in a real app, this would be more sophisticated)
-                    alert('Product added to cart!');
-                });
+        // Modal functionality
+        const loginModal = document.getElementById('login-modal');
+        const signupModal = document.getElementById('signup-modal');
+        const uploadModal = document.getElementById('upload-modal');
+        const paymentModal = document.getElementById('payment-modal');
+        
+        const loginBtn = document.getElementById('login-btn');
+        const signupBtn = document.getElementById('signup-btn');
+        const uploadBtn = document.getElementById('upload-product-btn');
+        const sellLink = document.getElementById('sell-link');
+        
+        const closeLogin = document.getElementById('close-login');
+        const closeSignup = document.getElementById('close-signup');
+        const closeUpload = document.getElementById('close-upload');
+        const closePayment = document.getElementById('close-payment');
+        
+        const showSignup = document.getElementById('show-signup');
+        const showLogin = document.getElementById('show-login');
+        
+        // Open modals
+        loginBtn.addEventListener('click', () => loginModal.style.display = 'flex');
+        signupBtn.addEventListener('click', () => signupModal.style.display = 'flex');
+        uploadBtn.addEventListener('click', () => uploadModal.style.display = 'flex');
+        sellLink.addEventListener('click', () => signupModal.style.display = 'flex');
+        
+        // Close modals
+        closeLogin.addEventListener('click', () => loginModal.style.display = 'none');
+        closeSignup.addEventListener('click', () => signupModal.style.display = 'none');
+        closeUpload.addEventListener('click', () => uploadModal.style.display = 'none');
+        closePayment.addEventListener('click', () => paymentModal.style.display = 'none');
+        
+        // Switch between login and signup
+        showSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            signupModal.style.display = 'flex';
+        });
+        
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupModal.style.display = 'none';
+            loginModal.style.display = 'flex';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) loginModal.style.display = 'none';
+            if (e.target === signupModal) signupModal.style.display = 'none';
+            if (e.target === uploadModal) uploadModal.style.display = 'none';
+            if (e.target === paymentModal) paymentModal.style.display = 'none';
+        });
+        
+        // Form submissions
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Login functionality would be implemented here');
+            loginModal.style.display = 'none';
+        });
+        
+        document.getElementById('signup-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Account created successfully!');
+            signupModal.style.display = 'none';
+        });
+        
+        document.getElementById('upload-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Product uploaded successfully!');
+            uploadModal.style.display = 'none';
+        });
+        
+        // Cart functionality
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const cartCount = document.querySelector('.cart-count');
+        let count = 3;
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                count++;
+                cartCount.textContent = count;
+                
+                // Add animation to cart icon
+                const cartIcon = document.querySelector('.cart-icon');
+                cartIcon.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    cartIcon.style.transform = 'scale(1)';
+                }, 300);
+                
+                // Show payment modal
+                const product = this.getAttribute('data-product');
+                const price = this.getAttribute('data-price');
+                const seller = this.getAttribute('data-seller');
+                
+                document.getElementById('payment-product').textContent = product;
+                document.getElementById('payment-price').textContent = `₦${parseInt(price).toLocaleString()}`;
+                document.getElementById('payment-seller').textContent = seller;
+                
+                paymentModal.style.display = 'flex';
             });
-            
-            // Wishlist functionality
-            const wishlistButtons = document.querySelectorAll('.wishlist');
-            wishlistButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const icon = this.querySelector('i');
-                    if (icon.classList.contains('far')) {
-                        icon.classList.remove('far');
-                        icon.classList.add('fas');
-                        this.style.color = 'var(--accent)';
-                        this.style.borderColor = 'var(--accent)';
-                    } else {
-                        icon.classList.remove('fas');
-                        icon.classList.add('far');
-                        this.style.color = '';
-                        this.style.borderColor = '#ddd';
-                    }
-                });
+        });
+        
+        // Wishlist functionality
+        const wishlistButtons = document.querySelectorAll('.wishlist');
+        wishlistButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    this.style.color = 'var(--accent)';
+                    this.style.borderColor = 'var(--accent)';
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    this.style.color = '';
+                    this.style.borderColor = 'var(--dark-border)';
+                }
             });
+        });
+        
+        // Paystack payment integration
+        document.getElementById('paystack-btn').addEventListener('click', function() {
+            const email = document.getElementById('payment-email').value;
+            const amount = document.querySelector('.add-to-cart').getAttribute('data-price'); // In kobo
+            
+            if (!email) {
+                alert('Please enter your email address');
+                return;
+            }
+            
+            // Paystack integration
+            const handler = PaystackPop.setup({
+                key: 'pk_test_your_paystack_public_key', // Replace with your Paystack public key
+                email: email,
+                amount: amount * 100, // Convert to kobo
+                currency: 'NGN',
+                ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+                callback: function(response) {
+                    alert('Payment complete! Reference: ' + response.reference);
+                    paymentModal.style.display = 'none';
+                    // Here you would typically process the order
+                },
+                onClose: function() {
+                    alert('Payment window closed.');
+                }
+            });
+            handler.openIframe();
         });
     </script>
 </body>
