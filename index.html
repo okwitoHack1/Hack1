@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Market Onitsha - Nigeria's Premier Online Marketplace</title>
+    <title>Main Market Onitsha - Online Marketplace</title>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -103,19 +110,6 @@
 
         .logout-btn {
             display: none;
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            color: white;
-            padding: 3px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.8rem;
-        }
-
-        .logout-btn:hover {
-            background: white;
-            color: var(--danger);
         }
 
         .main-header {
@@ -273,77 +267,7 @@
             background: var(--secondary-light);
         }
 
-        /* File Upload Styles */
-        .file-upload-container {
-            margin-bottom: 15px;
-        }
-
-        .file-upload-label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-
-        .file-upload-wrapper {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .file-upload-input {
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-
-        .file-upload-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 15px;
-            background: var(--light-gray);
-            border: 2px dashed var(--border);
-            border-radius: 4px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
-        }
-
-        .file-upload-button:hover {
-            border-color: var(--primary);
-            background: rgba(44, 90, 160, 0.05);
-        }
-
-        .file-upload-button i {
-            margin-right: 8px;
-            color: var(--primary);
-            font-size: 1.2rem;
-        }
-
-        .file-upload-preview {
-            margin-top: 10px;
-            text-align: center;
-            display: none;
-        }
-
-        .file-upload-preview img {
-            max-width: 200px;
-            max-height: 150px;
-            border-radius: 4px;
-            border: 1px solid var(--border);
-        }
-
-        .file-upload-name {
-            margin-top: 5px;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-
-        /* Rest of the CSS */
+        /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
@@ -388,6 +312,7 @@
             box-shadow: var(--shadow);
         }
 
+        /* Categories Section */
         .categories {
             margin: 30px 0;
         }
@@ -446,6 +371,7 @@
             font-weight: 600;
         }
 
+        /* Products Section */
         .products {
             margin: 30px 0;
         }
@@ -652,6 +578,77 @@
             box-shadow: 0 0 0 2px rgba(44, 90, 160, 0.2);
         }
 
+        /* File Upload Styles */
+        .file-upload-container {
+            margin-bottom: 15px;
+        }
+
+        .file-upload-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .file-upload-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 15px;
+            background: var(--light-gray);
+            border: 2px dashed var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .file-upload-button:hover {
+            border-color: var(--primary);
+            background: rgba(44, 90, 160, 0.05);
+        }
+
+        .file-upload-button i {
+            margin-right: 8px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .file-upload-preview {
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .file-upload-preview img {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .file-upload-name {
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* User Type Selection */
         .user-type {
             display: flex;
             gap: 10px;
@@ -700,6 +697,7 @@
             text-decoration: underline;
         }
 
+        /* Dashboard Styles */
         .dashboard {
             display: none;
             margin: 25px 0;
@@ -754,6 +752,7 @@
             box-shadow: var(--shadow);
         }
 
+        /* Cart Page Styles */
         .cart-page {
             display: none;
             margin: 25px 0;
@@ -908,6 +907,7 @@
             background: var(--primary-light);
         }
 
+        /* Ads Section */
         .ads {
             margin: 25px 0;
         }
@@ -927,6 +927,7 @@
             margin-bottom: 8px;
         }
 
+        /* Footer Styles */
         footer {
             background: var(--darker);
             color: white;
@@ -1012,6 +1013,7 @@
             color: #aaa;
         }
 
+        /* Toast Notification */
         .toast {
             position: fixed;
             bottom: 15px;
@@ -1051,6 +1053,11 @@
             color: var(--warning);
         }
 
+        .toast.info i {
+            color: var(--primary);
+        }
+
+        /* Loading Spinner */
         .spinner {
             display: inline-block;
             width: 16px;
@@ -1066,6 +1073,7 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Responsive Styles */
         @media (max-width: 992px) {
             .logo-section {
                 flex-direction: column;
@@ -1221,8 +1229,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Nigeria's Premier Online Marketplace</h1>
-            <p>Your one-stop online marketplace for everything sold in Onitsha Main Market. Buy and sell with confidence.</p>
+            <h1>Main Market Onitsha - Powered by Firebase</h1>
+            <p>Your products are now saved in the cloud and visible to all users!</p>
             <a href="#" class="btn">Start Shopping</a>
         </div>
     </section>
@@ -1230,8 +1238,8 @@
     <!-- Ads Section -->
     <section class="ads container">
         <div class="ad-banner">
-            <h3>Special Offer!</h3>
-            <p>Get 15% off on all clothing items this week. Use code: ONITSHA15</p>
+            <h3>Special Launch Offer!</h3>
+            <p>First 50 sellers get featured placement for one month</p>
         </div>
     </section>
 
@@ -1272,7 +1280,11 @@
         <section class="products">
             <h2 class="section-title">Featured Products</h2>
             <div class="product-grid" id="productGrid">
-                <!-- Products will be dynamically added here -->
+                <!-- Products will be loaded from Firebase -->
+                <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                    <div class="spinner" style="border-top-color: var(--primary); margin: 0 auto 15px;"></div>
+                    <p>Loading products from Firebase...</p>
+                </div>
             </div>
         </section>
 
@@ -1280,13 +1292,13 @@
         <section class="dashboard" id="sellerDashboard">
             <div class="dashboard-header">
                 <h2>Seller Dashboard</h2>
-                <p>Manage your products and sales</p>
+                <p>Manage your products and track sales</p>
             </div>
             
             <div class="dashboard-tabs">
                 <div class="tab active" data-tab="add-product">Add Product</div>
                 <div class="tab" data-tab="my-products">My Products</div>
-                <div class="tab" data-tab="sales">Sales</div>
+                <div class="tab" data-tab="sales">Sales Analytics</div>
             </div>
             
             <div class="tab-content active" id="add-product">
@@ -1294,11 +1306,11 @@
                     <h3>Add New Product</h3>
                     <form id="productForm">
                         <div class="form-group">
-                            <label for="productName">Product Name</label>
-                            <input type="text" id="productName" required>
+                            <label for="productName">Product Name *</label>
+                            <input type="text" id="productName" required placeholder="Enter product name">
                         </div>
                         <div class="form-group">
-                            <label for="productCategory">Category</label>
+                            <label for="productCategory">Category *</label>
                             <select id="productCategory" required>
                                 <option value="">Select Category</option>
                                 <option value="clothing">Clothing</option>
@@ -1311,12 +1323,12 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="productPrice">Price (₦)</label>
-                            <input type="number" id="productPrice" required min="1">
+                            <label for="productPrice">Price (₦) *</label>
+                            <input type="number" id="productPrice" required min="1" placeholder="Enter price">
                         </div>
                         <div class="form-group">
                             <label for="productDescription">Description</label>
-                            <textarea id="productDescription" rows="3"></textarea>
+                            <textarea id="productDescription" rows="3" placeholder="Describe your product..."></textarea>
                         </div>
                         
                         <!-- File Upload Section -->
@@ -1335,7 +1347,9 @@
                             </div>
                         </div>
                         
-                        <button type="submit" class="btn">Add Product</button>
+                        <button type="submit" class="btn" style="width: 100%;">
+                            <i class="fas fa-plus"></i> Add Product to Marketplace
+                        </button>
                     </form>
                 </div>
             </div>
@@ -1343,14 +1357,20 @@
             <div class="tab-content" id="my-products">
                 <h3>My Products</h3>
                 <div class="product-grid" id="myProductsGrid">
-                    <!-- Seller's products will be displayed here -->
+                    <p style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                        You haven't added any products yet. Start by adding your first product!
+                    </p>
                 </div>
             </div>
 
             <div class="tab-content" id="sales">
-                <h3>Sales History</h3>
-                <div class="sales-list">
-                    <p>Sales history will appear here once you make sales.</p>
+                <h3>Sales Analytics</h3>
+                <div class="sales-analytics">
+                    <p>Sales data will appear here as you make sales.</p>
+                    <div style="background: var(--light-gray); padding: 20px; border-radius: 6px; text-align: center;">
+                        <i class="fas fa-chart-line" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+                        <p>Start selling to see your analytics dashboard</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1360,7 +1380,11 @@
             <h2 class="section-title">Shopping Cart</h2>
             
             <div class="cart-items" id="cartItems">
-                <!-- Cart items will be displayed here -->
+                <div style="padding: 40px; text-align: center;">
+                    <i class="fas fa-shopping-cart" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i>
+                    <p>Your cart is empty.</p>
+                    <a href="#" class="btn" style="margin-top: 15px;" onclick="goBackToShopping()">Continue Shopping</a>
+                </div>
             </div>
             
             <div class="cart-summary">
@@ -1427,7 +1451,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Main Market Onitsha. All rights reserved.</p>
+                <p>&copy; 2023 Main Market Onitsha. All rights reserved. | Powered by Firebase</p>
             </div>
         </div>
     </footer>
@@ -1443,13 +1467,15 @@
                 <form id="loginForm">
                     <div class="form-group">
                         <label for="loginEmail">Email Address</label>
-                        <input type="email" id="loginEmail" required>
+                        <input type="email" id="loginEmail" required placeholder="Enter your email">
                     </div>
                     <div class="form-group">
                         <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" required>
+                        <input type="password" id="loginPassword" required placeholder="Enter your password">
                     </div>
-                    <button type="submit" class="btn" style="width: 100%;">Login</button>
+                    <button type="submit" class="btn" style="width: 100%;">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
                     <div class="form-footer">
                         <p>Don't have an account? <a href="#" id="switchToRegister">Register here</a></p>
                     </div>
@@ -1469,21 +1495,21 @@
                 <form id="registerForm">
                     <div class="form-group">
                         <label for="registerName">Full Name</label>
-                        <input type="text" id="registerName" required>
+                        <input type="text" id="registerName" required placeholder="Enter your full name">
                     </div>
                     <div class="form-group">
                         <label for="registerEmail">Email Address</label>
-                        <input type="email" id="registerEmail" required>
+                        <input type="email" id="registerEmail" required placeholder="Enter your email">
                     </div>
                     <div class="form-group">
                         <label for="registerPhone">Phone Number</label>
-                        <input type="tel" id="registerPhone" required>
+                        <input type="tel" id="registerPhone" required placeholder="Enter your phone number">
                     </div>
                     
                     <div class="form-group">
                         <label>Account Type</label>
                         <div class="user-type">
-                            <div class="user-type-option" data-type="buyer">
+                            <div class="user-type-option selected" data-type="buyer">
                                 <i class="fas fa-shopping-cart"></i>
                                 <div>Buyer</div>
                             </div>
@@ -1497,13 +1523,15 @@
                     
                     <div class="form-group">
                         <label for="registerPassword">Password</label>
-                        <input type="password" id="registerPassword" required>
+                        <input type="password" id="registerPassword" required placeholder="Create a password">
                     </div>
                     <div class="form-group">
                         <label for="registerConfirmPassword">Confirm Password</label>
-                        <input type="password" id="registerConfirmPassword" required>
+                        <input type="password" id="registerConfirmPassword" required placeholder="Confirm your password">
                     </div>
-                    <button type="submit" class="btn" style="width: 100%;">Register</button>
+                    <button type="submit" class="btn" style="width: 100%;">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
                     <div class="form-footer">
                         <p>Already have an account? <a href="#" id="switchToLogin">Login here</a></p>
                     </div>
@@ -1519,51 +1547,62 @@
     </div>
 
     <script>
-        // Sample product data
+        // === YOUR FIREBASE CONFIGURATION ===
+        const firebaseConfig = {
+            apiKey: "AIzaSyAd_7YPxHYIM-xn4zySaxIzD1W8JZBP1-E",
+            authDomain: "mainmarketonitsha-f1947.firebaseapp.com",
+            projectId: "mainmarketonitsha-f1947",
+            storageBucket: "mainmarketonitsha-f1947.firebasestorage.app",
+            messagingSenderId: "80816751981",
+            appId: "1:80816751981:web:a9b355b70e153e650d4664",
+            measurementId: "G-ENLKHXDWNN"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+        const storage = firebase.storage();
+
+        // Sample products for demo (fallback)
         const sampleProducts = [
             {
-                id: 1,
+                id: "sample1",
                 name: "Men's Ankara Shirt",
                 price: 12500,
                 category: "clothing",
                 seller: "Ngozi Fashion",
                 image: "https://images.unsplash.com/photo-1594938371073-8b96043d18d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                description: "High-quality Ankara fabric shirt for men, perfect for special occasions."
+                description: "High-quality Ankara fabric shirt for men, perfect for special occasions.",
+                createdAt: new Date()
             },
             {
-                id: 2,
+                id: "sample2", 
                 name: "Women's Handbag",
                 price: 8900,
                 category: "bags",
                 seller: "Ada Bags Collection",
                 image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                description: "Elegant leather handbag for women, available in multiple colors."
+                description: "Elegant leather handbag for women, available in multiple colors.",
+                createdAt: new Date()
             },
             {
-                id: 3,
+                id: "sample3",
                 name: "Designer Sneakers",
                 price: 15000,
                 category: "shoes",
                 seller: "Footwear Express",
                 image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                description: "Comfortable and stylish sneakers for everyday wear."
-            },
-            {
-                id: 4,
-                name: "Smartphone",
-                price: 65000,
-                category: "electronics",
-                seller: "Tech Hub Onitsha",
-                image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                description: "Latest smartphone model with advanced features and long battery life."
+                description: "Comfortable and stylish sneakers for everyday wear.",
+                createdAt: new Date()
             }
         ];
 
         // Application state
         let currentUser = null;
         let cart = [];
+        let allProducts = [];
         let userProducts = [];
-        let allProducts = [...sampleProducts];
 
         // DOM Elements
         const loginBtn = document.getElementById('loginBtn');
@@ -1594,25 +1633,446 @@
         const previewImage = document.getElementById('previewImage');
         const fileName = document.getElementById('fileName');
 
-        // Initialize the application
-        function init() {
-            displayProducts(allProducts);
-            setupEventListeners();
-            checkLoginStatus();
-            loadCartFromStorage();
+        // === FIREBASE FUNCTIONS ===
+
+        // Load products from Firestore
+        async function loadProducts() {
+            try {
+                showToast('🔗 Connecting to Firebase...', 'info');
+                
+                const querySnapshot = await db.collection("products")
+                    .orderBy("createdAt", "desc")
+                    .get();
+                
+                allProducts = [];
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    allProducts.push({ 
+                        id: doc.id, 
+                        ...data,
+                        createdAt: data.createdAt ? data.createdAt.toDate() : new Date()
+                    });
+                });
+
+                if (allProducts.length === 0) {
+                    allProducts = [...sampleProducts];
+                    showToast('📦 Using demo products. Add your first product!', 'info');
+                } else {
+                    showToast(`✅ Loaded ${allProducts.length} products from cloud!`, 'success');
+                }
+
+                displayProducts(allProducts);
+            } catch (error) {
+                console.error("Error loading products: ", error);
+                allProducts = [...sampleProducts];
+                displayProducts(allProducts);
+                showToast('⚠️ Using offline mode. Check console for errors.', 'warning');
+            }
         }
 
-        // Set up event listeners
+        // Save product to Firestore
+        async function addProductToFirebase(product) {
+            try {
+                const productWithTimestamp = {
+                    ...product,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    sellerId: currentUser.uid
+                };
+
+                const docRef = await db.collection("products").add(productWithTimestamp);
+                return docRef.id;
+            } catch (error) {
+                console.error("Error adding product: ", error);
+                throw error;
+            }
+        }
+
+        // Upload image to Firebase Storage
+        async function uploadImage(file) {
+            try {
+                const filename = `products/${currentUser.uid}/${Date.now()}-${file.name}`;
+                const storageRef = storage.ref();
+                const fileRef = storageRef.child(filename);
+                
+                const snapshot = await fileRef.put(file);
+                const downloadURL = await snapshot.ref.getDownloadURL();
+                
+                return downloadURL;
+            } catch (error) {
+                console.error("Error uploading image: ", error);
+                throw error;
+            }
+        }
+
+        // User registration
+        async function handleRegister(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const phone = document.getElementById('registerPhone').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            const userType = document.getElementById('userType').value;
+
+            if (password !== confirmPassword) {
+                showToast('❌ Passwords do not match.', 'error');
+                return;
+            }
+
+            if (!name || !email || !password) {
+                showToast('❌ Please fill in all required fields.', 'error');
+                return;
+            }
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="spinner"></span> Creating account...';
+            submitBtn.disabled = true;
+
+            try {
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+
+                await db.collection("users").doc(user.uid).set({
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    type: userType,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                await user.updateProfile({
+                    displayName: name
+                });
+
+                showToast('✅ Account created successfully! Welcome!', 'success');
+                registerModal.style.display = 'none';
+                registerForm.reset();
+
+            } catch (error) {
+                console.error("Registration error: ", error);
+                let errorMessage = 'Registration failed. ';
+                
+                if (error.code === 'auth/email-already-in-use') {
+                    errorMessage += 'Email already exists.';
+                } else if (error.code === 'auth/weak-password') {
+                    errorMessage += 'Password is too weak.';
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                showToast(errorMessage, 'error');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // User login
+        async function handleLogin(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="spinner"></span> Logging in...';
+            submitBtn.disabled = true;
+
+            try {
+                await auth.signInWithEmailAndPassword(email, password);
+                showToast('✅ Login successful! Welcome back!', 'success');
+                loginModal.style.display = 'none';
+                loginForm.reset();
+            } catch (error) {
+                console.error("Login error: ", error);
+                let errorMessage = 'Login failed. ';
+                
+                if (error.code === 'auth/user-not-found') {
+                    errorMessage += 'No account found with this email.';
+                } else if (error.code === 'auth/wrong-password') {
+                    errorMessage += 'Incorrect password.';
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                showToast(errorMessage, 'error');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // User logout
+        async function handleLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                try {
+                    await auth.signOut();
+                    showToast('👋 Logged out successfully.', 'success');
+                } catch (error) {
+                    console.error("Logout error: ", error);
+                    showToast('Logout failed.', 'error');
+                }
+            }
+        }
+
+        // Add product with Firebase
+        async function handleAddProduct(e) {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                showToast('🔐 Please login to add products.', 'error');
+                loginModal.style.display = 'flex';
+                return;
+            }
+
+            const name = document.getElementById('productName').value;
+            const category = document.getElementById('productCategory').value;
+            const price = parseInt(document.getElementById('productPrice').value);
+            const description = document.getElementById('productDescription').value;
+            const imageFile = document.getElementById('productImageFile').files[0];
+
+            if (!name || !category || !price) {
+                showToast('❌ Please fill in all required fields.', 'error');
+                return;
+            }
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="spinner"></span> Adding product...';
+            submitBtn.disabled = true;
+
+            try {
+                let imageUrl = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80';
+                
+                if (imageFile) {
+                    showToast('📤 Uploading image...', 'info');
+                    imageUrl = await uploadImage(imageFile);
+                }
+
+                const product = {
+                    name: name,
+                    price: price,
+                    category: category,
+                    seller: currentUser.displayName || 'Seller',
+                    image: imageUrl,
+                    description: description || 'No description provided.'
+                };
+
+                await addProductToFirebase(product);
+                
+                productForm.reset();
+                imagePreview.style.display = 'none';
+                
+                showToast('✅ Product added! Visible to all users. 🌟', 'success');
+                loadProducts();
+
+            } catch (error) {
+                console.error("Error adding product: ", error);
+                showToast('❌ Failed to add product. Please try again.', 'error');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // === AUTH STATE LISTENER ===
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                currentUser = user;
+                console.log('User logged in:', user.email);
+                checkLoginStatus();
+                loadProducts();
+            } else {
+                currentUser = null;
+                console.log('User logged out');
+                checkLoginStatus();
+                loadProducts();
+            }
+        });
+
+        // === UI FUNCTIONS ===
+
+        // Display products
+        function displayProducts(products) {
+            productGrid.innerHTML = '';
+            
+            if (products.length === 0) {
+                productGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 40px;">No products found. Be the first to add a product!</p>';
+                return;
+            }
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">₦${product.price.toLocaleString()}</div>
+                        <div class="product-seller"><i class="fas fa-store"></i> ${product.seller}</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
+                            <button class="view-details" data-id="${product.id}">Details</button>
+                        </div>
+                    </div>
+                `;
+                productGrid.appendChild(productCard);
+            });
+            
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productId = e.target.dataset.id;
+                    const product = allProducts.find(p => p.id === productId);
+                    if (product) addToCart(product);
+                });
+            });
+
+            document.querySelectorAll('.view-details').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productId = e.target.dataset.id;
+                    const product = allProducts.find(p => p.id === productId);
+                    if (product) viewProductDetails(product);
+                });
+            });
+        }
+
+        // Check login status
+        function checkLoginStatus() {
+            if (currentUser) {
+                loginBtn.style.display = 'none';
+                registerBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-block';
+                userAccount.querySelector('span').textContent = currentUser.displayName || 'Account';
+                
+                const userType = localStorage.getItem('userType');
+                if (userType === 'seller') {
+                    sellerDashboard.style.display = 'block';
+                }
+            } else {
+                loginBtn.style.display = 'inline-block';
+                registerBtn.style.display = 'inline-block';
+                logoutBtn.style.display = 'none';
+                sellerDashboard.style.display = 'none';
+            }
+        }
+
+        // Add to cart
+        function addToCart(product) {
+            if (!currentUser) {
+                showToast('🔐 Please login to add items to cart.', 'warning');
+                loginModal.style.display = 'flex';
+                return;
+            }
+            
+            const existingItem = cart.find(item => item.id === product.id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+            
+            updateCartUI();
+            showToast(`🛒 ${product.name} added to cart!`, 'success');
+        }
+
+        // View product details
+        function viewProductDetails(product) {
+            alert(`🛍️ Product Details:\n\nName: ${product.name}\nPrice: ₦${product.price.toLocaleString()}\nSeller: ${product.seller}\nDescription: ${product.description}`);
+        }
+
+        // Update cart UI
+        function updateCartUI() {
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        // Show cart page
+        function showCartPage() {
+            if (!currentUser) {
+                showToast('🔐 Please login to view your cart.', 'warning');
+                loginModal.style.display = 'flex';
+                return;
+            }
+            
+            document.querySelector('.categories').style.display = 'none';
+            document.querySelector('.products').style.display = 'none';
+            sellerDashboard.style.display = 'none';
+            cartPage.style.display = 'block';
+            
+            // Cart display logic would go here
+        }
+
+        // Go back to shopping
+        function goBackToShopping() {
+            cartPage.style.display = 'none';
+            document.querySelector('.categories').style.display = 'block';
+            document.querySelector('.products').style.display = 'block';
+            if (currentUser && currentUser.type === 'seller') {
+                sellerDashboard.style.display = 'block';
+            }
+        }
+
+        // Toast notification
+        function showToast(message, type = 'info') {
+            toastMessage.textContent = message;
+            toast.className = 'toast';
+            toast.classList.add(type);
+            
+            const icon = toast.querySelector('i');
+            icon.className = 
+                type === 'success' ? 'fas fa-check-circle' :
+                type === 'error' ? 'fas fa-exclamation-circle' :
+                type === 'warning' ? 'fas fa-exclamation-triangle' :
+                'fas fa-info-circle';
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // File upload preview
+        productImageFile.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImage.src = e.target.result;
+                        fileName.textContent = file.name;
+                        imagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    showToast('❌ Please select a valid image file.', 'error');
+                    this.value = '';
+                }
+            }
+        });
+
+        // User type selection
+        userTypeOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                userTypeOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                userTypeInput.value = option.dataset.type;
+                localStorage.setItem('userType', option.dataset.type);
+            });
+        });
+
+        // Event listeners
         function setupEventListeners() {
             // Modal functionality
-            loginBtn.addEventListener('click', () => {
-                loginModal.style.display = 'flex';
-            });
-
-            registerBtn.addEventListener('click', () => {
-                registerModal.style.display = 'flex';
-            });
-
+            loginBtn.addEventListener('click', () => loginModal.style.display = 'flex');
+            registerBtn.addEventListener('click', () => registerModal.style.display = 'flex');
             logoutBtn.addEventListener('click', handleLogout);
 
             closeModalButtons.forEach(button => {
@@ -1635,48 +2095,14 @@
             });
 
             window.addEventListener('click', (e) => {
-                if (e.target === loginModal) {
-                    loginModal.style.display = 'none';
-                }
-                if (e.target === registerModal) {
-                    registerModal.style.display = 'none';
-                }
-            });
-
-            // User type selection
-            userTypeOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    userTypeOptions.forEach(opt => opt.classList.remove('selected'));
-                    option.classList.add('selected');
-                    userTypeInput.value = option.dataset.type;
-                });
+                if (e.target === loginModal) loginModal.style.display = 'none';
+                if (e.target === registerModal) registerModal.style.display = 'none';
             });
 
             // Form submissions
             document.getElementById('loginForm').addEventListener('submit', handleLogin);
             document.getElementById('registerForm').addEventListener('submit', handleRegister);
             productForm.addEventListener('submit', handleAddProduct);
-
-            // File upload functionality
-            productImageFile.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    if (file.type.startsWith('image/')) {
-                        const reader = new FileReader();
-                        
-                        reader.onload = function(e) {
-                            previewImage.src = e.target.result;
-                            fileName.textContent = file.name;
-                            imagePreview.style.display = 'block';
-                        }
-                        
-                        reader.readAsDataURL(file);
-                    } else {
-                        showToast('Please select a valid image file.', 'error');
-                        this.value = '';
-                    }
-                }
-            });
 
             // Navigation
             userAccount.addEventListener('click', handleUserAccount);
@@ -1688,7 +2114,6 @@
                     e.preventDefault();
                     const category = e.target.dataset.category;
                     filterProducts(category);
-                    
                     navLinks.forEach(l => l.classList.remove('active'));
                     e.target.classList.add('active');
                 });
@@ -1698,12 +2123,9 @@
                 card.addEventListener('click', () => {
                     const category = card.dataset.category;
                     filterProducts(category);
-                    
                     navLinks.forEach(l => l.classList.remove('active'));
                     const correspondingNavLink = document.querySelector(`.nav-link[data-category="${category}"]`);
-                    if (correspondingNavLink) {
-                        correspondingNavLink.classList.add('active');
-                    }
+                    if (correspondingNavLink) correspondingNavLink.classList.add('active');
                 });
             });
 
@@ -1711,80 +2133,18 @@
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.addEventListener('click', () => {
                     const tabId = tab.dataset.tab;
-                    
                     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
-                    
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
                     document.getElementById(tabId).classList.add('active');
                 });
-            });
-
-            // Search functionality
-            document.querySelector('.search-bar input').addEventListener('keyup', (e) => {
-                if (e.key === 'Enter') {
-                    performSearch(e.target.value);
-                }
-            });
-
-            document.querySelector('.search-bar button').addEventListener('click', () => {
-                const searchTerm = document.querySelector('.search-bar input').value;
-                performSearch(searchTerm);
             });
 
             // Checkout button
             document.querySelector('.checkout-btn').addEventListener('click', handleCheckout);
         }
 
-        // Display products in the grid
-        function displayProducts(products) {
-            productGrid.innerHTML = '';
-            
-            if (products.length === 0) {
-                productGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 40px;">No products found matching your criteria.</p>';
-                return;
-            }
-            
-            products.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.innerHTML = `
-                    <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}" loading="lazy">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">${product.name}</h3>
-                        <div class="product-price">₦${product.price.toLocaleString()}</div>
-                        <div class="product-seller"><i class="fas fa-store"></i> ${product.seller}</div>
-                        <div class="product-actions">
-                            <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
-                            <button class="view-details" data-id="${product.id}">Details</button>
-                        </div>
-                    </div>
-                `;
-                
-                productGrid.appendChild(productCard);
-            });
-            
-            // Add event listeners to buttons
-            document.querySelectorAll('.add-to-cart').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const productId = parseInt(e.target.dataset.id);
-                    addToCart(productId);
-                });
-            });
-
-            document.querySelectorAll('.view-details').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const productId = parseInt(e.target.dataset.id);
-                    viewProductDetails(productId);
-                });
-            });
-        }
-
-        // Filter products by category
+        // Filter products
         function filterProducts(category) {
             if (category === 'all') {
                 displayProducts(allProducts);
@@ -1794,152 +2154,21 @@
             }
         }
 
-        // Perform search
-        function performSearch(searchTerm) {
-            if (!searchTerm.trim()) {
-                displayProducts(allProducts);
+        // Handle checkout
+        function handleCheckout() {
+            if (cart.length === 0) {
+                showToast('🛒 Your cart is empty.', 'warning');
                 return;
             }
             
-            const filteredProducts = allProducts.filter(product => 
-                product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                product.seller.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                product.category.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-            
-            displayProducts(filteredProducts);
-            showToast(`Found ${filteredProducts.length} products matching "${searchTerm}"`, 'success');
-        }
-
-        // View product details
-        function viewProductDetails(productId) {
-            const product = allProducts.find(p => p.id === productId);
-            if (product) {
-                alert(`Product: ${product.name}\nPrice: ₦${product.price.toLocaleString()}\nSeller: ${product.seller}\nDescription: ${product.description}`);
-            }
-        }
-
-        // Handle user login
-        function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            // Show loading state
-            const submitBtn = e.target.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span class="spinner"></span> Logging in...';
-            submitBtn.disabled = true;
-            
-            // Simulate API call
+            showToast('💳 Processing checkout...', 'info');
             setTimeout(() => {
-                if (email && password) {
-                    currentUser = {
-                        email: email,
-                        name: email.split('@')[0],
-                        type: localStorage.getItem('userType') || 'buyer'
-                    };
-                    
-                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                    checkLoginStatus();
-                    loginModal.style.display = 'none';
-                    
-                    showToast('Login successful!', 'success');
-                } else {
-                    showToast('Please enter both email and password.', 'error');
-                }
-                
-                // Reset button
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 1000);
-        }
-
-        // Handle user registration
-        function handleRegister(e) {
-            e.preventDefault();
-            const name = document.getElementById('registerName').value;
-            const email = document.getElementById('registerEmail').value;
-            const phone = document.getElementById('registerPhone').value;
-            const password = document.getElementById('registerPassword').value;
-            const confirmPassword = document.getElementById('registerConfirmPassword').value;
-            const userType = userTypeInput.value;
-            
-            // Show loading state
-            const submitBtn = e.target.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span class="spinner"></span> Registering...';
-            submitBtn.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                if (password !== confirmPassword) {
-                    showToast('Passwords do not match.', 'error');
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                    return;
-                }
-                
-                if (name && email && phone && password) {
-                    currentUser = {
-                        name: name,
-                        email: email,
-                        phone: phone,
-                        type: userType
-                    };
-                    
-                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                    localStorage.setItem('userType', userType);
-                    checkLoginStatus();
-                    registerModal.style.display = 'none';
-                    
-                    showToast(`Registration successful! You can now ${userType === 'seller' ? 'add products to sell.' : 'shop on our platform.'}`, 'success');
-                } else {
-                    showToast('Please fill in all fields.', 'error');
-                }
-                
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 1000);
-        }
-
-        // Handle user logout
-        function handleLogout() {
-            if (confirm('Are you sure you want to logout?')) {
-                currentUser = null;
-                localStorage.removeItem('currentUser');
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) + 1500;
+                showToast(`✅ Order placed! Total: ₦${total.toLocaleString()}`, 'success');
                 cart = [];
                 updateCartUI();
-                checkLoginStatus();
-                showToast('You have been logged out successfully.', 'success');
-                goBackToShopping();
-            }
-        }
-
-        // Check login status
-        function checkLoginStatus() {
-            const savedUser = localStorage.getItem('currentUser');
-            
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                loginBtn.style.display = 'none';
-                registerBtn.style.display = 'none';
-                logoutBtn.style.display = 'inline-block';
-                userAccount.querySelector('span').textContent = currentUser.name;
-                
-                if (currentUser.type === 'seller') {
-                    sellerDashboard.style.display = 'block';
-                    displayUserProducts();
-                } else {
-                    sellerDashboard.style.display = 'none';
-                }
-            } else {
-                loginBtn.style.display = 'inline-block';
-                registerBtn.style.display = 'inline-block';
-                logoutBtn.style.display = 'none';
-                sellerDashboard.style.display = 'none';
-            }
+                setTimeout(() => goBackToShopping(), 2000);
+            }, 2000);
         }
 
         // Handle user account click
@@ -1948,362 +2177,25 @@
                 if (currentUser.type === 'seller') {
                     sellerDashboard.scrollIntoView({ behavior: 'smooth' });
                 } else {
-                    showToast(`Welcome ${currentUser.name}!`, 'info');
+                    showToast(`👋 Welcome ${currentUser.displayName || 'User'}!`, 'info');
                 }
             } else {
                 loginModal.style.display = 'flex';
             }
-        }
-
-        // Add product to cart
-        function addToCart(productId) {
-            if (!currentUser) {
-                showToast('Please login to add items to your cart.', 'warning');
-                loginModal.style.display = 'flex';
-                return;
-            }
-            
-            const product = allProducts.find(p => p.id === productId);
-            const existingItem = cart.find(item => item.id === productId);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    ...product,
-                    quantity: 1
-                });
-            }
-            
-            updateCartUI();
-            saveCartToStorage();
-            showToast(`${product.name} added to cart!`, 'success');
-        }
-
-        // Update cart UI
-        function updateCartUI() {
-            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-            if (cartPage.style.display === 'block') {
-                showCartPage();
-            }
-        }
-
-        // Show cart page
-        function showCartPage() {
-            if (!currentUser) {
-                showToast('Please login to view your cart.', 'warning');
-                loginModal.style.display = 'flex';
-                return;
-            }
-            
-            document.querySelector('.categories').style.display = 'none';
-            document.querySelector('.products').style.display = 'none';
-            sellerDashboard.style.display = 'none';
-            cartPage.style.display = 'block';
-            
-            cartItems.innerHTML = '';
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<div style="padding: 40px; text-align: center;"><i class="fas fa-shopping-cart" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i><p>Your cart is empty.</p><a href="#" class="btn" style="margin-top: 15px;" onclick="goBackToShopping()">Continue Shopping</a></div>';
-            } else {
-                cart.forEach(item => {
-                    const cartItemElement = document.createElement('div');
-                    cartItemElement.className = 'cart-item';
-                    cartItemElement.innerHTML = `
-                        <div class="cart-item-image">
-                            <img src="${item.image}" alt="${item.name}">
-                        </div>
-                        <div class="cart-item-details">
-                            <div class="cart-item-title">${item.name}</div>
-                            <div class="cart-item-seller">Sold by: ${item.seller}</div>
-                            <div class="cart-item-price">₦${item.price.toLocaleString()}</div>
-                        </div>
-                        <div class="cart-item-actions">
-                            <div class="quantity-control">
-                                <button class="quantity-btn minus" data-id="${item.id}">-</button>
-                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-id="${item.id}">
-                                <button class="quantity-btn plus" data-id="${item.id}">+</button>
-                            </div>
-                            <button class="remove-item" data-id="${item.id}" title="Remove item"><i class="fas fa-trash"></i></button>
-                        </div>
-                    `;
-                    cartItems.appendChild(cartItemElement);
-                });
-                
-                document.querySelectorAll('.quantity-btn.minus').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const productId = parseInt(e.target.dataset.id);
-                        updateCartItemQuantity(productId, -1);
-                    });
-                });
-                
-                document.querySelectorAll('.quantity-btn.plus').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const productId = parseInt(e.target.dataset.id);
-                        updateCartItemQuantity(productId, 1);
-                    });
-                });
-                
-                document.querySelectorAll('.quantity-input').forEach(input => {
-                    input.addEventListener('change', (e) => {
-                        const productId = parseInt(e.target.dataset.id);
-                        const newQuantity = parseInt(e.target.value);
-                        setCartItemQuantity(productId, newQuantity);
-                    });
-                });
-                
-                document.querySelectorAll('.remove-item').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const productId = parseInt(e.target.closest('button').dataset.id);
-                        removeFromCart(productId);
-                    });
-                });
-            }
-            
-            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-            const shipping = 1500;
-            const tax = subtotal * 0.05;
-            const total = subtotal + shipping + tax;
-            
-            document.getElementById('cartSubtotal').textContent = `₦${subtotal.toLocaleString()}`;
-            document.getElementById('cartShipping').textContent = `₦${shipping.toLocaleString()}`;
-            document.getElementById('cartTax').textContent = `₦${tax.toLocaleString()}`;
-            document.getElementById('cartTotal').textContent = `₦${total.toLocaleString()}`;
-        }
-
-        // Go back to shopping
-        function goBackToShopping() {
-            cartPage.style.display = 'none';
-            document.querySelector('.categories').style.display = 'block';
-            document.querySelector('.products').style.display = 'block';
-            if (currentUser && currentUser.type === 'seller') {
-                sellerDashboard.style.display = 'block';
-            }
-        }
-
-        // Update cart item quantity
-        function updateCartItemQuantity(productId, change) {
-            const item = cart.find(item => item.id === productId);
-            if (item) {
-                item.quantity += change;
-                if (item.quantity < 1) {
-                    removeFromCart(productId);
-                } else {
-                    updateCartUI();
-                    saveCartToStorage();
-                }
-            }
-        }
-
-        // Set cart item quantity
-        function setCartItemQuantity(productId, quantity) {
-            const item = cart.find(item => item.id === productId);
-            if (item) {
-                if (quantity < 1) {
-                    removeFromCart(productId);
-                } else {
-                    item.quantity = quantity;
-                    updateCartUI();
-                    saveCartToStorage();
-                }
-            }
-        }
-
-        // Remove item from cart
-        function removeFromCart(productId) {
-            const item = cart.find(item => item.id === productId);
-            if (item && confirm(`Remove ${item.name} from cart?`)) {
-                cart = cart.filter(item => item.id !== productId);
-                updateCartUI();
-                saveCartToStorage();
-                showToast('Item removed from cart.', 'info');
-            }
-        }
-
-        // Handle checkout
-        function handleCheckout() {
-            if (cart.length === 0) {
-                showToast('Your cart is empty.', 'warning');
-                return;
-            }
-            
-            showToast('Proceeding to checkout...', 'info');
-            setTimeout(() => {
-                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) + 1500;
-                showToast(`Order placed! Total: ₦${total.toLocaleString()}`, 'success');
-                cart = [];
-                updateCartUI();
-                saveCartToStorage();
-                setTimeout(() => {
-                    goBackToShopping();
-                }, 2000);
-            }, 2000);
-        }
-
-        // Save cart to storage
-        function saveCartToStorage() {
-            if (currentUser) {
-                localStorage.setItem(`cart_${currentUser.email}`, JSON.stringify(cart));
-            }
-        }
-
-        // Load cart from storage
-        function loadCartFromStorage() {
-            if (currentUser) {
-                const savedCart = localStorage.getItem(`cart_${currentUser.email}`);
-                if (savedCart) {
-                    cart = JSON.parse(savedCart);
-                    updateCartUI();
-                }
-            }
-        }
-
-        // Handle adding a new product
-        function handleAddProduct(e) {
-            e.preventDefault();
-            
-            if (!currentUser || currentUser.type !== 'seller') {
-                showToast('You need to be logged in as a seller to add products.', 'error');
-                return;
-            }
-            
-            const name = document.getElementById('productName').value;
-            const category = document.getElementById('productCategory').value;
-            const price = parseInt(document.getElementById('productPrice').value);
-            const description = document.getElementById('productDescription').value;
-            const imageFile = productImageFile.files[0];
-            
-            if (name && category && price) {
-                let imageSrc = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80';
-                
-                if (imageFile) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        imageSrc = e.target.result;
-                        addProductToSystem(name, category, price, description, imageSrc);
-                    };
-                    reader.readAsDataURL(imageFile);
-                } else {
-                    addProductToSystem(name, category, price, description, imageSrc);
-                }
-            } else {
-                showToast('Please fill in all required fields.', 'error');
-            }
-        }
-
-        // Add product to system
-        function addProductToSystem(name, category, price, description, imageSrc) {
-            const newProduct = {
-                id: Date.now(),
-                name,
-                price,
-                category,
-                seller: currentUser.name,
-                image: imageSrc,
-                description,
-                isUserProduct: true
-            };
-            
-            userProducts.push(newProduct);
-            allProducts.push(newProduct);
-            productForm.reset();
-            imagePreview.style.display = 'none';
-            productImageFile.value = '';
-            
-            showToast('Product added successfully!', 'success');
-            displayProducts(allProducts);
-            displayUserProducts();
-            filterProducts('all');
-        }
-
-        // Display user's products
-        function displayUserProducts() {
-            myProductsGrid.innerHTML = '';
-            
-            if (userProducts.length === 0) {
-                myProductsGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 40px;">You haven\'t added any products yet.</p>';
-                return;
-            }
-            
-            userProducts.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.innerHTML = `
-                    <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">${product.name}</h3>
-                        <div class="product-price">₦${product.price.toLocaleString()}</div>
-                        <div class="product-seller"><i class="fas fa-store"></i> ${product.seller}</div>
-                        <div class="product-actions">
-                            <button class="edit-product" data-id="${product.id}">Edit</button>
-                            <button class="delete-product" data-id="${product.id}">Delete</button>
-                        </div>
-                    </div>
-                `;
-                myProductsGrid.appendChild(productCard);
-            });
-            
-            document.querySelectorAll('.edit-product').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const productId = parseInt(e.target.dataset.id);
-                    editProduct(productId);
-                });
-            });
-            
-            document.querySelectorAll('.delete-product').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const productId = parseInt(e.target.dataset.id);
-                    deleteProduct(productId);
-                });
-            });
-        }
-
-        // Edit product
-        function editProduct(productId) {
-            const product = userProducts.find(p => p.id === productId);
-            if (product) {
-                document.getElementById('productName').value = product.name;
-                document.getElementById('productCategory').value = product.category;
-                document.getElementById('productPrice').value = product.price;
-                document.getElementById('productDescription').value = product.description;
-                showToast(`Editing ${product.name}`, 'info');
-            }
-        }
-
-        // Delete product
-        function deleteProduct(productId) {
-            const product = userProducts.find(p => p.id === productId);
-            if (product && confirm(`Delete "${product.name}"?`)) {
-                userProducts = userProducts.filter(p => p.id !== productId);
-                allProducts = allProducts.filter(p => p.id !== productId);
-                displayUserProducts();
-                displayProducts(allProducts);
-                showToast('Product deleted.', 'success');
-            }
-        }
-
-        // Show toast notification
-        function showToast(message, type = 'info') {
-            toastMessage.textContent = message;
-            toast.className = 'toast';
-            toast.classList.add(type);
-            
-            const icon = toast.querySelector('i');
-            icon.className = 
-                type === 'success' ? 'fas fa-check-circle' :
-                type === 'error' ? 'fas fa-exclamation-circle' :
-                type === 'warning' ? 'fas fa-exclamation-triangle' :
-                'fas fa-info-circle';
-            
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
         }
 
         // Initialize the application
+        function init() {
+            loadProducts();
+            setupEventListeners();
+            checkLoginStatus();
+            
+            setTimeout(() => {
+                showToast('🚀 Main Market Onitsha - Powered by Firebase!', 'success', 5000);
+            }, 1000);
+        }
+
+        // Start the application
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
