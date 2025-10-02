@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Market Onitsha - African Marketplace</title>
+    <title>Main Market Onitsha - Nigeria's Online Marketplace</title>
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
@@ -14,43 +14,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* AliExpress Inspired Theme */
         :root {
-            --primary: #2c5aa0;
-            --primary-dark: #1e3d72;
-            --primary-light: #4a7bc8;
-            --secondary: #f8b500;
-            --accent: #e74c3c;
-            --success: #27ae60;
-            --warning: #f39c12;
-            --danger: #e74c3c;
-            --dark: #2c3e50;
-            --light: #ecf0f1;
-            --gray: #95a5a6;
+            --primary: #ff4747;
+            --primary-dark: #e60000;
+            --primary-light: #ff6b6b;
+            --secondary: #ff6a00;
+            --accent: #ff4747;
+            --success: #00c851;
+            --warning: #ffbb33;
+            --danger: #ff4444;
+            --dark: #2d2d2d;
+            --light: #f8f8f8;
+            --gray: #999999;
             --white: #ffffff;
-            --black: #2c3e50;
+            --black: #000000;
+            --border: #e8e8e8;
             
             --bg-color: #ffffff;
-            --text-color: #2c3e50;
+            --text-color: #2d2d2d;
             --card-bg: #ffffff;
             --header-bg: #ffffff;
-            --footer-bg: #2c3e50;
-            --border-color: #ecf0f1;
+            --footer-bg: #f5f5f5;
+            --border-color: #e8e8e8;
             
-            --border-radius: 12px;
-            --border-radius-sm: 8px;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --border-radius: 4px;
+            --border-radius-sm: 2px;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.15);
             --transition: all 0.3s ease;
-        }
-
-        .dark-mode {
-            --bg-color: #1a1a1a;
-            --text-color: #ffffff;
-            --card-bg: #2d2d2d;
-            --header-bg: #2d2d2d;
-            --footer-bg: #1a1a1a;
-            --border-color: #444444;
-            --light: #444444;
         }
 
         * {
@@ -59,270 +51,193 @@
             box-sizing: border-box;
         }
 
-        html, body {
-            height: 100%;
-            overflow-x: hidden;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--bg-color);
             transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-            width: 100%;
+            padding: 0 15px;
         }
 
-        /* Header Styles */
-        .trust-badges {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: var(--white);
-            padding: 8px 0;
-            font-size: 0.85rem;
-        }
-
-        .trust-badges .container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .top-header {
-            background: var(--header-bg);
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .top-header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .contact-info {
-            display: flex;
-            gap: 25px;
-            font-size: 0.9rem;
-            flex-wrap: wrap;
-        }
-
-        .auth-buttons {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .auth-buttons button {
-            padding: 8px 20px;
-            border: 1px solid var(--primary);
-            background: transparent;
-            color: var(--primary);
-            border-radius: var(--border-radius-sm);
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 500;
-            white-space: nowrap;
-        }
-
-        .auth-buttons button:hover {
+        /* Header Styles - AliExpress Inspired */
+        .top-notice {
             background: var(--primary);
             color: var(--white);
-        }
-
-        .theme-toggle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 1px solid var(--gray);
-            background: transparent;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            padding: 8px 0;
+            font-size: 0.8rem;
+            text-align: center;
         }
 
         .main-header {
             background: var(--header-bg);
-            padding: 20px 0;
-            box-shadow: var(--shadow);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
         }
 
-        .logo-section {
+        .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 15px;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 15px;
         }
 
         .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
             display: flex;
             align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            flex-shrink: 0;
+            gap: 10px;
         }
 
-        .logo i {
-            font-size: 2.5rem;
-            color: var(--primary);
+        .logo span {
+            color: var(--dark);
         }
 
         .search-bar {
-            display: flex;
-            max-width: 500px;
             flex: 1;
-            min-width: 250px;
+            max-width: 600px;
+            display: flex;
+            margin: 0 20px;
         }
 
         .search-bar input {
             flex: 1;
             padding: 12px 15px;
-            border: 2px solid var(--border-color);
+            border: 2px solid var(--primary);
             border-radius: var(--border-radius) 0 0 var(--border-radius);
-            font-size: 1rem;
-            background: var(--bg-color);
-            color: var(--text-color);
-            min-width: 0;
+            font-size: 0.9rem;
+            outline: none;
         }
 
         .search-bar button {
-            padding: 0 20px;
             background: var(--primary);
             color: var(--white);
             border: none;
+            padding: 0 25px;
             border-radius: 0 var(--border-radius) var(--border-radius) 0;
             cursor: pointer;
-            flex-shrink: 0;
+            font-weight: 500;
         }
 
-        .user-actions {
+        .header-actions {
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
         }
 
-        .action-item {
+        .action-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 4px;
-            cursor: pointer;
-            padding: 8px 12px;
-            border-radius: var(--border-radius-sm);
-            position: relative;
-            min-width: 60px;
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: var(--transition);
         }
 
-        .action-item:hover {
-            background: var(--light);
+        .action-btn:hover {
+            color: var(--primary);
+        }
+
+        .action-btn i {
+            font-size: 1.2rem;
         }
 
         .cart-count {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: var(--accent);
+            background: var(--primary);
             color: var(--white);
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.7rem;
-            font-weight: bold;
+            position: absolute;
+            top: -5px;
+            right: -5px;
         }
 
-        nav {
-            background: var(--primary-dark);
+        /* Navigation */
+        .main-nav {
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 5px;
-            flex-wrap: wrap;
+            gap: 0;
         }
 
         .nav-links a {
-            color: var(--white);
+            padding: 12px 20px;
+            color: var(--dark);
             text-decoration: none;
-            padding: 16px 20px;
-            display: block;
-            border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
             font-weight: 500;
-            white-space: nowrap;
+            transition: var(--transition);
+            border-bottom: 2px solid transparent;
         }
 
-        .nav-links a:hover, .nav-links a.active {
-            background: var(--primary);
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
         }
 
-        /* Main Content */
-        main {
-            flex: 1;
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        /* Hero Banner - AliExpress Style */
+        .hero-banner {
+            background: linear-gradient(135deg, #ff6b6b, #ff4747);
             color: var(--white);
             padding: 60px 0;
-            width: 100%;
+            text-align: center;
         }
 
-        .hero .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .hero-content h1 {
+        .hero-banner h1 {
             font-size: 2.5rem;
-            margin-bottom: 20px;
-            line-height: 1.2;
+            margin-bottom: 15px;
+            font-weight: 700;
         }
 
-        .hero-content p {
+        .hero-banner p {
             font-size: 1.1rem;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             opacity: 0.9;
         }
 
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
+            padding: 12px 30px;
             border: none;
             border-radius: var(--border-radius);
             font-weight: 600;
-            text-decoration: none;
             cursor: pointer;
-            font-size: 1rem;
             transition: var(--transition);
-            white-space: nowrap;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-primary {
-            background: var(--secondary);
-            color: var(--dark);
+            background: var(--white);
+            color: var(--primary);
         }
 
         .btn-primary:hover {
@@ -330,29 +245,83 @@
             box-shadow: var(--shadow-lg);
         }
 
-        .btn-secondary {
-            background: var(--white);
-            color: var(--primary);
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
         }
 
-        .hero-image img {
-            width: 100%;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Products */
-        .products {
-            padding: 60px 0;
+        /* Categories Grid */
+        .categories {
+            padding: 40px 0;
             background: var(--bg-color);
-            width: 100%;
         }
 
-        .product-grid {
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            width: 100%;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        /* Products Grid - AliExpress Style */
+        .products-section {
+            padding: 40px 0;
+            background: var(--light);
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .view-all {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
         }
 
         .product-card {
@@ -360,9 +329,8 @@
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
             transition: var(--transition);
-            width: 100%;
+            position: relative;
         }
 
         .product-card:hover {
@@ -373,8 +341,8 @@
         .product-image {
             height: 200px;
             overflow: hidden;
-            position: relative;
             background: var(--light);
+            position: relative;
         }
 
         .product-image img {
@@ -383,59 +351,101 @@
             object-fit: cover;
         }
 
-        .seller-status {
+        .product-badge {
             position: absolute;
             top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.7);
-            color: white;
+            left: 10px;
+            background: var(--primary);
+            color: var(--white);
             padding: 4px 8px;
-            border-radius: 12px;
+            border-radius: var(--border-radius-sm);
             font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-title {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+            line-height: 1.4;
+            height: 40px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .product-original-price {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-decoration: line-through;
+            margin-bottom: 10px;
+        }
+
+        .product-rating {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 5px;
+            margin-bottom: 10px;
         }
 
-        .status-online {
-            color: var(--success);
+        .rating-stars {
+            color: var(--warning);
         }
 
-        .status-offline {
+        .rating-count {
+            font-size: 0.8rem;
             color: var(--gray);
         }
 
-        /* Success Messages */
-        .success-message {
-            background: var(--success);
-            color: white;
-            padding: 15px 20px;
-            border-radius: var(--border-radius);
-            text-align: center;
-            margin: 15px 0;
+        .product-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .add-to-cart {
+            flex: 1;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 8px 12px;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background: var(--primary-dark);
+        }
+
+        .wishlist-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--border-color);
+            background: var(--white);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            animation: slideDown 0.3s ease;
+            transition: var(--transition);
         }
 
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .compression-info {
-            font-size: 0.8rem;
-            color: var(--gray);
-            margin-top: 5px;
-            text-align: center;
+        .wishlist-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
         }
 
         /* Seller Dashboard */
@@ -445,7 +455,6 @@
             border-radius: var(--border-radius);
             margin: 40px 0;
             box-shadow: var(--shadow);
-            width: 100%;
         }
 
         .form-group {
@@ -456,22 +465,32 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
+            color: var(--dark);
         }
 
-        .form-group input, .form-group select, .form-group textarea {
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-sm);
-            background: var(--bg-color);
-            color: var(--text-color);
-            font-size: 1rem;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 71, 71, 0.1);
         }
 
         .file-upload {
             border: 2px dashed var(--border-color);
             border-radius: var(--border-radius);
-            padding: 30px;
+            padding: 40px;
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
@@ -494,8 +513,8 @@
         .image-preview img {
             max-width: 200px;
             max-height: 200px;
-            border-radius: var(--border-radius-sm);
-            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
         }
 
         .upload-progress {
@@ -503,7 +522,7 @@
             background: var(--light);
             border-radius: 10px;
             overflow: hidden;
-            height: 10px;
+            height: 6px;
         }
 
         .progress-bar {
@@ -513,45 +532,51 @@
             transition: width 0.3s ease;
         }
 
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            padding: 50px 0 20px;
+            border-top: 1px solid var(--border-color);
         }
 
-        .modal-content {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 30px;
-            max-width: 500px;
-            width: 100%;
-            box-shadow: var(--shadow-lg);
-            max-height: 90vh;
-            overflow-y: auto;
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
         }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .footer-column h3 {
+            font-size: 1.1rem;
             margin-bottom: 20px;
+            color: var(--dark);
         }
 
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-color);
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--gray);
+            font-size: 0.8rem;
         }
 
         /* Loading Animations */
@@ -559,365 +584,275 @@
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 3px solid #ffffff;
+            border: 2px solid #ffffff;
             border-radius: 50%;
             border-top-color: transparent;
             animation: spin 1s ease-in-out infinite;
-        }
-
-        .loading.primary {
-            border: 3px solid var(--primary);
-            border-top-color: transparent;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        /* About Us Page */
-        .about-page {
-            padding: 60px 0;
-            background: var(--bg-color);
-            width: 100%;
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .about-section {
-            margin-bottom: 40px;
-            padding: 30px;
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-        }
-
-        .about-section h2 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--secondary);
-            padding-bottom: 10px;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--footer-bg);
-            color: var(--white);
-            padding: 40px 0 20px;
-            width: 100%;
-            margin-top: auto;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* Toast Notifications */
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+        /* Success Messages */
+        .success-message {
             background: var(--success);
             color: white;
-            padding: 15px 25px;
+            padding: 12px 20px;
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            z-index: 1001;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
+            margin: 15px 0;
             display: flex;
             align-items: center;
             gap: 10px;
+            animation: slideDown 0.3s ease;
         }
 
-        .toast.show {
-            transform: translateX(0);
-        }
-
-        .toast.error {
-            background: var(--danger);
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .hero .container {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 30px;
-            }
-            
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-            
-            .logo-section {
+            .header-top {
                 flex-direction: column;
-                align-items: stretch;
+                text-align: center;
             }
             
             .search-bar {
+                margin: 15px 0;
                 max-width: 100%;
             }
             
-            .user-actions {
-                justify-content: center;
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             }
             
-            .contact-info {
-                justify-content: center;
-            }
-            
-            .auth-buttons {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-            
-            .hero {
-                padding: 40px 0;
-            }
-            
-            .products {
-                padding: 40px 0;
-            }
-            
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-links a {
-                padding: 12px 15px;
-                font-size: 0.9rem;
+            .nav-links {
+                overflow-x: auto;
+                padding-bottom: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="trust-badges">
-            <div class="container">
-                <span><i class="fas fa-shield-alt"></i> 100% Secure</span>
-                <span><i class="fas fa-truck"></i> Free Shipping ₦10k+</span>
-                <span><i class="fas fa-undo"></i> 7-Day Returns</span>
-                <span><i class="fas fa-headset"></i> 24/7 Support</span>
-            </div>
+    <!-- Top Notice -->
+    <div class="top-notice">
+        <div class="container">
+            🎉 Welcome to Main Market Onitsha - Nigeria's Largest Online Marketplace! Free Shipping on Orders Over ₦10,000
         </div>
+    </div>
 
-        <div class="top-header">
-            <div class="container">
-                <div class="contact-info">
-                    <span><i class="fas fa-phone"></i> 0806 456 2826</span>
-                    <span><i class="fas fa-envelope"></i> info@mainmarketonitsha.com</span>
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    Main Market <span>Onitsha</span>
                 </div>
-                <div class="auth-buttons">
-                    <button class="theme-toggle" id="themeToggle">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <button id="loginBtn">Login</button>
-                    <button id="registerBtn">Register</button>
-                    <button id="logoutBtn" style="display: none;">Logout</button>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for products, brands, and categories...">
+                    <button><i class="fas fa-search"></i> Search</button>
                 </div>
-            </div>
-        </div>
-        
-        <div class="main-header">
-            <div class="container">
-                <div class="logo-section">
-                    <div class="logo" onclick="showHomePage()">
-                        <i class="fas fa-shopping-bag"></i>
-                        <div>
-                            <span style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">Main Market</span>
-                            <span style="font-size: 0.9rem; color: var(--dark);">Onitsha</span>
-                        </div>
-                    </div>
-                    
-                    <div class="search-bar">
-                        <input type="text" id="searchInput" placeholder="Search for products...">
-                        <button id="searchBtn"><i class="fas fa-search"></i></button>
-                    </div>
-                    
-                    <div class="user-actions">
-                        <div class="action-item" id="userAccount">
-                            <i class="fas fa-user"></i>
-                            <span>Account</span>
-                        </div>
-                        <div class="action-item" id="sellerDashboardBtn">
-                            <i class="fas fa-store"></i>
-                            <span>Seller</span>
-                        </div>
-                        <div class="action-item cart-item" id="viewCart">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span>Cart</span>
-                            <div class="cart-count">0</div>
-                        </div>
-                    </div>
+                
+                <div class="header-actions">
+                    <a href="#" class="action-btn" onclick="showLoginModal()">
+                        <i class="fas fa-user"></i>
+                        <span>Account</span>
+                    </a>
+                    <a href="#" class="action-btn" onclick="showSellerDashboard()">
+                        <i class="fas fa-store"></i>
+                        <span>Sell</span>
+                    </a>
+                    <a href="#" class="action-btn" style="position: relative;">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Cart</span>
+                        <div class="cart-count">0</div>
+                    </a>
                 </div>
             </div>
         </div>
-        
-        <nav>
-            <div class="container">
-                <ul class="nav-links">
-                    <li><a href="#" class="nav-link active" onclick="showHomePage()">Home</a></li>
-                    <li><a href="#" class="nav-link" onclick="showAboutPage()">About Us</a></li>
-                    <li><a href="#" class="nav-link" onclick="showProducts()">Products</a></li>
-                </ul>
-            </div>
-        </nav>
     </header>
 
-    <!-- Main Content Area -->
-    <main id="mainContent">
-        <!-- Home Page (Default) -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>Discover Authentic African Marketplace</h1>
-                    <p>Connect directly with local sellers through live video chat. Support Nigerian businesses with secure transactions.</p>
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary" onclick="showProducts()">
-                            <i class="fas fa-shopping-bag"></i> Start Shopping
-                        </button>
-                        <button class="btn btn-secondary" onclick="showSellerDashboard()">
-                            <i class="fas fa-store"></i> Sell Products
-                        </button>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1563013546-7eab76c7af75?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="African Marketplace">
-                </div>
-            </div>
-        </section>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Fashion</a></li>
+                <li><a href="#">Electronics</a></li>
+                <li><a href="#">Home & Garden</a></li>
+                <li><a href="#">Beauty</a></li>
+                <li><a href="#">Sports</a></li>
+                <li><a href="#">Automotive</a></li>
+                <li><a href="#">Toys</a></li>
+                <li><a href="#">Food</a></li>
+                <li><a href="#">More</a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <!-- Products Section -->
-        <section class="products" id="productsSection" style="display: none;">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 40px; color: var(--primary);">Featured Products</h2>
-                <div id="loadingProducts" style="text-align: center; padding: 40px;">
-                    <div class="loading primary" style="margin: 0 auto 15px;"></div>
-                    <p>Loading products...</p>
-                </div>
-                <div class="product-grid" id="productGrid">
-                    <!-- Products loaded by JavaScript -->
-                </div>
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="container">
+            <h1>Discover Amazing Deals</h1>
+            <p>Shop from thousands of Nigerian sellers with secure payments and fast delivery</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary">
+                    <i class="fas fa-shopping-bag"></i> Start Shopping
+                </button>
+                <button class="btn btn-outline">
+                    <i class="fas fa-store"></i> Become a Seller
+                </button>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Seller Dashboard -->
-        <section id="sellerDashboard" style="display: none;">
-            <div class="container">
-                <div class="seller-dashboard">
-                    <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary);">Add New Product</h2>
-                    <form id="productForm">
-                        <div class="form-group">
-                            <label for="productName">Product Name *</label>
-                            <input type="text" id="productName" required placeholder="Enter product name">
-                        </div>
-                        <div class="form-group">
-                            <label for="productPrice">Price (₦) *</label>
-                            <input type="number" id="productPrice" required placeholder="Enter price" min="1">
-                        </div>
-                        <div class="form-group">
-                            <label for="productDescription">Description *</label>
-                            <textarea id="productDescription" rows="3" required placeholder="Describe your product..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="productCategory">Category *</label>
-                            <select id="productCategory" required>
-                                <option value="">Select Category</option>
-                                <option value="fashion">Fashion</option>
-                                <option value="electronics">Electronics</option>
-                                <option value="home">Home & Living</option>
-                                <option value="food">Food & Groceries</option>
-                                <option value="beauty">Beauty & Health</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Product Image *</label>
-                            <div class="file-upload" onclick="document.getElementById('productImage').click()">
-                                <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
-                                <p>Click to upload product image</p>
-                                <p class="compression-info">Images will be compressed to 100KB for faster loading</p>
-                                <input type="file" id="productImage" accept="image/*" onchange="previewImage(event)">
-                            </div>
-                            <div class="image-preview" id="imagePreview"></div>
-                            <div class="upload-progress" id="uploadProgress" style="display: none;">
-                                <div class="progress-bar" id="progressBar"></div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;" id="submitBtn">
-                            <i class="fas fa-plus"></i> Add Product
-                        </button>
-                    </form>
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Popular Categories</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Fashion</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Electronics</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Home</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Food</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Beauty</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                    <h3>Sports</h3>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- About Us Page -->
-        <section id="aboutPage" class="about-page" style="display: none;">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-section">
-                        <h2>About Main Market Onitsha</h2>
-                        <p>Main Market Onitsha is Nigeria's premier online marketplace, connecting buyers and sellers across the nation. Founded in 2020, we've grown to become the trusted platform for authentic African products and local businesses.</p>
-                    </div>
-                    
-                    <div class="about-section">
-                        <h2>Our Mission</h2>
-                        <p>To empower Nigerian entrepreneurs by providing them with cutting-edge digital tools and nationwide reach. We believe every seller deserves access to both local and national markets.</p>
-                    </div>
-                    
-                    <div class="about-section">
-                        <h2>Why Choose Us?</h2>
-                        <p>• Secure Payment System with Bank Transfer<br>
-                           • 5 Physical Branches Nationwide for Pickup<br>
-                           • 7-Day Return Policy<br>
-                           • 24/7 Customer Support<br>
-                           • Direct Seller Communication</p>
-                    </div>
-                    
-                    <div class="about-section">
-                        <h2>Our Branches</h2>
-                        <p>• <strong>Onitsha Main Branch</strong> - Main Market Complex, Onitsha<br>
-                           • <strong>Lagos Island Branch</strong> - 123 Broad Street, Lagos<br>
-                           • <strong>Abuja Central Branch</strong> - Plot 456, CBD, Abuja<br>
-                           • <strong>Port Harcourt Branch</strong> - 78 Aba Road, Port Harcourt<br>
-                           • <strong>Ibadan Branch</strong> - Dugbe Market Complex, Ibadan</p>
-                    </div>
-                </div>
+    <!-- Featured Products -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products-header">
+                <h2 class="section-title">Featured Products</h2>
+                <a href="#" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
             </div>
-        </section>
-    </main>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Seller Dashboard (Hidden by default) -->
+    <section id="sellerDashboard" style="display: none;">
+        <div class="container">
+            <div class="seller-dashboard">
+                <h2 style="text-align: center; margin-bottom: 30px; color: var(--dark);">Add New Product</h2>
+                <form id="productForm">
+                    <div class="form-group">
+                        <label for="productName">Product Name *</label>
+                        <input type="text" id="productName" required placeholder="Enter product name">
+                    </div>
+                    <div class="form-group">
+                        <label for="productPrice">Price (₦) *</label>
+                        <input type="number" id="productPrice" required placeholder="Enter price" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="productDescription">Description *</label>
+                        <textarea id="productDescription" rows="3" required placeholder="Describe your product..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="productCategory">Category *</label>
+                        <select id="productCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="home">Home & Living</option>
+                            <option value="food">Food & Groceries</option>
+                            <option value="beauty">Beauty & Health</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Product Image *</label>
+                        <div class="file-upload" onclick="document.getElementById('productImage').click()">
+                            <i class="fas fa-cloud-upload-alt" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 10px;"></i>
+                            <p>Click to upload product image</p>
+                            <p style="font-size: 0.8rem; color: var(--gray);">Images will be optimized for fast loading</p>
+                            <input type="file" id="productImage" accept="image/*" onchange="previewImage(event)">
+                        </div>
+                        <div class="image-preview" id="imagePreview"></div>
+                        <div class="upload-progress" id="uploadProgress" style="display: none;">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1rem;" id="submitBtn">
+                        <i class="fas fa-plus"></i> Add Product to Marketplace
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Main Market Onitsha</h3>
-                    <p>Connecting Nigerian buyers and sellers through technology and trust.</p>
+                    <h3>Customer Service</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Main Market</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Contact Info</h3>
-                    <p><i class="fas fa-phone"></i> 0806 456 2826</p>
-                    <p><i class="fas fa-envelope"></i> info@mainmarketonitsha.com</p>
-                    <p><i class="fas fa-map-marker-alt"></i> 5 Branches Nationwide</p>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone"></i> 0806 456 2826</li>
+                        <li><i class="fas fa-envelope"></i> info@mainmarketonitsha.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Onitsha Main Market</li>
+                    </ul>
                 </div>
             </div>
             <div class="copyright">
@@ -925,77 +860,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Login to Your Account</h2>
-                <button class="close-modal" onclick="closeModal('loginModal')">&times;</button>
-            </div>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="loginEmail">Email Address</label>
-                    <input type="email" id="loginEmail" required placeholder="Enter your email">
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" required placeholder="Enter your password">
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;" id="loginSubmitBtn">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </button>
-                <div style="text-align: center; margin-top: 15px;">
-                    <p>Don't have an account? <a href="#" onclick="closeModal('loginModal'); document.getElementById('registerModal').style.display = 'flex';" style="color: var(--primary);">Register here</a></p>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Register Modal -->
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Create New Account</h2>
-                <button class="close-modal" onclick="closeModal('registerModal')">&times;</button>
-            </div>
-            <form id="registerForm">
-                <div class="form-group">
-                    <label for="registerName">Full Name</label>
-                    <input type="text" id="registerName" required placeholder="Enter your full name">
-                </div>
-                <div class="form-group">
-                    <label for="registerEmail">Email Address</label>
-                    <input type="email" id="registerEmail" required placeholder="Enter your email">
-                </div>
-                <div class="form-group">
-                    <label for="registerPassword">Password</label>
-                    <input type="password" id="registerPassword" required placeholder="Create a password (min. 6 characters)">
-                </div>
-                <div class="form-group">
-                    <label>Account Type</label>
-                    <div style="display: flex; gap: 10px; margin-top: 10px;">
-                        <label style="flex: 1; text-align: center; padding: 15px; border: 2px solid var(--border-color); border-radius: var(--border-radius-sm); cursor: pointer;">
-                            <input type="radio" name="userType" value="buyer" checked style="margin-right: 5px;">
-                            <i class="fas fa-shopping-cart"></i><br>
-                            Buyer
-                        </label>
-                        <label style="flex: 1; text-align: center; padding: 15px; border: 2px solid var(--border-color); border-radius: var(--border-radius-sm); cursor: pointer;">
-                            <input type="radio" name="userType" value="seller" style="margin-right: 5px;">
-                            <i class="fas fa-store"></i><br>
-                            Seller
-                        </label>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;" id="registerSubmitBtn">
-                    <i class="fas fa-user-plus"></i> Create Account
-                </button>
-                <div style="text-align: center; margin-top: 15px;">
-                    <p>Already have an account? <a href="#" onclick="closeModal('registerModal'); document.getElementById('loginModal').style.display = 'flex';" style="color: var(--primary);">Login here</a></p>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <script>
         // Firebase Configuration
@@ -1014,355 +878,94 @@
         const auth = firebase.auth();
         const storage = firebase.storage();
 
-        // Global Variables
-        let currentUser = null;
-        let products = [];
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Sample products data
+        const sampleProducts = [
+            {
+                id: 1,
+                name: "Men's Casual T-Shirt - Cotton Comfort Fit",
+                price: 3500,
+                originalPrice: 5000,
+                image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                rating: 4.5,
+                reviews: 128,
+                badge: "HOT"
+            },
+            {
+                id: 2,
+                name: "Wireless Bluetooth Headphones - Noise Cancelling",
+                price: 12500,
+                originalPrice: 18000,
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                rating: 4.8,
+                reviews: 89,
+                badge: "SALE"
+            },
+            {
+                id: 3,
+                name: "Smartphone Android 128GB - Dual Camera",
+                price: 65000,
+                originalPrice: 85000,
+                image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                rating: 4.3,
+                reviews: 256,
+                badge: "NEW"
+            },
+            {
+                id: 4,
+                name: "Women's Handbag - Leather Fashion Bag",
+                price: 8500,
+                originalPrice: 12000,
+                image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                rating: 4.7,
+                reviews: 64,
+                badge: "TRENDING"
+            }
+        ];
 
-        // Image compression function
-        function compressImage(file, maxSizeKB = 100, quality = 0.7) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = (event) => {
-                    const img = new Image();
-                    img.src = event.target.result;
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        let width = img.width;
-                        let height = img.height;
-                        
-                        // Calculate new dimensions while maintaining aspect ratio
-                        const maxDimension = 800;
-                        if (width > height && width > maxDimension) {
-                            height = (height * maxDimension) / width;
-                            width = maxDimension;
-                        } else if (height > maxDimension) {
-                            width = (width * maxDimension) / height;
-                            height = maxDimension;
-                        }
-                        
-                        canvas.width = width;
-                        canvas.height = height;
-                        
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
-                        
-                        // Convert to blob with quality adjustment
-                        canvas.toBlob((blob) => {
-                            if (blob.size / 1024 > maxSizeKB) {
-                                // If still too large, reduce quality further
-                                const reducedQuality = Math.max(0.3, quality * 0.8);
-                                canvas.toBlob((smallerBlob) => {
-                                    resolve(smallerBlob);
-                                }, 'image/jpeg', reducedQuality);
-                            } else {
-                                resolve(blob);
-                            }
-                        }, 'image/jpeg', quality);
-                    };
-                    img.onerror = reject;
-                };
-                reader.onerror = reject;
-            });
-        }
-
-        // Initialize App
+        // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
-            initializeApp();
+            loadProducts();
+            setupEventListeners();
         });
 
-        async function initializeApp() {
-            setupEventListeners();
-            setupAuthStateListener();
-            loadProductsFromFirebase();
-            updateCartCount();
-            checkSavedTheme();
-        }
-
-        // Firebase Authentication
-        function setupAuthStateListener() {
-            auth.onAuthStateChanged(async (user) => {
-                if (user) {
-                    currentUser = {
-                        uid: user.uid,
-                        email: user.email,
-                        displayName: user.displayName
-                    };
-                    await checkUserRole(user.uid);
-                } else {
-                    currentUser = null;
-                }
-                updateAuthUI();
-            });
-        }
-
-        async function checkUserRole(uid) {
-            try {
-                const userDoc = await db.collection('users').doc(uid).get();
-                if (userDoc.exists) {
-                    currentUser.role = userDoc.data().role;
-                }
-            } catch (error) {
-                console.error('Error checking user role:', error);
-            }
-        }
-
-        // Page Navigation
-        function showHomePage() {
-            hideAllSections();
-            document.querySelector('.hero').style.display = 'block';
-            updateNavActive('home');
-        }
-
-        function showAboutPage() {
-            hideAllSections();
-            document.getElementById('aboutPage').style.display = 'block';
-            updateNavActive('about');
-        }
-
-        function showProducts() {
-            hideAllSections();
-            document.getElementById('productsSection').style.display = 'block';
-            loadProductsFromFirebase();
-            updateNavActive('products');
-        }
-
-        function showSellerDashboard() {
-            if (currentUser && currentUser.role === 'seller') {
-                hideAllSections();
-                document.getElementById('sellerDashboard').style.display = 'block';
-            } else {
-                showToast('Please register as a seller to add products', 'error');
-                document.getElementById('registerModal').style.display = 'flex';
-            }
-        }
-
-        function hideAllSections() {
-            document.querySelector('.hero').style.display = 'none';
-            document.getElementById('productsSection').style.display = 'none';
-            document.getElementById('sellerDashboard').style.display = 'none';
-            document.getElementById('aboutPage').style.display = 'none';
-        }
-
-        function updateNavActive(page) {
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-        }
-
-        // Product Management with Firebase
-        async function loadProductsFromFirebase() {
-            try {
-                document.getElementById('loadingProducts').style.display = 'block';
-                document.getElementById('productGrid').innerHTML = '';
-                
-                const querySnapshot = await db.collection('products')
-                    .orderBy('createdAt', 'desc')
-                    .get();
-                
-                products = [];
-                querySnapshot.forEach((doc) => {
-                    products.push({
-                        id: doc.id,
-                        ...doc.data()
-                    });
-                });
-                
-                renderProducts();
-                document.getElementById('loadingProducts').style.display = 'none';
-                
-            } catch (error) {
-                console.error('Error loading products:', error);
-                document.getElementById('loadingProducts').innerHTML = `
-                    <div style="text-align: center; color: var(--danger);">
-                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 15px;"></i>
-                        <p>Error loading products. Please check your connection.</p>
-                    </div>
-                `;
-            }
-        }
-
-        function renderProducts() {
-            const productGrid = document.getElementById('productGrid');
+        // Load and display products
+        function loadProducts() {
+            const productsGrid = document.getElementById('productsGrid');
             
-            if (products.length === 0) {
-                productGrid.innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--gray);">
-                        <i class="fas fa-box-open" style="font-size: 4rem; margin-bottom: 20px;"></i>
-                        <h3>No Products Yet</h3>
-                        <p>Be the first to add a product!</p>
-                        <button class="btn btn-primary" onclick="showSellerDashboard()" style="margin-top: 15px;">
-                            <i class="fas fa-plus"></i> Add First Product
-                        </button>
-                    </div>
-                `;
-                return;
-            }
-            
-            productGrid.innerHTML = products.map(product => `
+            productsGrid.innerHTML = sampleProducts.map(product => `
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="${product.imageUrl}" alt="${product.name}" 
-                             onerror="this.src='https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+                        <img src="${product.image}" alt="${product.name}">
+                        <div class="product-badge">${product.badge}</div>
                     </div>
-                    <div class="product-info" style="padding: 20px;">
-                        <h3 style="margin-bottom: 10px; font-size: 1.1rem;">${product.name}</h3>
-                        <div style="font-size: 1.3rem; font-weight: bold; color: var(--primary); margin-bottom: 10px;">
-                            ₦${product.price.toLocaleString()}
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">₦${product.price.toLocaleString()}</div>
+                        <div class="product-original-price">₦${product.originalPrice.toLocaleString()}</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                ${'★'.repeat(Math.floor(product.rating))}${product.rating % 1 >= 0.5 ? '½' : ''}${'☆'.repeat(5 - Math.ceil(product.rating))}
+                            </div>
+                            <span class="rating-count">(${product.reviews})</span>
                         </div>
-                        <p style="color: var(--gray); margin-bottom: 15px; font-size: 0.9rem; line-height: 1.4;">
-                            ${product.description}
-                        </p>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <span style="font-size: 0.8rem; color: var(--gray); background: var(--light); padding: 4px 8px; border-radius: 12px;">
-                                ${product.category}
-                            </span>
+                        <div class="product-actions">
+                            <button class="add-to-cart" onclick="addToCart(${product.id})">
+                                Add to Cart
+                            </button>
+                            <button class="wishlist-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
                         </div>
-                        <button class="btn btn-primary" onclick="addToCart('${product.id}')" style="width: 100%;">
-                            <i class="fas fa-shopping-cart"></i> Add to Cart
-                        </button>
                     </div>
                 </div>
             `).join('');
         }
 
-        // Product Form Handler with Image Compression
-        document.getElementById('productForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            if (!currentUser) {
-                showToast('Please login first', 'error');
-                document.getElementById('loginModal').style.display = 'flex';
-                return;
-            }
+        // Shopping cart functionality
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-            if (currentUser.role !== 'seller') {
-                showToast('Please register as a seller first', 'error');
-                return;
-            }
-
-            const productName = document.getElementById('productName').value;
-            const productPrice = document.getElementById('productPrice').value;
-            const productDescription = document.getElementById('productDescription').value;
-            const productCategory = document.getElementById('productCategory').value;
-            const productImage = document.getElementById('productImage').files[0];
-
-            if (!productImage) {
-                showToast('Please select a product image', 'error');
-                return;
-            }
-
-            const submitBtn = document.getElementById('submitBtn');
-            const originalText = submitBtn.innerHTML;
-            
-            try {
-                submitBtn.innerHTML = '<div class="loading"></div> Compressing Image...';
-                submitBtn.disabled = true;
-
-                // Show progress bar
-                document.getElementById('uploadProgress').style.display = 'block';
-                
-                // Compress image first
-                const compressedBlob = await compressImage(productImage, 100, 0.7);
-                
-                document.getElementById('progressBar').style.width = '30%';
-                submitBtn.innerHTML = '<div class="loading"></div> Uploading...';
-                
-                // Upload compressed image to Firebase Storage
-                const storageRef = storage.ref();
-                const imageRef = storageRef.child(`products/${Date.now()}_${productImage.name}`);
-                
-                const uploadTask = imageRef.put(compressedBlob);
-                
-                // Track upload progress
-                uploadTask.on('state_changed',
-                    (snapshot) => {
-                        const progress = 30 + (snapshot.bytesTransferred / snapshot.totalBytes) * 70;
-                        document.getElementById('progressBar').style.width = progress + '%';
-                    },
-                    (error) => {
-                        console.error('Upload error:', error);
-                        showToast('Image upload failed: ' + error.message, 'error');
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                        document.getElementById('uploadProgress').style.display = 'none';
-                    },
-                    async () => {
-                        // Upload completed
-                        const imageUrl = await uploadTask.snapshot.ref.getDownloadURL();
-
-                        // Save product to Firestore
-                        await db.collection('products').add({
-                            name: productName,
-                            price: parseInt(productPrice),
-                            description: productDescription,
-                            category: productCategory,
-                            imageUrl: imageUrl,
-                            sellerId: currentUser.uid,
-                            sellerEmail: currentUser.email,
-                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                        });
-
-                        // Show success message
-                        const successMessage = document.createElement('div');
-                        successMessage.className = 'success-message';
-                        successMessage.innerHTML = `
-                            <i class="fas fa-check-circle"></i>
-                            Product added successfully!
-                        `;
-                        document.getElementById('productForm').prepend(successMessage);
-
-                        // Reset form and UI
-                        setTimeout(() => {
-                            this.reset();
-                            document.getElementById('imagePreview').innerHTML = '';
-                            document.getElementById('uploadProgress').style.display = 'none';
-                            submitBtn.innerHTML = originalText;
-                            submitBtn.disabled = false;
-                            successMessage.remove();
-                            
-                            loadProductsFromFirebase();
-                            showProducts();
-                        }, 2000);
-                        
-                    }
-                );
-                
-            } catch (error) {
-                console.error('Error adding product:', error);
-                showToast('Error adding product: ' + error.message, 'error');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                document.getElementById('uploadProgress').style.display = 'none';
-            }
-        });
-
-        function previewImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                // Validate file type
-                if (!file.type.match('image.*')) {
-                    showToast('Please select an image file', 'error');
-                    return;
-                }
-
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('imagePreview').innerHTML = `
-                        <img src="${e.target.result}" alt="Preview">
-                        <p style="margin-top: 10px; font-size: 0.8rem; color: var(--gray);">
-                            ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB) - Will be compressed to 100KB
-                        </p>
-                    `;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Shopping Cart
         function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
+            const product = sampleProducts.find(p => p.id === productId);
             if (product) {
                 cart.push(product);
                 localStorage.setItem('cart', JSON.stringify(cart));
@@ -1375,168 +978,127 @@
             document.querySelector('.cart-count').textContent = cart.length;
         }
 
-        // Auth Functions with Loading Animations
-        function setupEventListeners() {
-            document.getElementById('loginBtn').addEventListener('click', () => {
-                document.getElementById('loginModal').style.display = 'flex';
+        // Seller dashboard functions
+        function showSellerDashboard() {
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'none';
             });
+            document.getElementById('sellerDashboard').style.display = 'block';
+        }
 
-            document.getElementById('registerBtn').addEventListener('click', () => {
-                document.getElementById('registerModal').style.display = 'flex';
-            });
+        function showLoginModal() {
+            alert('Login modal would appear here. For demo, you can access seller features directly.');
+            showSellerDashboard();
+        }
 
-            document.getElementById('sellerDashboardBtn').addEventListener('click', showSellerDashboard);
-
-            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
-
-            // Login form
-            document.getElementById('loginForm').addEventListener('submit', async function(e) {
-                e.preventDefault();
-                const email = document.getElementById('loginEmail').value;
-                const password = document.getElementById('loginPassword').value;
-                const submitBtn = document.getElementById('loginSubmitBtn');
-                const originalText = submitBtn.innerHTML;
-                
-                try {
-                    submitBtn.innerHTML = '<div class="loading"></div> Logging in...';
-                    submitBtn.disabled = true;
-                    
-                    await auth.signInWithEmailAndPassword(email, password);
-                    closeModal('loginModal');
-                    showToast('Login successful!');
-                } catch (error) {
-                    showToast('Login failed: ' + error.message, 'error');
-                } finally {
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                }
-            });
-
-            // Register form
-            document.getElementById('registerForm').addEventListener('submit', async function(e) {
-                e.preventDefault();
-                const name = document.getElementById('registerName').value;
-                const email = document.getElementById('registerEmail').value;
-                const password = document.getElementById('registerPassword').value;
-                const userType = document.querySelector('input[name="userType"]:checked').value;
-                const submitBtn = document.getElementById('registerSubmitBtn');
-                const originalText = submitBtn.innerHTML;
-                
-                try {
-                    submitBtn.innerHTML = '<div class="loading"></div> Creating account...';
-                    submitBtn.disabled = true;
-                    
-                    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-                    await userCredential.user.updateProfile({
-                        displayName: name
-                    });
-
-                    // Save user role to Firestore
-                    await db.collection('users').doc(userCredential.user.uid).set({
-                        name: name,
-                        email: email,
-                        role: userType,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                    });
-
-                    // Show success message
-                    const successMessage = document.createElement('div');
-                    successMessage.className = 'success-message';
-                    successMessage.innerHTML = `
-                        <i class="fas fa-check-circle"></i>
-                        Registration successful! Welcome ${name}
+        // Image preview function
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').innerHTML = `
+                        <img src="${e.target.result}" alt="Preview">
+                        <p style="margin-top: 10px; font-size: 0.8rem; color: var(--gray);">
+                            ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)
+                        </p>
                     `;
-                    document.getElementById('registerForm').prepend(successMessage);
-
-                    setTimeout(() => {
-                        closeModal('registerModal');
-                        successMessage.remove();
-                    }, 2000);
-                    
-                } catch (error) {
-                    showToast('Registration failed: ' + error.message, 'error');
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                }
-            });
-
-            // Theme toggle
-            document.getElementById('themeToggle').addEventListener('click', toggleDarkMode);
-        }
-
-        function updateAuthUI() {
-            const loginBtn = document.getElementById('loginBtn');
-            const registerBtn = document.getElementById('registerBtn');
-            const logoutBtn = document.getElementById('logoutBtn');
-            const userAccount = document.getElementById('userAccount');
-
-            if (currentUser) {
-                loginBtn.style.display = 'none';
-                registerBtn.style.display = 'none';
-                logoutBtn.style.display = 'block';
-                userAccount.querySelector('span').textContent = currentUser.displayName || 'Account';
-            } else {
-                loginBtn.style.display = 'block';
-                registerBtn.style.display = 'block';
-                logoutBtn.style.display = 'none';
-                userAccount.querySelector('span').textContent = 'Account';
+                };
+                reader.readAsDataURL(file);
             }
         }
 
-        async function handleLogout() {
+        // Product form submission with SIMPLE upload (no compression for now)
+        document.getElementById('productForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const productName = document.getElementById('productName').value;
+            const productPrice = document.getElementById('productPrice').value;
+            const productDescription = document.getElementById('productDescription').value;
+            const productCategory = document.getElementById('productCategory').value;
+            const productImage = document.getElementById('productImage').files[0];
+
+            if (!productImage) {
+                alert('Please select a product image');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            
             try {
-                await auth.signOut();
-                showToast('Logged out successfully');
+                submitBtn.innerHTML = '<div class="loading"></div> Uploading...';
+                submitBtn.disabled = true;
+
+                // Show progress bar
+                document.getElementById('uploadProgress').style.display = 'block';
+                
+                // SIMPLE UPLOAD - No compression for testing
+                const storageRef = storage.ref();
+                const imageRef = storageRef.child(`products/${Date.now()}_${productImage.name}`);
+                
+                const uploadTask = imageRef.put(productImage);
+                
+                // Track upload progress
+                uploadTask.on('state_changed',
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        document.getElementById('progressBar').style.width = progress + '%';
+                    },
+                    (error) => {
+                        console.error('Upload error:', error);
+                        alert('Upload failed: ' + error.message);
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        document.getElementById('uploadProgress').style.display = 'none';
+                    },
+                    async () => {
+                        // Upload completed
+                        const imageUrl = await uploadTask.snapshot.ref.getDownloadURL();
+
+                        // Show success message
+                        const successMessage = document.createElement('div');
+                        successMessage.className = 'success-message';
+                        successMessage.innerHTML = `
+                            <i class="fas fa-check-circle"></i>
+                            Product "${productName}" added successfully!
+                        `;
+                        document.getElementById('productForm').prepend(successMessage);
+
+                        // Reset form and UI
+                        setTimeout(() => {
+                            this.reset();
+                            document.getElementById('imagePreview').innerHTML = '';
+                            document.getElementById('uploadProgress').style.display = 'none';
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                            successMessage.remove();
+                        }, 3000);
+                    }
+                );
+                
             } catch (error) {
-                showToast('Logout failed: ' + error.message, 'error');
+                console.error('Error adding product:', error);
+                alert('Error: ' + error.message);
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                document.getElementById('uploadProgress').style.display = 'none';
             }
+        });
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Add any additional event listeners here
         }
 
-        // Dark Mode
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            const themeToggle = document.getElementById('themeToggle');
-            if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            } else {
-                localStorage.setItem('theme', 'light');
-                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-            }
+        // Toast notification
+        function showToast(message) {
+            // Simple alert for demo
+            alert(message);
         }
 
-        // Check for saved theme
-        function checkSavedTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-                document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i>';
-            }
-        }
-
-        // Utility Functions
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        function showToast(message, type = 'success') {
-            // Remove existing toasts
-            document.querySelectorAll('.toast').forEach(toast => toast.remove());
-
-            const toast = document.createElement('div');
-            toast.className = `toast ${type === 'error' ? 'error' : ''}`;
-            toast.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check' : 'exclamation-triangle'}"></i>
-                <span>${message}</span>
-            `;
-            document.body.appendChild(toast);
-
-            setTimeout(() => toast.classList.add('show'), 100);
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => toast.remove(), 300);
-            }, 4000);
-        }
+        // Initialize cart count
+        updateCartCount();
     </script>
 </body>
 </html>
