@@ -405,90 +405,37 @@
             color: var(--gray);
         }
 
-        /* Video Chat Section */
-        .video-chat-section {
-            padding: 60px 0;
-            background: var(--bg-color);
-            width: 100%;
-        }
-
-        .video-chat-container {
-            background: var(--card-bg);
+        /* Success Messages */
+        .success-message {
+            background: var(--success);
+            color: white;
+            padding: 15px 20px;
             border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            margin: 0 auto;
-            max-width: 1000px;
-            width: 100%;
-        }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            height: 400px;
-            padding: 10px;
-            background: #1a1a1a;
-        }
-
-        .local-video-container, .remote-video-container {
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #000;
-        }
-
-        .local-video-container video, .remote-video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0,0,0,0.7);
-            color: white;
             text-align: center;
-        }
-
-        .call-controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            padding: 20px;
-            background: var(--card-bg);
-            flex-wrap: wrap;
-        }
-
-        .control-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: none;
-            background: var(--light);
-            color: var(--dark);
-            cursor: pointer;
+            margin: 15px 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition);
+            gap: 10px;
+            animation: slideDown 0.3s ease;
         }
 
-        .control-btn:hover {
-            transform: scale(1.1);
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .control-btn.end-call {
-            background: var(--danger);
-            color: white;
+        .compression-info {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 5px;
+            text-align: center;
         }
 
         /* Seller Dashboard */
@@ -727,11 +674,6 @@
                 justify-content: center;
             }
             
-            .video-grid {
-                grid-template-columns: 1fr;
-                height: 300px;
-            }
-            
             .contact-info {
                 justify-content: center;
             }
@@ -834,7 +776,6 @@
                 <ul class="nav-links">
                     <li><a href="#" class="nav-link active" onclick="showHomePage()">Home</a></li>
                     <li><a href="#" class="nav-link" onclick="showAboutPage()">About Us</a></li>
-                    <li><a href="#" class="nav-link" onclick="showVideoChat()">Video Chat</a></li>
                     <li><a href="#" class="nav-link" onclick="showProducts()">Products</a></li>
                 </ul>
             </div>
@@ -878,57 +819,6 @@
             </div>
         </section>
 
-        <!-- Video Chat Section -->
-        <section class="video-chat-section" id="videoChatSection" style="display: none;">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary);">Live Video Shopping</h2>
-                <p style="text-align: center; margin-bottom: 30px; color: var(--gray);">
-                    Connect with sellers through live video calls to see products and ask questions
-                </p>
-                
-                <!-- Online Sellers List -->
-                <div style="background: var(--card-bg); padding: 20px; border-radius: var(--border-radius); margin-bottom: 30px; box-shadow: var(--shadow);">
-                    <h3 style="margin-bottom: 15px; color: var(--primary);">Available Sellers</h3>
-                    <div id="onlineSellers" style="display: grid; gap: 15px;">
-                        <!-- Online sellers will be listed here -->
-                    </div>
-                </div>
-
-                <div class="video-chat-container">
-                    <div class="video-grid">
-                        <div class="local-video-container">
-                            <video id="localVideo" autoplay muted></video>
-                            <div class="video-overlay" id="localOverlay">
-                                <i class="fas fa-user video-placeholder" style="font-size: 3rem; margin-bottom: 15px;"></i>
-                                <p>Your camera feed</p>
-                            </div>
-                        </div>
-                        <div class="remote-video-container">
-                            <video id="remoteVideo" autoplay></video>
-                            <div class="video-overlay" id="remoteOverlay">
-                                <i class="fas fa-store video-placeholder" style="font-size: 3rem; margin-bottom: 15px;"></i>
-                                <p>Seller's camera feed</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="call-controls">
-                        <button class="control-btn" id="startCallBtn" onclick="startVideoCall()">
-                            <i class="fas fa-video"></i>
-                        </button>
-                        <button class="control-btn" id="muteBtn" onclick="toggleMute()">
-                            <i class="fas fa-microphone"></i>
-                        </button>
-                        <button class="control-btn" id="videoBtn" onclick="toggleVideo()">
-                            <i class="fas fa-video"></i>
-                        </button>
-                        <button class="control-btn end-call" id="endCallBtn" onclick="endVideoCall()">
-                            <i class="fas fa-phone"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Seller Dashboard -->
         <section id="sellerDashboard" style="display: none;">
             <div class="container">
@@ -963,7 +853,7 @@
                             <div class="file-upload" onclick="document.getElementById('productImage').click()">
                                 <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
                                 <p>Click to upload product image</p>
-                                <p style="font-size: 0.8rem; color: var(--gray);">Supported: JPG, PNG, WEBP (Max 5MB)</p>
+                                <p class="compression-info">Images will be compressed to 100KB for faster loading</p>
                                 <input type="file" id="productImage" accept="image/*" onchange="previewImage(event)">
                             </div>
                             <div class="image-preview" id="imagePreview"></div>
@@ -1128,15 +1018,54 @@
         let currentUser = null;
         let products = [];
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let onlineUsers = new Map();
-        let userStatusRef = null;
 
-        // Video Chat Variables
-        let localStream = null;
-        let peerConnection = null;
-        let isCallActive = false;
-        let isMuted = false;
-        let isVideoOff = false;
+        // Image compression function
+        function compressImage(file, maxSizeKB = 100, quality = 0.7) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+                        
+                        // Calculate new dimensions while maintaining aspect ratio
+                        const maxDimension = 800;
+                        if (width > height && width > maxDimension) {
+                            height = (height * maxDimension) / width;
+                            width = maxDimension;
+                        } else if (height > maxDimension) {
+                            width = (width * maxDimension) / height;
+                            height = maxDimension;
+                        }
+                        
+                        canvas.width = width;
+                        canvas.height = height;
+                        
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        // Convert to blob with quality adjustment
+                        canvas.toBlob((blob) => {
+                            if (blob.size / 1024 > maxSizeKB) {
+                                // If still too large, reduce quality further
+                                const reducedQuality = Math.max(0.3, quality * 0.8);
+                                canvas.toBlob((smallerBlob) => {
+                                    resolve(smallerBlob);
+                                }, 'image/jpeg', reducedQuality);
+                            } else {
+                                resolve(blob);
+                            }
+                        }, 'image/jpeg', quality);
+                    };
+                    img.onerror = reject;
+                };
+                reader.onerror = reject;
+            });
+        }
 
         // Initialize App
         document.addEventListener('DOMContentLoaded', function() {
@@ -1161,12 +1090,8 @@
                         displayName: user.displayName
                     };
                     await checkUserRole(user.uid);
-                    setupUserStatus(user.uid);
                 } else {
                     currentUser = null;
-                    if (userStatusRef) {
-                        userStatusRef.off();
-                    }
                 }
                 updateAuthUI();
             });
@@ -1183,84 +1108,6 @@
             }
         }
 
-        // User Online/Offline Status
-        function setupUserStatus(uid) {
-            // Set user as online
-            const userStatusRef = db.collection('status').doc(uid);
-            
-            // Create real-time connection to Firestore
-            const isOfflineForFirestore = {
-                state: 'online',
-                last_changed: firebase.firestore.FieldValue.serverTimestamp(),
-            };
-
-            const isOnlineForFirestore = {
-                state: 'offline',
-                last_changed: firebase.firestore.FieldValue.serverTimestamp(),
-            };
-
-            // Set user as online
-            db.collection('status').doc(uid).set(isOfflineForFirestore);
-
-            // Listen for online/offline status of other users
-            db.collection('status').onSnapshot((snapshot) => {
-                snapshot.docChanges().forEach((change) => {
-                    if (change.type === 'added' || change.type === 'modified') {
-                        const data = change.doc.data();
-                        onlineUsers.set(change.doc.id, data.state === 'online');
-                    }
-                    if (change.type === 'removed') {
-                        onlineUsers.delete(change.doc.id);
-                    }
-                });
-                updateOnlineSellersDisplay();
-            });
-
-            // Handle disconnect
-            window.addEventListener('beforeunload', () => {
-                db.collection('status').doc(uid).set(isOnlineForFirestore);
-            });
-        }
-
-        function updateOnlineSellersDisplay() {
-            const onlineSellersDiv = document.getElementById('onlineSellers');
-            if (!onlineSellersDiv) return;
-
-            // Get all sellers from products
-            const sellers = new Map();
-            products.forEach(product => {
-                if (!sellers.has(product.sellerId)) {
-                    sellers.set(product.sellerId, {
-                        email: product.sellerEmail,
-                        name: product.sellerEmail.split('@')[0],
-                        isOnline: onlineUsers.get(product.sellerId) || false
-                    });
-                }
-            });
-
-            if (sellers.size === 0) {
-                onlineSellersDiv.innerHTML = '<p style="text-align: center; color: var(--gray);">No sellers available at the moment</p>';
-                return;
-            }
-
-            onlineSellersDiv.innerHTML = Array.from(sellers.values()).map(seller => `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: var(--light); border-radius: var(--border-radius-sm);">
-                    <div>
-                        <strong>${seller.name}</strong>
-                        <div style="display: flex; align-items: center; gap: 5px; margin-top: 5px;">
-                            <i class="fas fa-circle ${seller.isOnline ? 'status-online' : 'status-offline'}" style="font-size: 0.7rem;"></i>
-                            <span style="font-size: 0.8rem; color: var(--gray);">
-                                ${seller.isOnline ? 'Online - Available for video calls' : 'Offline'}
-                            </span>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary" onclick="startVideoCallWithSeller('${seller.email}')" ${!seller.isOnline ? 'disabled' : ''}>
-                        <i class="fas fa-video"></i> Call
-                    </button>
-                </div>
-            `).join('');
-        }
-
         // Page Navigation
         function showHomePage() {
             hideAllSections();
@@ -1272,13 +1119,6 @@
             hideAllSections();
             document.getElementById('aboutPage').style.display = 'block';
             updateNavActive('about');
-        }
-
-        function showVideoChat() {
-            hideAllSections();
-            document.getElementById('videoChatSection').style.display = 'block';
-            updateOnlineSellersDisplay();
-            updateNavActive('video');
         }
 
         function showProducts() {
@@ -1301,7 +1141,6 @@
         function hideAllSections() {
             document.querySelector('.hero').style.display = 'none';
             document.getElementById('productsSection').style.display = 'none';
-            document.getElementById('videoChatSection').style.display = 'none';
             document.getElementById('sellerDashboard').style.display = 'none';
             document.getElementById('aboutPage').style.display = 'none';
         }
@@ -1361,17 +1200,11 @@
                 return;
             }
             
-            productGrid.innerHTML = products.map(product => {
-                const isSellerOnline = onlineUsers.get(product.sellerId) || false;
-                return `
+            productGrid.innerHTML = products.map(product => `
                 <div class="product-card">
                     <div class="product-image">
                         <img src="${product.imageUrl}" alt="${product.name}" 
                              onerror="this.src='https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
-                        <div class="seller-status">
-                            <i class="fas fa-circle ${isSellerOnline ? 'status-online' : 'status-offline'}"></i>
-                            ${isSellerOnline ? 'Online' : 'Offline'}
-                        </div>
                     </div>
                     <div class="product-info" style="padding: 20px;">
                         <h3 style="margin-bottom: 10px; font-size: 1.1rem;">${product.name}</h3>
@@ -1386,22 +1219,15 @@
                                 ${product.category}
                             </span>
                         </div>
-                        <div style="display: flex; gap: 10px;">
-                            <button class="btn btn-primary" onclick="addToCart('${product.id}')" style="flex: 1;">
-                                <i class="fas fa-shopping-cart"></i> Cart
-                            </button>
-                            <button class="btn btn-secondary" onclick="startVideoCallWithSeller('${product.sellerEmail}')" 
-                                    ${!isSellerOnline ? 'disabled' : ''} style="flex: 1;">
-                                <i class="fas fa-video"></i> Call
-                            </button>
-                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('${product.id}')" style="width: 100%;">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
                     </div>
                 </div>
-                `;
-            }).join('');
+            `).join('');
         }
 
-        // Product Form Handler
+        // Product Form Handler with Image Compression
         document.getElementById('productForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -1427,32 +1253,32 @@
                 return;
             }
 
-            // Validate file size (5MB max)
-            if (productImage.size > 5 * 1024 * 1024) {
-                showToast('Image size should be less than 5MB', 'error');
-                return;
-            }
-
             const submitBtn = document.getElementById('submitBtn');
             const originalText = submitBtn.innerHTML;
             
             try {
-                submitBtn.innerHTML = '<div class="loading"></div> Uploading...';
+                submitBtn.innerHTML = '<div class="loading"></div> Compressing Image...';
                 submitBtn.disabled = true;
 
                 // Show progress bar
                 document.getElementById('uploadProgress').style.display = 'block';
                 
-                // Upload image to Firebase Storage
+                // Compress image first
+                const compressedBlob = await compressImage(productImage, 100, 0.7);
+                
+                document.getElementById('progressBar').style.width = '30%';
+                submitBtn.innerHTML = '<div class="loading"></div> Uploading...';
+                
+                // Upload compressed image to Firebase Storage
                 const storageRef = storage.ref();
                 const imageRef = storageRef.child(`products/${Date.now()}_${productImage.name}`);
                 
-                const uploadTask = imageRef.put(productImage);
+                const uploadTask = imageRef.put(compressedBlob);
                 
                 // Track upload progress
                 uploadTask.on('state_changed',
                     (snapshot) => {
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        const progress = 30 + (snapshot.bytesTransferred / snapshot.totalBytes) * 70;
                         document.getElementById('progressBar').style.width = progress + '%';
                     },
                     (error) => {
@@ -1478,16 +1304,28 @@
                             createdAt: firebase.firestore.FieldValue.serverTimestamp()
                         });
 
+                        // Show success message
+                        const successMessage = document.createElement('div');
+                        successMessage.className = 'success-message';
+                        successMessage.innerHTML = `
+                            <i class="fas fa-check-circle"></i>
+                            Product added successfully!
+                        `;
+                        document.getElementById('productForm').prepend(successMessage);
+
                         // Reset form and UI
-                        this.reset();
-                        document.getElementById('imagePreview').innerHTML = '';
-                        document.getElementById('uploadProgress').style.display = 'none';
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
+                        setTimeout(() => {
+                            this.reset();
+                            document.getElementById('imagePreview').innerHTML = '';
+                            document.getElementById('uploadProgress').style.display = 'none';
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                            successMessage.remove();
+                            
+                            loadProductsFromFirebase();
+                            showProducts();
+                        }, 2000);
                         
-                        showToast('Product added successfully!');
-                        loadProductsFromFirebase();
-                        showProducts();
                     }
                 );
                 
@@ -1514,7 +1352,7 @@
                     document.getElementById('imagePreview').innerHTML = `
                         <img src="${e.target.result}" alt="Preview">
                         <p style="margin-top: 10px; font-size: 0.8rem; color: var(--gray);">
-                            ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)
+                            ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB) - Will be compressed to 100KB
                         </p>
                     `;
                 };
@@ -1535,85 +1373,6 @@
 
         function updateCartCount() {
             document.querySelector('.cart-count').textContent = cart.length;
-        }
-
-        // Video Chat Functions
-        function startVideoCallWithSeller(sellerEmail) {
-            if (!currentUser) {
-                showToast('Please login to start a video call', 'error');
-                document.getElementById('loginModal').style.display = 'flex';
-                return;
-            }
-            
-            showVideoChat();
-            setTimeout(() => {
-                startVideoCall();
-                showToast(`Starting video call with ${sellerEmail}`);
-            }, 1000);
-        }
-
-        async function startVideoCall() {
-            try {
-                localStream = await navigator.mediaDevices.getUserMedia({
-                    video: true,
-                    audio: true
-                });
-                
-                document.getElementById('localVideo').srcObject = localStream;
-                document.getElementById('localOverlay').style.display = 'none';
-                document.getElementById('startCallBtn').style.display = 'none';
-                
-                // Simulate remote connection after delay
-                setTimeout(() => {
-                    document.getElementById('remoteOverlay').style.display = 'none';
-                    showToast('Seller joined the call! You can now discuss the product.');
-                }, 2000);
-                
-                isCallActive = true;
-            } catch (error) {
-                showToast('Error accessing camera/microphone: ' + error.message, 'error');
-            }
-        }
-
-        function toggleMute() {
-            if (localStream) {
-                const audioTracks = localStream.getAudioTracks();
-                audioTracks.forEach(track => {
-                    track.enabled = !track.enabled;
-                });
-                isMuted = !isMuted;
-                document.getElementById('muteBtn').innerHTML = 
-                    isMuted ? '<i class="fas fa-microphone-slash"></i>' : '<i class="fas fa-microphone"></i>';
-                showToast(isMuted ? 'Microphone muted' : 'Microphone unmuted');
-            }
-        }
-
-        function toggleVideo() {
-            if (localStream) {
-                const videoTracks = localStream.getVideoTracks();
-                videoTracks.forEach(track => {
-                    track.enabled = !track.enabled;
-                });
-                isVideoOff = !isVideoOff;
-                document.getElementById('videoBtn').innerHTML = 
-                    isVideoOff ? '<i class="fas fa-video-slash"></i>' : '<i class="fas fa-video"></i>';
-                showToast(isVideoOff ? 'Video turned off' : 'Video turned on');
-            }
-        }
-
-        function endVideoCall() {
-            if (localStream) {
-                localStream.getTracks().forEach(track => track.stop());
-            }
-            
-            document.getElementById('localVideo').srcObject = null;
-            document.getElementById('remoteVideo').srcObject = null;
-            document.getElementById('localOverlay').style.display = 'flex';
-            document.getElementById('remoteOverlay').style.display = 'flex';
-            document.getElementById('startCallBtn').style.display = 'flex';
-            
-            isCallActive = false;
-            showToast('Call ended');
         }
 
         // Auth Functions with Loading Animations
@@ -1680,11 +1439,22 @@
                         createdAt: firebase.firestore.FieldValue.serverTimestamp()
                     });
 
-                    closeModal('registerModal');
-                    showToast(`Registration successful! Welcome ${name}`);
+                    // Show success message
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'success-message';
+                    successMessage.innerHTML = `
+                        <i class="fas fa-check-circle"></i>
+                        Registration successful! Welcome ${name}
+                    `;
+                    document.getElementById('registerForm').prepend(successMessage);
+
+                    setTimeout(() => {
+                        closeModal('registerModal');
+                        successMessage.remove();
+                    }, 2000);
+                    
                 } catch (error) {
                     showToast('Registration failed: ' + error.message, 'error');
-                } finally {
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
                 }
@@ -1715,14 +1485,6 @@
 
         async function handleLogout() {
             try {
-                // Set user as offline before logging out
-                if (currentUser) {
-                    await db.collection('status').doc(currentUser.uid).set({
-                        state: 'offline',
-                        last_changed: firebase.firestore.FieldValue.serverTimestamp(),
-                    });
-                }
-                
                 await auth.signOut();
                 showToast('Logged out successfully');
             } catch (error) {
