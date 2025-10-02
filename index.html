@@ -59,18 +59,27 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--bg-color);
             transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            width: 100%;
         }
 
         /* Header Styles */
@@ -98,18 +107,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .contact-info {
             display: flex;
             gap: 25px;
             font-size: 0.9rem;
+            flex-wrap: wrap;
         }
 
         .auth-buttons {
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
         }
 
         .auth-buttons button {
@@ -121,6 +133,7 @@
             cursor: pointer;
             transition: var(--transition);
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .auth-buttons button:hover {
@@ -138,6 +151,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .main-header {
@@ -147,10 +161,11 @@
         }
 
         .logo-section {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 30px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .logo {
@@ -158,6 +173,7 @@
             align-items: center;
             gap: 12px;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .logo i {
@@ -167,31 +183,36 @@
 
         .search-bar {
             display: flex;
-            max-width: 600px;
+            max-width: 500px;
+            flex: 1;
+            min-width: 250px;
         }
 
         .search-bar input {
             flex: 1;
-            padding: 14px 20px;
+            padding: 12px 15px;
             border: 2px solid var(--border-color);
             border-radius: var(--border-radius) 0 0 var(--border-radius);
             font-size: 1rem;
             background: var(--bg-color);
             color: var(--text-color);
+            min-width: 0;
         }
 
         .search-bar button {
-            padding: 0 25px;
+            padding: 0 20px;
             background: var(--primary);
             color: var(--white);
             border: none;
             border-radius: 0 var(--border-radius) var(--border-radius) 0;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .user-actions {
             display: flex;
-            gap: 25px;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .action-item {
@@ -203,6 +224,7 @@
             padding: 8px 12px;
             border-radius: var(--border-radius-sm);
             position: relative;
+            min-width: 60px;
         }
 
         .action-item:hover {
@@ -233,6 +255,7 @@
             display: flex;
             list-style: none;
             gap: 5px;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -242,36 +265,51 @@
             display: block;
             border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .nav-links a:hover, .nav-links a.active {
             background: var(--primary);
         }
 
+        /* Main Content */
+        main {
+            flex: 1;
+            width: 100%;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary-light), var(--primary));
             color: var(--white);
-            padding: 80px 0;
+            padding: 60px 0;
+            width: 100%;
         }
 
         .hero .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 40px;
             align-items: center;
         }
 
         .hero-content h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 28px;
+            padding: 12px 24px;
             border: none;
             border-radius: var(--border-radius);
             font-weight: 600;
@@ -279,6 +317,7 @@
             cursor: pointer;
             font-size: 1rem;
             transition: var(--transition);
+            white-space: nowrap;
         }
 
         .btn-primary {
@@ -286,21 +325,34 @@
             color: var(--dark);
         }
 
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
         .btn-secondary {
             background: var(--white);
             color: var(--primary);
         }
 
+        .hero-image img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+        }
+
         /* Products */
         .products {
-            padding: 80px 0;
+            padding: 60px 0;
             background: var(--bg-color);
+            width: 100%;
         }
 
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 25px;
+            width: 100%;
         }
 
         .product-card {
@@ -310,6 +362,7 @@
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
             transition: var(--transition);
+            width: 100%;
         }
 
         .product-card:hover {
@@ -330,13 +383,122 @@
             object-fit: cover;
         }
 
+        .seller-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-online {
+            color: var(--success);
+        }
+
+        .status-offline {
+            color: var(--gray);
+        }
+
+        /* Video Chat Section */
+        .video-chat-section {
+            padding: 60px 0;
+            background: var(--bg-color);
+            width: 100%;
+        }
+
+        .video-chat-container {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            margin: 0 auto;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            height: 400px;
+            padding: 10px;
+            background: #1a1a1a;
+        }
+
+        .local-video-container, .remote-video-container {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .local-video-container video, .remote-video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            text-align: center;
+        }
+
+        .call-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            background: var(--card-bg);
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: var(--light);
+            color: var(--dark);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .control-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .control-btn.end-call {
+            background: var(--danger);
+            color: white;
+        }
+
         /* Seller Dashboard */
         .seller-dashboard {
             background: var(--card-bg);
-            padding: 40px;
+            padding: 30px;
             border-radius: var(--border-radius);
             margin: 40px 0;
             box-shadow: var(--shadow);
+            width: 100%;
         }
 
         .form-group {
@@ -356,12 +518,13 @@
             border-radius: var(--border-radius-sm);
             background: var(--bg-color);
             color: var(--text-color);
+            font-size: 1rem;
         }
 
         .file-upload {
             border: 2px dashed var(--border-color);
             border-radius: var(--border-radius);
-            padding: 40px;
+            padding: 30px;
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
@@ -415,6 +578,7 @@
             z-index: 1000;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
         .modal-content {
@@ -422,8 +586,10 @@
             border-radius: var(--border-radius);
             padding: 30px;
             max-width: 500px;
-            width: 90%;
+            width: 100%;
             box-shadow: var(--shadow-lg);
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-header {
@@ -441,10 +607,31 @@
             color: var(--text-color);
         }
 
+        /* Loading Animations */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        .loading.primary {
+            border: 3px solid var(--primary);
+            border-top-color: transparent;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* About Us Page */
         .about-page {
-            padding: 80px 0;
+            padding: 60px 0;
             background: var(--bg-color);
+            width: 100%;
         }
 
         .about-content {
@@ -471,14 +658,16 @@
         footer {
             background: var(--footer-bg);
             color: var(--white);
-            padding: 60px 0 20px;
+            padding: 40px 0 20px;
+            width: 100%;
+            margin-top: auto;
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
         .copyright {
@@ -513,30 +702,65 @@
             background: var(--danger);
         }
 
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #ffffff;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Responsive */
+        /* Responsive Design */
         @media (max-width: 768px) {
             .hero .container {
                 grid-template-columns: 1fr;
                 text-align: center;
+                gap: 30px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
             }
             
             .logo-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-bar {
+                max-width: 100%;
+            }
+            
+            .user-actions {
+                justify-content: center;
+            }
+            
+            .video-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                height: 300px;
+            }
+            
+            .contact-info {
+                justify-content: center;
+            }
+            
+            .auth-buttons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .hero {
+                padding: 40px 0;
+            }
+            
+            .products {
+                padding: 40px 0;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links a {
+                padding: 12px 15px;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -610,6 +834,7 @@
                 <ul class="nav-links">
                     <li><a href="#" class="nav-link active" onclick="showHomePage()">Home</a></li>
                     <li><a href="#" class="nav-link" onclick="showAboutPage()">About Us</a></li>
+                    <li><a href="#" class="nav-link" onclick="showVideoChat()">Video Chat</a></li>
                     <li><a href="#" class="nav-link" onclick="showProducts()">Products</a></li>
                 </ul>
             </div>
@@ -623,7 +848,7 @@
             <div class="container">
                 <div class="hero-content">
                     <h1>Discover Authentic African Marketplace</h1>
-                    <p>Connect directly with local sellers. Support Nigerian businesses with secure transactions.</p>
+                    <p>Connect directly with local sellers through live video chat. Support Nigerian businesses with secure transactions.</p>
                     <div class="hero-buttons">
                         <button class="btn btn-primary" onclick="showProducts()">
                             <i class="fas fa-shopping-bag"></i> Start Shopping
@@ -644,11 +869,62 @@
             <div class="container">
                 <h2 style="text-align: center; margin-bottom: 40px; color: var(--primary);">Featured Products</h2>
                 <div id="loadingProducts" style="text-align: center; padding: 40px;">
-                    <div class="loading" style="margin: 0 auto 15px;"></div>
+                    <div class="loading primary" style="margin: 0 auto 15px;"></div>
                     <p>Loading products...</p>
                 </div>
                 <div class="product-grid" id="productGrid">
                     <!-- Products loaded by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Chat Section -->
+        <section class="video-chat-section" id="videoChatSection" style="display: none;">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary);">Live Video Shopping</h2>
+                <p style="text-align: center; margin-bottom: 30px; color: var(--gray);">
+                    Connect with sellers through live video calls to see products and ask questions
+                </p>
+                
+                <!-- Online Sellers List -->
+                <div style="background: var(--card-bg); padding: 20px; border-radius: var(--border-radius); margin-bottom: 30px; box-shadow: var(--shadow);">
+                    <h3 style="margin-bottom: 15px; color: var(--primary);">Available Sellers</h3>
+                    <div id="onlineSellers" style="display: grid; gap: 15px;">
+                        <!-- Online sellers will be listed here -->
+                    </div>
+                </div>
+
+                <div class="video-chat-container">
+                    <div class="video-grid">
+                        <div class="local-video-container">
+                            <video id="localVideo" autoplay muted></video>
+                            <div class="video-overlay" id="localOverlay">
+                                <i class="fas fa-user video-placeholder" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                                <p>Your camera feed</p>
+                            </div>
+                        </div>
+                        <div class="remote-video-container">
+                            <video id="remoteVideo" autoplay></video>
+                            <div class="video-overlay" id="remoteOverlay">
+                                <i class="fas fa-store video-placeholder" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                                <p>Seller's camera feed</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="call-controls">
+                        <button class="control-btn" id="startCallBtn" onclick="startVideoCall()">
+                            <i class="fas fa-video"></i>
+                        </button>
+                        <button class="control-btn" id="muteBtn" onclick="toggleMute()">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button class="control-btn" id="videoBtn" onclick="toggleVideo()">
+                            <i class="fas fa-video"></i>
+                        </button>
+                        <button class="control-btn end-call" id="endCallBtn" onclick="endVideoCall()">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -776,7 +1052,7 @@
                     <label for="loginPassword">Password</label>
                     <input type="password" id="loginPassword" required placeholder="Enter your password">
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;" id="loginSubmitBtn">
                     <i class="fas fa-sign-in-alt"></i> Login
                 </button>
                 <div style="text-align: center; margin-top: 15px;">
@@ -821,7 +1097,7 @@
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;" id="registerSubmitBtn">
                     <i class="fas fa-user-plus"></i> Create Account
                 </button>
                 <div style="text-align: center; margin-top: 15px;">
@@ -852,6 +1128,15 @@
         let currentUser = null;
         let products = [];
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let onlineUsers = new Map();
+        let userStatusRef = null;
+
+        // Video Chat Variables
+        let localStream = null;
+        let peerConnection = null;
+        let isCallActive = false;
+        let isMuted = false;
+        let isVideoOff = false;
 
         // Initialize App
         document.addEventListener('DOMContentLoaded', function() {
@@ -868,16 +1153,20 @@
 
         // Firebase Authentication
         function setupAuthStateListener() {
-            auth.onAuthStateChanged((user) => {
+            auth.onAuthStateChanged(async (user) => {
                 if (user) {
                     currentUser = {
                         uid: user.uid,
                         email: user.email,
                         displayName: user.displayName
                     };
-                    checkUserRole(user.uid);
+                    await checkUserRole(user.uid);
+                    setupUserStatus(user.uid);
                 } else {
                     currentUser = null;
+                    if (userStatusRef) {
+                        userStatusRef.off();
+                    }
                 }
                 updateAuthUI();
             });
@@ -894,6 +1183,84 @@
             }
         }
 
+        // User Online/Offline Status
+        function setupUserStatus(uid) {
+            // Set user as online
+            const userStatusRef = db.collection('status').doc(uid);
+            
+            // Create real-time connection to Firestore
+            const isOfflineForFirestore = {
+                state: 'online',
+                last_changed: firebase.firestore.FieldValue.serverTimestamp(),
+            };
+
+            const isOnlineForFirestore = {
+                state: 'offline',
+                last_changed: firebase.firestore.FieldValue.serverTimestamp(),
+            };
+
+            // Set user as online
+            db.collection('status').doc(uid).set(isOfflineForFirestore);
+
+            // Listen for online/offline status of other users
+            db.collection('status').onSnapshot((snapshot) => {
+                snapshot.docChanges().forEach((change) => {
+                    if (change.type === 'added' || change.type === 'modified') {
+                        const data = change.doc.data();
+                        onlineUsers.set(change.doc.id, data.state === 'online');
+                    }
+                    if (change.type === 'removed') {
+                        onlineUsers.delete(change.doc.id);
+                    }
+                });
+                updateOnlineSellersDisplay();
+            });
+
+            // Handle disconnect
+            window.addEventListener('beforeunload', () => {
+                db.collection('status').doc(uid).set(isOnlineForFirestore);
+            });
+        }
+
+        function updateOnlineSellersDisplay() {
+            const onlineSellersDiv = document.getElementById('onlineSellers');
+            if (!onlineSellersDiv) return;
+
+            // Get all sellers from products
+            const sellers = new Map();
+            products.forEach(product => {
+                if (!sellers.has(product.sellerId)) {
+                    sellers.set(product.sellerId, {
+                        email: product.sellerEmail,
+                        name: product.sellerEmail.split('@')[0],
+                        isOnline: onlineUsers.get(product.sellerId) || false
+                    });
+                }
+            });
+
+            if (sellers.size === 0) {
+                onlineSellersDiv.innerHTML = '<p style="text-align: center; color: var(--gray);">No sellers available at the moment</p>';
+                return;
+            }
+
+            onlineSellersDiv.innerHTML = Array.from(sellers.values()).map(seller => `
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: var(--light); border-radius: var(--border-radius-sm);">
+                    <div>
+                        <strong>${seller.name}</strong>
+                        <div style="display: flex; align-items: center; gap: 5px; margin-top: 5px;">
+                            <i class="fas fa-circle ${seller.isOnline ? 'status-online' : 'status-offline'}" style="font-size: 0.7rem;"></i>
+                            <span style="font-size: 0.8rem; color: var(--gray);">
+                                ${seller.isOnline ? 'Online - Available for video calls' : 'Offline'}
+                            </span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="startVideoCallWithSeller('${seller.email}')" ${!seller.isOnline ? 'disabled' : ''}>
+                        <i class="fas fa-video"></i> Call
+                    </button>
+                </div>
+            `).join('');
+        }
+
         // Page Navigation
         function showHomePage() {
             hideAllSections();
@@ -905,6 +1272,13 @@
             hideAllSections();
             document.getElementById('aboutPage').style.display = 'block';
             updateNavActive('about');
+        }
+
+        function showVideoChat() {
+            hideAllSections();
+            document.getElementById('videoChatSection').style.display = 'block';
+            updateOnlineSellersDisplay();
+            updateNavActive('video');
         }
 
         function showProducts() {
@@ -927,6 +1301,7 @@
         function hideAllSections() {
             document.querySelector('.hero').style.display = 'none';
             document.getElementById('productsSection').style.display = 'none';
+            document.getElementById('videoChatSection').style.display = 'none';
             document.getElementById('sellerDashboard').style.display = 'none';
             document.getElementById('aboutPage').style.display = 'none';
         }
@@ -986,11 +1361,17 @@
                 return;
             }
             
-            productGrid.innerHTML = products.map(product => `
+            productGrid.innerHTML = products.map(product => {
+                const isSellerOnline = onlineUsers.get(product.sellerId) || false;
+                return `
                 <div class="product-card">
                     <div class="product-image">
                         <img src="${product.imageUrl}" alt="${product.name}" 
                              onerror="this.src='https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+                        <div class="seller-status">
+                            <i class="fas fa-circle ${isSellerOnline ? 'status-online' : 'status-offline'}"></i>
+                            ${isSellerOnline ? 'Online' : 'Offline'}
+                        </div>
                     </div>
                     <div class="product-info" style="padding: 20px;">
                         <h3 style="margin-bottom: 10px; font-size: 1.1rem;">${product.name}</h3>
@@ -1004,19 +1385,23 @@
                             <span style="font-size: 0.8rem; color: var(--gray); background: var(--light); padding: 4px 8px; border-radius: 12px;">
                                 ${product.category}
                             </span>
-                            <span style="font-size: 0.8rem; color: var(--gray);">
-                                <i class="fas fa-store"></i> ${product.sellerEmail}
-                            </span>
                         </div>
-                        <button class="btn btn-primary" onclick="addToCart('${product.id}')" style="width: 100%;">
-                            <i class="fas fa-shopping-cart"></i> Add to Cart
-                        </button>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn btn-primary" onclick="addToCart('${product.id}')" style="flex: 1;">
+                                <i class="fas fa-shopping-cart"></i> Cart
+                            </button>
+                            <button class="btn btn-secondary" onclick="startVideoCallWithSeller('${product.sellerEmail}')" 
+                                    ${!isSellerOnline ? 'disabled' : ''} style="flex: 1;">
+                                <i class="fas fa-video"></i> Call
+                            </button>
+                        </div>
                     </div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
-        // Product Form Handler with Firebase Storage
+        // Product Form Handler
         document.getElementById('productForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -1152,7 +1537,86 @@
             document.querySelector('.cart-count').textContent = cart.length;
         }
 
-        // Auth Functions with Firebase
+        // Video Chat Functions
+        function startVideoCallWithSeller(sellerEmail) {
+            if (!currentUser) {
+                showToast('Please login to start a video call', 'error');
+                document.getElementById('loginModal').style.display = 'flex';
+                return;
+            }
+            
+            showVideoChat();
+            setTimeout(() => {
+                startVideoCall();
+                showToast(`Starting video call with ${sellerEmail}`);
+            }, 1000);
+        }
+
+        async function startVideoCall() {
+            try {
+                localStream = await navigator.mediaDevices.getUserMedia({
+                    video: true,
+                    audio: true
+                });
+                
+                document.getElementById('localVideo').srcObject = localStream;
+                document.getElementById('localOverlay').style.display = 'none';
+                document.getElementById('startCallBtn').style.display = 'none';
+                
+                // Simulate remote connection after delay
+                setTimeout(() => {
+                    document.getElementById('remoteOverlay').style.display = 'none';
+                    showToast('Seller joined the call! You can now discuss the product.');
+                }, 2000);
+                
+                isCallActive = true;
+            } catch (error) {
+                showToast('Error accessing camera/microphone: ' + error.message, 'error');
+            }
+        }
+
+        function toggleMute() {
+            if (localStream) {
+                const audioTracks = localStream.getAudioTracks();
+                audioTracks.forEach(track => {
+                    track.enabled = !track.enabled;
+                });
+                isMuted = !isMuted;
+                document.getElementById('muteBtn').innerHTML = 
+                    isMuted ? '<i class="fas fa-microphone-slash"></i>' : '<i class="fas fa-microphone"></i>';
+                showToast(isMuted ? 'Microphone muted' : 'Microphone unmuted');
+            }
+        }
+
+        function toggleVideo() {
+            if (localStream) {
+                const videoTracks = localStream.getVideoTracks();
+                videoTracks.forEach(track => {
+                    track.enabled = !track.enabled;
+                });
+                isVideoOff = !isVideoOff;
+                document.getElementById('videoBtn').innerHTML = 
+                    isVideoOff ? '<i class="fas fa-video-slash"></i>' : '<i class="fas fa-video"></i>';
+                showToast(isVideoOff ? 'Video turned off' : 'Video turned on');
+            }
+        }
+
+        function endVideoCall() {
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+            }
+            
+            document.getElementById('localVideo').srcObject = null;
+            document.getElementById('remoteVideo').srcObject = null;
+            document.getElementById('localOverlay').style.display = 'flex';
+            document.getElementById('remoteOverlay').style.display = 'flex';
+            document.getElementById('startCallBtn').style.display = 'flex';
+            
+            isCallActive = false;
+            showToast('Call ended');
+        }
+
+        // Auth Functions with Loading Animations
         function setupEventListeners() {
             document.getElementById('loginBtn').addEventListener('click', () => {
                 document.getElementById('loginModal').style.display = 'flex';
@@ -1171,13 +1635,21 @@
                 e.preventDefault();
                 const email = document.getElementById('loginEmail').value;
                 const password = document.getElementById('loginPassword').value;
+                const submitBtn = document.getElementById('loginSubmitBtn');
+                const originalText = submitBtn.innerHTML;
                 
                 try {
+                    submitBtn.innerHTML = '<div class="loading"></div> Logging in...';
+                    submitBtn.disabled = true;
+                    
                     await auth.signInWithEmailAndPassword(email, password);
                     closeModal('loginModal');
                     showToast('Login successful!');
                 } catch (error) {
                     showToast('Login failed: ' + error.message, 'error');
+                } finally {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
                 }
             });
 
@@ -1188,8 +1660,13 @@
                 const email = document.getElementById('registerEmail').value;
                 const password = document.getElementById('registerPassword').value;
                 const userType = document.querySelector('input[name="userType"]:checked').value;
+                const submitBtn = document.getElementById('registerSubmitBtn');
+                const originalText = submitBtn.innerHTML;
                 
                 try {
+                    submitBtn.innerHTML = '<div class="loading"></div> Creating account...';
+                    submitBtn.disabled = true;
+                    
                     const userCredential = await auth.createUserWithEmailAndPassword(email, password);
                     await userCredential.user.updateProfile({
                         displayName: name
@@ -1207,6 +1684,9 @@
                     showToast(`Registration successful! Welcome ${name}`);
                 } catch (error) {
                     showToast('Registration failed: ' + error.message, 'error');
+                } finally {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
                 }
             });
 
@@ -1235,6 +1715,14 @@
 
         async function handleLogout() {
             try {
+                // Set user as offline before logging out
+                if (currentUser) {
+                    await db.collection('status').doc(currentUser.uid).set({
+                        state: 'offline',
+                        last_changed: firebase.firestore.FieldValue.serverTimestamp(),
+                    });
+                }
+                
                 await auth.signOut();
                 showToast('Logged out successfully');
             } catch (error) {
